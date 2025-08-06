@@ -65,7 +65,23 @@ const galleryTabs = [
   { id: "certifications", label: "CERTIFICATIONS", active: false },
 ];
 
+const certificationImages = [
+  "construction-site.webp",
+  "factory-aluminum-pvc.webp",
+  "high-angle-measuring-tools-desk-still-life.webp",
+  "hd-construction-site-architecture-scene-background-image.webp",
+];
+
 export const Desktop = (): JSX.Element => {
+  const [activeTab, setActiveTab] = React.useState("gallery");
+  const [carouselIndex, setCarouselIndex] = React.useState(0);
+  const visibleCount = 3; // Number of images visible in the carousel at once
+
+  // Reset carousel index when tab changes
+  React.useEffect(() => {
+    setCarouselIndex(0);
+  }, [activeTab]);
+
   return (
     <div className="bg-white grid justify-items-center [align-items:start] w-screen min-h-screen h-full">
       <div className="bg-white overflow-hidden w-[1440px] h-[6617px] relative">
@@ -88,10 +104,10 @@ export const Desktop = (): JSX.Element => {
               </p>
             </CardContent>
           </Card>
-
           <img
             className="absolute w-[300px] h-[300px] top-[70px] left-60 object-cover"
             alt="Vision"
+            src="vision.webp"
           />
         </section>
 
@@ -100,6 +116,7 @@ export const Desktop = (): JSX.Element => {
           <img
             className="absolute w-[300px] h-[300px] top-16 left-[871px] object-cover"
             alt="Mission"
+            src="mission.webp"
           />
 
           <Card className="absolute w-[501px] h-[203px] top-[108px] left-[147px] bg-transparent border-none">
@@ -127,6 +144,7 @@ export const Desktop = (): JSX.Element => {
             <img
               className="absolute w-[341px] h-12 top-[26px] left-[146px] object-cover"
               alt="Vinsub"
+              src="VINSUB.webp"
             />
 
             <NavigationMenu className="absolute w-[648px] h-2 top-[46px] left-[660px]">
@@ -165,42 +183,46 @@ export const Desktop = (): JSX.Element => {
             <img
               className="absolute w-[275px] h-[456px] top-0 -left-1"
               alt="Image"
+              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
             />
-
             <img
               className="absolute w-[276px] h-[435px] top-[87px] left-[289px]"
               alt="Image"
+              src="4466.webp"
             />
-
             <img
               className="absolute w-[276px] h-[389px] top-0 left-[583px] object-cover"
               alt="Image"
+              src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80"
             />
-
             <img
               className="absolute w-[275px] h-[396px] top-[106px] left-[877px] object-cover"
               alt="Image"
+              src="close-up-metallic-gear.webp"
             />
           </div>
         </section>
 
         {/* Services Section */}
-        <section className="absolute w-[1440px] h-[2122px] top-[2117px] left-0">
+        <section className="absolute w-[1440px] h-[2122px] top-[2117px] left-0 overflow-hidden bg-black">
           <img
-            className="absolute w-[1440px] h-[206px] top-0 left-0"
+            className="absolute w-[1440px] h-[206px] top-0 left-0 opacity-95 object-cover"
             alt="Rectangle"
+            src="close-up-machine-part.webp"
           />
 
           <div className="absolute w-[1440px] h-[1917px] top-[205px] left-0 bg-black" />
 
           <img
-            className="absolute w-[1440px] h-[479px] top-[1643px] left-0"
+            className="absolute w-[1440px] h-[479px] top-[1643px] left-0 opacity-20"
             alt="Factory aluminum pvc"
+            src="hd-construction-site-architecture-scene-background-image.webp"
           />
 
           <img
-            className="absolute w-[1440px] h-[479px] top-[205px] left-0"
+            className="absolute w-[1440px] h-[479px] top-[205px] left-0 opacity-20"
             alt="High angle measuring"
+            src="high-angle-measuring-tools-desk-still-life.webp"
           />
 
           <h2 className="w-[481px] top-[68px] left-[480px] bg-[linear-gradient(90deg,rgba(249,165,26,1)_0%,rgba(255,255,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] text-transparent text-[65px] absolute [font-family:'Plus_Jakarta_Sans',Helvetica] font-extrabold tracking-[0] leading-[60px] whitespace-nowrap">
@@ -267,7 +289,7 @@ export const Desktop = (): JSX.Element => {
                         : index === 1
                           ? "absolute w-[377px] top-[74px] left-0"
                           : index === 2
-                            ? "absolute w-[374px] top-[78px] left-[9px]"
+                            ? "absolute w-[374px] top-[78px] left-9"
                             : "absolute w-[377px] top-[74px] left-0"
                     }`}
                   >
@@ -293,13 +315,15 @@ export const Desktop = (): JSX.Element => {
           ))}
 
           <img
-            className="absolute w-[1440px] h-[479px] top-[684px] left-0"
+            className="absolute w-[1440px] h-[479px] top-[684px] left-0 opacity-20"
             alt="Hd construction site"
+            src="hd-construction-site-architecture-scene-background-image.webp"
           />
 
           <img
-            className="absolute w-[1440px] h-[479px] top-[1164px] left-0"
+            className="absolute w-[1440px] h-[479px] top-[1164px] left-0 opacity-20"
             alt="Young factory worker"
+            src="young-factory-worker-working-with-adept-robotic-arm.webp"
           />
 
           <MailIcon className="absolute w-6 h-6 top-[1395px] left-[708px] text-white" />
@@ -322,13 +346,13 @@ export const Desktop = (): JSX.Element => {
             </span>
           </div>
 
-          <Button className="absolute w-[133px] h-[35px] top-[14px] left-[1160px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)]">
+          <Button className="absolute w-[133px] h-[35px] top-[25px] left-[1160px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)]">
             <span className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-bold text-black text-[19px] tracking-[0] whitespace-nowrap">
               Contact Us
             </span>
           </Button>
 
-          <Button className="absolute w-[195px] h-[35px] top-[14px] left-[945px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)]">
+          <Button className="absolute w-[195px] h-[35px] top-[25px] left-[945px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)]">
             <span className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-bold text-black text-[19px] tracking-[0] whitespace-nowrap">
               View Our Projects
             </span>
@@ -348,64 +372,76 @@ export const Desktop = (): JSX.Element => {
           <div className="absolute w-[910px] h-[75px] top-[235px] left-[265px]">
             <img
               className="absolute w-[100px] h-[75px] top-0 left-0 object-cover"
-              alt="Fasteners alrashed"
+              alt="Fasteners AlRashed"
+              src="clients/Fasteners-AlRashed-logo-retina.webp"
             />
 
             <img
               className="absolute w-[100px] h-[30px] top-[22px] left-[162px] object-cover"
-              alt="Logo"
+              alt="Vinsub Logo"
+              src="clients/nov-white-logo.webp"
             />
 
             <img
               className="absolute w-[100px] h-[33px] top-[21px] left-[324px] object-cover"
-              alt="Logo"
+              alt="Cropped OUR LOGO"
+              src="clients/cropped-OUR-LOGO1-2.webp"
             />
 
             <img
               className="absolute w-[100px] h-[72px] top-px left-[486px] object-cover"
-              alt="Logo light"
+              alt="Logo Light"
+              src="clients/logo_light.webp"
             />
 
             <img
               className="absolute w-[100px] h-[21px] top-[27px] left-[648px] object-cover"
-              alt="Logo"
+              alt="Eaton Arabia JV Mark"
+              src="clients/Eaton-Arabia-JV-mark-rectangle-l.webp"
             />
 
             <img
               className="absolute w-[100px] h-[54px] top-2.5 left-[810px] object-cover"
-              alt="Cropped OUR"
+              alt="Logo 1"
+              src="clients/logo-1.webp"
             />
           </div>
 
           <div className="absolute w-[915px] h-[43px] top-[402px] left-[263px]">
             <img
               className="absolute w-[100px] h-[43px] top-0 left-0 object-cover"
-              alt="Nov white logo"
+              alt="Alupco Logo"
+              src="clients/alupco_logo-50.webp"
             />
 
             <img
               className="absolute w-[100px] h-[21px] top-[11px] left-[163px] object-cover"
-              alt="Eaton arabia JV mark"
+              alt="Logo 2"
+              src="clients/logo2.webp"
             />
 
             <img
               className="absolute w-[100px] h-[22px] top-[11px] left-[326px] object-cover"
               alt="Logo"
+              src="clients/logo.webp"
             />
 
             <img
               className="absolute w-[100px] h-3.5 top-[15px] left-[489px] object-cover"
-              alt="Alupco logo"
+              alt="East Pipes Bilingual"
+              src="clients/EAST-PIPES_BILINGUAL_LOGO-01-e16.webp"
             />
 
             <img
               className="absolute w-[100px] h-[41px] top-px left-[652px] object-cover"
-              alt="East PIPES BILINGUAL"
+              alt="Logo AL Jazeera"
+              src="clients/Logo-AL-Jazeera-Steel.webp"
             />
 
             <img
               className="absolute w-[100px] h-[23px] top-2.5 left-[815px] object-cover"
-              alt="Logo AL jazeera"
+              alt="Logo (1)"
+              src="clients/logo (1).webp"
             />
           </div>
         </section>
@@ -509,11 +545,12 @@ export const Desktop = (): JSX.Element => {
 
               <img
                 className="absolute w-[126px] h-[34px] top-[203px] left-[153px]"
-                alt="Group"
+                alt="Groupss"
               />
 
               <img
                 className="absolute w-[340px] h-12 top-[70px] left-[152px] object-cover"
+                src="/VINSUB.webp"
                 alt="Vinsub"
               />
 
@@ -600,10 +637,16 @@ white text-sm tracking-[0] leading-[60px] whitespace-nowrap"
               CEO MESSEGE
             </h3>
 
-            <img
-              className="absolute w-[155px] h-[26px] top-[94px] left-[257px]"
-              alt="Group"
-            />
+            <div className="absolute flex flex-row gap-1 w-[155px] h-[26px] top-[94px] left-[257px]">
+              {[...Array(5)].map((_, i) => (
+                <img
+                  key={i}
+                  className="w-[30px] h-[30px] object-contain"
+                  src="geometric-star-shape.webp"
+                  alt="star"
+                />
+              ))}
+            </div>
           </div>
         </section>
 
@@ -619,70 +662,69 @@ white text-sm tracking-[0] leading-[60px] whitespace-nowrap"
           src="/vector-2.svg"
         />
 
-        {/* Gallery Section */}
-        <section className="absolute w-[1440px] h-[293px] top-[1649px] left-0 overflow-x-scroll">
-          <img
-            className="absolute w-[293px] h-[293px] top-0 left-[147px]"
-            alt="Rectangle"
-          />
-
-          <img
-            className="absolute w-[293px] h-[293px] top-0 left-[490px]"
-            alt="Rectangle"
-          />
-
-          <img
-            className="absolute w-[293px] h-[293px] top-0 left-[833px] object-cover"
-            alt="Rectangle"
-          />
-
-          <img
-            className="absolute w-[293px] h-[293px] top-0 left-[1176px] object-cover"
-            alt="Rectangle"
-          />
-
-          <img
-            className="absolute w-[293px] h-[293px] top-0 left-[1506px] object-cover"
-            alt="Rectangle"
-          />
-
-          <img
-            className="absolute w-[293px] h-[293px] top-0 left-[1865px] object-cover"
-            alt="Rectangle"
-          />
-        </section>
-
-        <Button className="absolute w-[171px] h-[29px] top-[1975px] left-[635px] rounded-[21.5px] bg-[linear-gradient(90deg,rgba(83,52,0,1)_0%,rgba(249,165,26,1)_100%)]">
-          <span className="bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(255,210,136,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Plus_Jakarta_Sans',Helvetica] font-medium text-transparent text-base tracking-[0] underline whitespace-nowrap">
-            more from gallery
-          </span>
-        </Button>
-
-        <div className="absolute w-[458px] h-[62px] top-[1565px] left-[638px]">
-          <div className="absolute w-[462px] h-[54px] top-0 left-0 flex">
-            {galleryTabs.map((tab) => (
-              <div
-                key={tab.id}
-                className={`relative ${tab.id === "gallery" ? "w-[167px]" : "w-[263px]"} h-[54px]`}
-              >
-                <div
-                  className={`absolute w-full h-[45px] top-1 left-0 rounded-[22.5px] border border-solid ${tab.active ? "border-black" : "border-[#a6a6a6]"}`}
-                />
-                <div
-                  className={`absolute w-[80%] top-0 left-6 [font-family:'Plus_Jakarta_Sans',Helvetica] font-bold ${tab.active ? "text-[#f9a51a]" : "text-[#a6a6a6]"} text-[26px] tracking-[0] leading-[51px] whitespace-nowrap`}
-                >
-                  {tab.label}
-                </div>
-                {tab.active && (
-                  <div className="absolute w-[85px] h-[3px] top-[59px] left-10">
-                    <div className="absolute w-[73px] h-[3px] top-0 left-0 bg-[#f9a51a] rounded-[9px]" />
-                    <div className="absolute w-2 h-[3px] top-0 left-[77px] bg-[#f9a51a] rounded-[9px]" />
-                  </div>
-                )}
-              </div>
-            ))}
+        {/* Gallery/Certification Collage Section */}
+        <section className="absolute w-full max-w-[1440px] left-0 top-[1649px] flex flex-col items-center">
+          {/* Tabs */}
+          <div className="flex gap-4 mb-6 mt-2">
+            <button
+              className={`px-8 py-2 rounded-full font-bold text-lg shadow transition-all duration-200 border-2 ${activeTab === 'gallery' ? 'bg-[#f9a51a] text-white border-[#f9a51a]' : 'bg-white text-[#222] border-gray-300 hover:border-[#f9a51a]'}`}
+              onClick={() => setActiveTab('gallery')}
+            >
+              Gallery
+            </button>
+            <button
+              className={`px-8 py-2 rounded-full font-bold text-lg shadow transition-all duration-200 border-2 ${activeTab === 'certifications' ? 'bg-[#f9a51a] text-white border-[#f9a51a]' : 'bg-white text-[#222] border-gray-300 hover:border-[#f9a51a]'}`}
+              onClick={() => setActiveTab('certifications')}
+            >
+              Certifications
+            </button>
           </div>
-        </div>
+
+          {/* Collage Carousel */}
+          <div className="relative w-full max-w-5xl overflow-hidden">
+            <div className="flex gap-4 transition-transform duration-500" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>
+              {(activeTab === 'gallery' ? [
+                "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80"
+              ] : certificationImages).map((src, idx) => (
+                <div key={src} className="flex-shrink-0 w-[350px] h-[260px] rounded-2xl overflow-hidden shadow-lg relative group">
+                  <img
+                    src={src}
+                    alt={activeTab === 'gallery' ? `Gallery ${idx + 1}` : `Certification ${idx + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  {/* Collage effect: overlay for gallery */}
+                  {activeTab === 'gallery' && (
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300" />
+                  )}
+                </div>
+              ))}
+            </div>
+            {/* Carousel Controls */}
+            <button
+              className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#f9a51a] text-black hover:text-white rounded-full p-2 shadow-lg z-10"
+              onClick={() => setCarouselIndex((prev) => Math.max(prev - 1, 0))}
+              disabled={carouselIndex === 0}
+              aria-label="Previous"
+              style={{ pointerEvents: carouselIndex === 0 ? 'none' : 'auto', opacity: carouselIndex === 0 ? 0.5 : 1 }}
+            >
+              &#8592;
+            </button>
+            <button
+              className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#f9a51a] text-black hover:text-white rounded-full p-2 shadow-lg z-10"
+              onClick={() => setCarouselIndex((prev) => Math.min(prev + 1, (activeTab === 'gallery' ? 6 : certificationImages.length) - visibleCount))}
+              disabled={carouselIndex >= (activeTab === 'gallery' ? 6 : certificationImages.length) - visibleCount}
+              aria-label="Next"
+              style={{ pointerEvents: carouselIndex >= (activeTab === 'gallery' ? 6 : certificationImages.length) - visibleCount ? 'none' : 'auto', opacity: carouselIndex >= (activeTab === 'gallery' ? 6 : certificationImages.length) - visibleCount ? 0.5 : 1 }}
+            >
+              &#8594;
+            </button>
+          </div>
+        </section>
       </div>
     </div>
   );
