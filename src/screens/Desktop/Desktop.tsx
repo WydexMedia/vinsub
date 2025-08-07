@@ -78,6 +78,7 @@ export const Desktop = (): JSX.Element => {
   const [activeTab, setActiveTab] = React.useState("gallery");
   const [carouselIndex, setCarouselIndex] = React.useState(0);
   const [visibleSections, setVisibleSections] = React.useState<Set<string>>(new Set());
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const visibleCount = 3; // Number of images visible in the carousel at once
 
   // Intersection Observer for scroll animations
@@ -119,7 +120,8 @@ export const Desktop = (): JSX.Element => {
 
   return (
     <div className="bg-white grid justify-items-center [align-items:start] w-screen min-h-screen h-full">
-      <div className="bg-white overflow-hidden w-[1480px] h-[6617px] relative">
+      {/* Desktop View */}
+      <div className="hidden lg:block bg-white overflow-hidden w-[1480px] h-[6617px] relative">
         {/* Vision Section */}
         <section 
           id="vision"
@@ -1156,6 +1158,582 @@ export const Desktop = (): JSX.Element => {
           alt="Vector"
           src="/vector-2.svg"
         />
+      </div>
+
+      {/* Mobile View */}
+      <div className="lg:hidden w-full min-h-screen bg-white">
+        {/* Mobile Hero Section */}
+        <section 
+          id="mobile-hero"
+          data-animate
+          className={`relative w-full min-h-screen bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] transition-all duration-1000 ${
+            visibleSections.has('mobile-hero') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          {/* Mobile Header */}
+          <header className={`relative w-full h-20 bg-white/95 backdrop-blur-sm transition-all duration-700 delay-200 ${
+            visibleSections.has('mobile-hero') ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+          }`}>
+            <div className="flex items-center justify-between px-4 h-full">
+              <img
+                className={`w-32 h-8 object-contain transition-all duration-700 delay-300 ${
+                  visibleSections.has('mobile-hero') ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                }`}
+                alt="Vinsub"
+                src="VINSUB.webp"
+              />
+              
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition-colors"
+              >
+                <div className="w-6 h-0.5 bg-black mb-1"></div>
+                <div className="w-6 h-0.5 bg-black mb-1"></div>
+                <div className="w-6 h-0.5 bg-black"></div>
+              </button>
+            </div>
+
+            {/* Mobile Navigation Menu */}
+            {isMobileMenuOpen && (
+              <div className="absolute top-full left-0 w-full bg-white shadow-lg z-50">
+                <nav className="flex flex-col py-4">
+                  {navigationItems.map((item, index) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className={`px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-gray-50 ${
+                        item.active ? "text-[#f9a51a] bg-gray-50" : "text-neutral-900"
+                      }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            )}
+          </header>
+
+          {/* Mobile Hero Content */}
+          <div className="flex flex-col items-center justify-center px-4 pt-20 pb-10 text-center">
+            <h1 className={`text-4xl md:text-6xl font-bold text-transparent bg-gradient-to-r from-white to-[#f9a51a] bg-clip-text mb-4 transition-all duration-700 delay-600 ${
+              visibleSections.has('mobile-hero') ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-20'
+            }`}>
+              Vinsub international
+            </h1>
+            
+            <h1 className={`text-3xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-white to-[#f9a51a] bg-clip-text mb-6 transition-all duration-700 delay-700 ${
+              visibleSections.has('mobile-hero') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+            }`}>
+              Contracting Co.
+            </h1>
+
+            <p className={`text-lg md:text-xl text-white font-medium mb-8 transition-all duration-700 delay-800 ${
+              visibleSections.has('mobile-hero') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}>
+              Engineering Service Provider in Saudi Arabia
+            </p>
+
+            {/* Mobile Hero Images Grid */}
+            <div className={`grid grid-cols-2 gap-4 w-full max-w-md transition-all duration-1000 delay-900 ${
+              visibleSections.has('mobile-hero') ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            }`}>
+              <img
+                className="w-full h-32 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
+                alt="Engineering Service"
+                src="engineering-service-provider-in-saudi-arabia.webp"
+              />
+              <img
+                className="w-full h-32 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
+                alt="Engineering Service"
+                src="4466.webp"
+              />
+              <img
+                className="w-full h-32 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
+                alt="Engineering Service"
+                src="engineering-service-provider-in-saudi-arabia1.webp"
+              />
+              <img
+                className="w-full h-32 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
+                alt="Engineering Service"
+                src="close-up-metallic-gear.webp"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Mobile CTA Section */}
+        <section 
+          id="mobile-cta"
+          data-animate
+          className={`w-full py-8 px-4 bg-gradient-to-r from-black to-white transition-all duration-1000 ${
+            visibleSections.has('mobile-cta') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className={`text-center mb-6 transition-all duration-700 delay-200 ${
+            visibleSections.has('mobile-cta') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+          }`}>
+            <span className="font-medium text-white text-lg">
+              Looking for a{" "}
+            </span>
+            <span className="font-bold text-white text-lg">
+              quality contract
+            </span>
+            <span className="font-medium text-white text-lg">
+              {" "}for your project?
+            </span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button className={`w-full sm:w-auto px-8 py-3 rounded-lg bg-gradient-to-r from-white to-gray-200 hover:scale-105 transition-all duration-300 delay-300 ${
+              visibleSections.has('mobile-cta') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}>
+              <span className="font-bold text-black text-base">
+                View Our Projects
+              </span>
+            </Button>
+            <Button className={`w-full sm:w-auto px-8 py-3 rounded-lg bg-gradient-to-r from-white to-gray-200 hover:scale-105 transition-all duration-300 delay-400 ${
+              visibleSections.has('mobile-cta') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}>
+              <span className="font-bold text-black text-base">
+                Contact Us
+              </span>
+            </Button>
+          </div>
+        </section>
+
+        {/* Mobile About Section */}
+        <section 
+          id="mobile-about"
+          data-animate
+          className={`w-full py-16 px-4 bg-white transition-all duration-1000 ${
+            visibleSections.has('mobile-about') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className={`text-3xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-[#f9a51a] to-black bg-clip-text mb-8 transition-all duration-700 delay-200 ${
+              visibleSections.has('mobile-about') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
+            }`}>
+              About Us
+            </h2>
+
+            <Separator className={`w-48 mx-auto mb-8 transition-all duration-700 delay-300 ${
+              visibleSections.has('mobile-about') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+            }`} />
+
+            <h3 className={`text-xl md:text-2xl font-bold text-black mb-6 transition-all duration-700 delay-500 ${
+              visibleSections.has('mobile-about') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}>
+              Vinsub International Contracting Co
+            </h3>
+
+            <p className={`text-base md:text-lg text-black text-center leading-relaxed transition-all duration-700 delay-600 ${
+              visibleSections.has('mobile-about') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}>
+              <span className="font-bold">Vinsub</span>, established in 1995, is a trusted engineering service provider
+              in Saudi Arabia, based in Dammam. We deliver long-term and short-term projects with complete
+              client satisfaction.
+              <br /><br />
+              Our commitment to quality and dedicated customer service has
+              earned the trust and appreciation of our clients over the years.
+              We bring expertise, efficiency, and a results-driven approach to
+              every project. With a skilled team and a proven track record, we
+              continue to grow as a reliable name in the industry.
+            </p>
+          </div>
+        </section>
+
+        {/* Mobile Services Section */}
+        <section 
+          id="mobile-services"
+          data-animate
+          className={`w-full py-16 px-4 bg-black transition-all duration-1000 ${
+            visibleSections.has('mobile-services') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="max-w-4xl mx-auto">
+            <h2 className={`text-3xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-[#f9a51a] to-white bg-clip-text text-center mb-12 transition-all duration-700 delay-500 ${
+              visibleSections.has('mobile-services') ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+            }`}>
+              OUR SERVICES
+            </h2>
+
+            <Separator className={`w-full mb-12 transition-all duration-700 delay-600 ${
+              visibleSections.has('mobile-services') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+            }`} />
+
+            <div className="space-y-8">
+              {services.map((service, index) => (
+                <Card
+                  key={service.id}
+                  className={`bg-transparent border-none transition-all duration-700 delay-${800 + index * 200} hover:scale-105 ${
+                    visibleSections.has('mobile-services') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+                  }`}
+                >
+                  <CardContent className="p-6 text-center">
+                    <span className={`block text-6xl font-extrabold text-[#f9a51a] mb-4 transition-all duration-700 delay-${1100 + index * 200} ${
+                      visibleSections.has('mobile-services') ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+                    }`}>
+                      {service.id}
+                    </span>
+                    
+                    <h3 className={`text-xl md:text-2xl font-bold text-white mb-4 transition-all duration-500 delay-${900 + index * 200} ${
+                      visibleSections.has('mobile-services') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                    }`}>
+                      {service.title}
+                    </h3>
+
+                    <p className={`text-white text-sm md:text-base text-justify leading-relaxed transition-all duration-500 delay-${1000 + index * 200} ${
+                      visibleSections.has('mobile-services') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                    }`}>
+                      {service.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Mobile Gallery/Certifications Section */}
+        <section 
+          id="mobile-gallery-certifications"
+          data-animate
+          className={`w-full py-16 px-4 bg-white transition-all duration-1000 ${
+            visibleSections.has('mobile-gallery-certifications') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="max-w-4xl mx-auto">
+            {/* Tabs */}
+            <div className={`flex gap-4 mb-8 justify-center transition-all duration-700 delay-200 ${
+              visibleSections.has('mobile-gallery-certifications') ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+            }`}>
+              <button
+                className={`px-6 py-2 rounded-full font-bold text-base shadow transition-all duration-300 border-2 hover:scale-105 ${
+                  activeTab === 'gallery' 
+                    ? 'bg-[#f9a51a] text-white border-[#f9a51a]' 
+                    : 'bg-white text-[#222] border-gray-300 hover:border-[#f9a51a]'
+                }`}
+                onClick={() => setActiveTab('gallery')}
+              >
+                Gallery
+              </button>
+              <button
+                className={`px-6 py-2 rounded-full font-bold text-base shadow transition-all duration-300 border-2 hover:scale-105 ${
+                  activeTab === 'certifications' 
+                    ? 'bg-[#f9a51a] text-white border-[#f9a51a]' 
+                    : 'bg-white text-[#222] border-gray-300 hover:border-[#f9a51a]'
+                }`}
+                onClick={() => setActiveTab('certifications')}
+              >
+                Certifications
+              </button>
+            </div>
+
+            {/* Mobile Carousel */}
+            <div className={`relative overflow-hidden transition-all duration-1000 delay-400 ${
+              visibleSections.has('mobile-gallery-certifications') ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            }`}>
+              <div className="flex gap-4 transition-transform duration-500" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>
+                {(activeTab === 'gallery' ? [
+                  { src: "engineering-service-provider-in-saudi-arabia1.webp", alt: "Gallery 1" },
+                  { src: "engineering-service-provider-in-saudi-arabia.webp", alt: "Gallery 2" },
+                  { src: "4466.webp", alt: "Gallery 3" },
+                  { src: "close-up-metallic-gear.webp", alt: "Gallery 4" },
+                  { src: "close-up-machine-part.webp", alt: "Gallery 5" },
+                  { src: "hd-construction-site-architecture-scene-background-image.webp", alt: "Gallery 6" }
+                ] : certificationImages.map((src, idx) => ({ src, alt: `Certification ${idx + 1}` }))).map((item, idx) => (
+                  <div key={`mobile-${activeTab}-${idx}`} className={`flex-shrink-0 w-80 h-60 rounded-2xl overflow-hidden shadow-lg relative group transition-all duration-500 delay-${600 + idx * 100} hover:scale-105 ${
+                    visibleSections.has('mobile-gallery-certifications') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}>
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    {activeTab === 'gallery' && (
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300" />
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              {/* Mobile Carousel Controls */}
+              <button
+                className={`absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#f9a51a] text-black hover:text-white rounded-full p-2 shadow-lg z-10 transition-all duration-300 hover:scale-110 ${
+                  visibleSections.has('mobile-gallery-certifications') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-5'
+                }`}
+                onClick={() => setCarouselIndex((prev) => Math.max(prev - 1, 0))}
+                disabled={carouselIndex === 0}
+                aria-label="Previous"
+              >
+                &#8592;
+              </button>
+              <button
+                className={`absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#f9a51a] text-black hover:text-white rounded-full p-2 shadow-lg z-10 transition-all duration-300 hover:scale-110 ${
+                  visibleSections.has('mobile-gallery-certifications') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'
+                }`}
+                onClick={() => setCarouselIndex((prev) => Math.min(prev + 1, (activeTab === 'gallery' ? 6 : certificationImages.length) - 1))}
+                disabled={carouselIndex >= (activeTab === 'gallery' ? 6 : certificationImages.length) - 1}
+                aria-label="Next"
+              >
+                &#8594;
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Mobile Mission Section */}
+        <section 
+          id="mobile-mission"
+          data-animate
+          className={`w-full py-16 px-4 bg-gradient-to-r from-white to-black transition-all duration-1000 ${
+            visibleSections.has('mobile-mission') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="max-w-4xl mx-auto text-center">
+            <img
+              className={`w-48 h-48 mx-auto mb-8 object-cover rounded-lg transition-all duration-700 delay-200 ${
+                visibleSections.has('mobile-mission') ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-75 -rotate-12'
+              }`}
+              alt="Mission"
+              src="mission.webp"
+            />
+
+            <h2 className={`text-2xl md:text-4xl font-bold text-black mb-6 transition-all duration-700 delay-300 ${
+              visibleSections.has('mobile-mission') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            }`}>
+              OUR MISSION
+            </h2>
+
+            <p className={`text-black text-sm md:text-base text-justify leading-relaxed transition-all duration-700 delay-500 ${
+              visibleSections.has('mobile-mission') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}>
+              To deliver top-notch fabrication, installation, and erection of
+              structural steel and process equipment at the best prices among
+              competitors, without compromising on quality. As a leading
+              engineering service provider in Saudi Arabia, we prioritize
+              safety, precision, and customer satisfaction in every project.
+              Our goal is to build long-lasting, trustworthy relationships
+              through exceptional service and reliable machine shop support.
+            </p>
+          </div>
+        </section>
+
+        {/* Mobile Vision Section */}
+        <section 
+          id="mobile-vision"
+          data-animate
+          className={`w-full py-16 px-4 bg-gradient-to-l from-white to-black transition-all duration-1000 ${
+            visibleSections.has('mobile-vision') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="max-w-4xl mx-auto text-center">
+            <img
+              className={`w-48 h-48 mx-auto mb-8 object-cover rounded-lg transition-all duration-700 delay-200 ${
+                visibleSections.has('mobile-vision') ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-75 rotate-12'
+              }`}
+              alt="Vision"
+              src="vision.webp"
+            />
+
+            <h2 className={`text-2xl md:text-4xl font-bold text-black mb-6 transition-all duration-700 delay-300 ${
+              visibleSections.has('mobile-vision') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            }`}>
+              OUR VISION
+            </h2>
+
+            <p className={`text-black text-sm md:text-base text-justify leading-relaxed transition-all duration-700 delay-500 ${
+              visibleSections.has('mobile-vision') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}>
+              We aspire to be the top provider of structural steel solutions
+              in the world. As an Engineering Service Provider based in Saudi
+              Arabia, our goal is to raise the bar for quality and innovation
+              with every project we undertake. We&apos;re all about building
+              strong partnerships and delivering real value to our clients.
+              With our commitment and expertise, we aim for excellence in
+              everything we do.
+            </p>
+          </div>
+        </section>
+
+        {/* Mobile Clients Section */}
+        <section 
+          id="mobile-clients"
+          data-animate
+          className={`w-full py-16 px-4 bg-[#d9d9d9] transition-all duration-1000 ${
+            visibleSections.has('mobile-clients') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className={`text-2xl md:text-4xl font-bold text-black mb-8 transition-all duration-700 delay-200 ${
+              visibleSections.has('mobile-clients') ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+            }`}>
+              OUR CLIENTS
+            </h2>
+
+            <Separator className={`w-48 mx-auto mb-8 transition-all duration-700 delay-300 ${
+              visibleSections.has('mobile-clients') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+            }`} />
+
+            {/* Mobile Client Logos Grid */}
+            <div className={`grid grid-cols-2 sm:grid-cols-3 gap-6 transition-all duration-1000 delay-400 ${
+              visibleSections.has('mobile-clients') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+            }`}>
+              {[
+                { src: "clients/Fasteners-AlRashed-logo-retina.webp", alt: "Fasteners AlRashed", href: "https://www.alrashed-fasteners.com/" },
+                { src: "clients/nov-white-logo.webp", alt: "Vinsub Logo", href: "https://www.gerflorme.com/" },
+                { src: "clients/cropped-OUR-LOGO1-2.webp", alt: "Cropped OUR LOGO", href: "https://www.sgn.com.sa/public/index.php" },
+                { src: "clients/logo_light.webp", alt: "Logo Light", href: "https://www.zamilladders.com/home/" },
+                { src: "clients/Eaton-Arabia-JV-mark-rectangle-l.webp", alt: "Eaton Arabia JV Mark", href: "https://www.zamilindustrial.com/en/" },
+                { src: "clients/logo-1.webp", alt: "Logo 1", href: "https://samcorebars.com/" },
+                { src: "clients/alupco_logo-50.webp", alt: "Alupco Logo", href: "https://alupco.com/" },
+                { src: "clients/logo2.webp", alt: "Logo 2", href: "https://jazeera-steel.co/" },
+                { src: "clients/logo.webp", alt: "Logo", href: "https://www.eastpipes.com/" },
+                { src: "clients/EAST-PIPES_BILINGUAL_LOGO-01-e16.webp", alt: "East Pipes Bilingual", href: "https://www.alrashed-steel.com/" },
+                { src: "clients/Logo-AL-Jazeera-Steel.webp", alt: "Logo AL Jazeera", href: "https://velan.com/" },
+                { src: "clients/logo (1).webp", alt: "Logo (1)", href: "https://www.almajdouie.com/almajdouie_metal" }
+              ].map((client, index) => (
+                <a
+                  key={index}
+                  href={client.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`block p-4 bg-white rounded-lg shadow-md hover:scale-105 transition-all duration-500 delay-${500 + index * 100} ${
+                    visibleSections.has('mobile-clients') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                >
+                  <img
+                    className="w-full h-12 object-contain"
+                    alt={client.alt}
+                    src={client.src}
+                  />
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Mobile CEO Message Section */}
+        <section 
+          id="mobile-ceo-message"
+          data-animate
+          className={`w-full py-16 px-4 bg-white transition-all duration-1000 ${
+            visibleSections.has('mobile-ceo-message') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="max-w-4xl mx-auto text-center">
+            <p className={`text-lg md:text-xl text-black mb-6 transition-all duration-700 delay-200 ${
+              visibleSections.has('mobile-ceo-message') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}>
+              &quot;No matter what size of project,
+              <br />
+              we look forward to providing value-driven excellence&quot;
+            </p>
+
+            <div className={`flex justify-center gap-1 mb-6 transition-all duration-700 delay-300 ${
+              visibleSections.has('mobile-ceo-message') ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+            }`}>
+              {[...Array(5)].map((_, i) => (
+                <img
+                  key={i}
+                  className={`w-6 h-6 object-contain transition-all duration-300 delay-${500 + i * 100} hover:scale-110 ${
+                    visibleSections.has('mobile-ceo-message') ? 'opacity-100 rotate-0' : 'opacity-0 rotate-12'
+                  }`}
+                  src="geometric-star-shape.webp"
+                  alt="star"
+                />
+              ))}
+            </div>
+
+            <h3 className={`text-xl md:text-2xl font-bold text-transparent bg-gradient-to-r from-[#f9a51a] to-[#93710f] bg-clip-text transition-all duration-700 delay-400 ${
+              visibleSections.has('mobile-ceo-message') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}>
+              CEO MESSAGE
+            </h3>
+          </div>
+        </section>
+
+        {/* Mobile Footer */}
+        <footer 
+          id="mobile-footer"
+          data-animate
+          className={`w-full py-16 px-4 bg-gradient-to-r from-[#d9d9d9] to-gray-800 transition-all duration-1000 ${
+            visibleSections.has('mobile-footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Company Info */}
+              <div className={`text-center md:text-left transition-all duration-700 delay-200 ${
+                visibleSections.has('mobile-footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+              }`}>
+                <img
+                  className={`w-32 h-8 mx-auto md:mx-0 mb-4 object-contain transition-all duration-700 delay-300 ${
+                    visibleSections.has('mobile-footer') ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                  }`}
+                  src="/VINSUB.webp"
+                  alt="Vinsub"
+                />
+                <p className="text-xs text-black italic mb-2">
+                  Engineering Service Provider in Saudi Arabia, Dammam
+                </p>
+                <p className="text-xs text-black italic mb-2">
+                  vinsubinternational © 2025. All Rights Reserved
+                </p>
+                <p className="text-xs text-black font-semibold">
+                  Developed by wydex
+                </p>
+              </div>
+
+              {/* Quick Links */}
+              <div className={`text-center md:text-left transition-all duration-700 delay-400 ${
+                visibleSections.has('mobile-footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+              }`}>
+                <h3 className="font-bold text-white text-lg mb-4">Quick Links</h3>
+                <div className="space-y-2">
+                  {quickLinks.map((link, index) => (
+                    <a
+                      key={index}
+                      href="#"
+                      className={`block text-white text-sm font-semibold hover:text-[#f9a51a] transition-all duration-300 delay-${500 + index * 100} ${
+                        visibleSections.has('mobile-footer') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-5'
+                      }`}
+                    >
+                      {link}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Info */}
+            <div className={`mt-8 pt-8 border-t border-gray-600 text-center md:text-left transition-all duration-700 delay-600 ${
+              visibleSections.has('mobile-footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}>
+              <h3 className="font-bold text-white text-lg mb-4">Get In Touch</h3>
+              <div className="space-y-3">
+                <div className="flex items-center justify-center md:justify-start gap-3">
+                  <img className="w-5 h-5" alt="Phone" src="/vector-1.svg" />
+                  <span className="text-white text-sm font-medium">0509331315</span>
+                </div>
+                <div className="flex items-center justify-center md:justify-start gap-3">
+                  <img className="w-5 h-5" alt="Email" src="/vector.svg" />
+                  <span className="text-white text-sm font-medium">info@vinsubco.co</span>
+                </div>
+                <div className="flex items-center justify-center md:justify-start gap-3">
+                  <img className="w-5 h-5" alt="Location" src="/vector-3.svg" />
+                  <span className="text-white text-sm font-medium">Dammam, Kingdom of Saudi Arabia</span>
+                </div>
+                <div className="flex items-center justify-center md:justify-start gap-3">
+                  <img className="w-5 h-5" alt="Registration" src="/vector-4.svg" />
+                  <span className="text-white text-sm font-medium">CR-2050161120</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );
