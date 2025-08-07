@@ -170,7 +170,7 @@ export const Desktop = (): JSX.Element => {
               Vinsub international
             </h1>
 
-            <h1 className="absolute w-[671px] top-20 left-[78px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(249,165,26,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Plus_Jakarta_Sans',Helvetica] font-bold text-transparent text-[85px] tracking-[0] leading-[94px]">
+            <h1 className="absolute h-[100px] w-[671px] top-20 left-[78px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(249,165,26,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Plus_Jakarta_Sans',Helvetica] font-bold text-transparent text-[85px] tracking-[0] leading-[94px]">
               Contracting Co.
             </h1>
           </div>
@@ -183,7 +183,7 @@ export const Desktop = (): JSX.Element => {
             <img
               className="absolute w-[275px] h-[456px] top-0 -left-1"
               alt="Image"
-              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+              src="engineering-service-provider-in-saudi-arabia.webp"  
             />
             <img
               className="absolute w-[276px] h-[435px] top-[87px] left-[289px]"
@@ -193,7 +193,7 @@ export const Desktop = (): JSX.Element => {
             <img
               className="absolute w-[276px] h-[389px] top-0 left-[583px] object-cover"
               alt="Image"
-              src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80"
+              src="engineering-service-provider-in-saudi-arabia1.webp"
             />
             <img
               className="absolute w-[275px] h-[396px] top-[106px] left-[877px] object-cover"
