@@ -892,11 +892,11 @@ export const Desktop = (): JSX.Element => {
           id="mobile-hero"
           data-animate
           className={`relative w-full bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] transition-all duration-1000 ${visibleSections.has("mobile-hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            } pt-16`}
         >
           {/* Header */}
           <header
-            className="sticky top-0 z-50 w-full h-16 bg-white/95 backdrop-blur-sm transition-all duration-700"
+            className="fixed top-0 left-0 z-50 w-full h-16 bg-white/95 backdrop-blur-sm transition-all duration-700"
             style={tDelay(200)}
           >
             <div className="flex items-center justify-between px-4 h-full w-full">
