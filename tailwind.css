@@ -232,12 +232,18 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f9a51a;
+  background: #9ca3af; /* gray-400 */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e09416;
+  background: #6b7280; /* gray-500 */
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #9ca3af #f1f1f1; /* thumb track */
 }
 
 @layer base {
