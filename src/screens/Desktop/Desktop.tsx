@@ -1,5 +1,6 @@
 import { MailIcon } from "lucide-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import {
@@ -54,7 +55,6 @@ const quickLinks = ["Home", "About Us", "Our projects", "Latest news", "Quality"
 
 // Gallery sources
 const certificationImages = [
-  "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80",
   "https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80",
   "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
   "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
@@ -67,7 +67,10 @@ export const Desktop = (): JSX.Element => {
   const [carouselIndex, setCarouselIndex] = React.useState(0);
   const [visibleSections, setVisibleSections] = React.useState<Set<string>>(new Set());
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const visibleCount = 3; // desktop carousel visible count
+  const [isCarouselPaused, setIsCarouselPaused] = React.useState(false);
+  const [isInstant, setIsInstant] = React.useState(false);
+  // desktop carousel visible count
+  const navigate = useNavigate();
 
   // Intersection Observer for scroll animations
   React.useEffect(() => {
@@ -91,13 +94,103 @@ export const Desktop = (): JSX.Element => {
     };
   }, []);
 
-  // Reset carousel index when tab changes
+  // Auto-rotate carousel every 1 second - seamless circular loop within a safe window
   React.useEffect(() => {
-    setCarouselIndex(0);
-  }, [activeTab]);
+    const interval = setInterval(() => {
+      if ((visibleSections.has("gallery-certifications") || visibleSections.has("mobile-gallery-certifications")) && !isCarouselPaused) {
+        const baseLen = activeTab === "gallery" ? 6 : certificationImages.length;
+        let didInstantReset = false;
+        setCarouselIndex((prev) => {
+          const next = prev + 1;
+          // keep index within [baseLen, baseLen*3)
+          if (next >= baseLen * 3) {
+            // instant jump back by one window of baseLen
+            didInstantReset = true;
+            return baseLen + (next - baseLen * 3);
+          }
+          return next;
+        });
+        if (didInstantReset) {
+          // disable transition just for this instant correction
+          setIsInstant(true);
+          // re-enable on next frame
+          setTimeout(() => setIsInstant(false), 0);
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [activeTab, certificationImages.length, visibleSections, isCarouselPaused]);
+
+  // Reset carousel index when tab changes: start in the middle window to allow both directions seamlessly
+  React.useEffect(() => {
+    const baseLen = activeTab === "gallery" ? 6 : certificationImages.length;
+    setIsInstant(true);
+    setCarouselIndex(baseLen);
+    setTimeout(() => setIsInstant(false), 0);
+  }, [activeTab, certificationImages.length]);
 
   // Helper: transition delay via style (avoid dynamic tailwind classes)
   const tDelay = (ms: number) => ({ transitionDelay: `${ms}ms` });
+
+  // Carousel control handlers - seamless circular navigation within safe window
+  const handleCarouselControl = (direction: 'prev' | 'next') => {
+    setIsCarouselPaused(true);
+    setTimeout(() => setIsCarouselPaused(false), 3000); // Resume after 3 seconds
+    const baseLen = activeTab === "gallery" ? 6 : certificationImages.length;
+
+    if (direction === 'prev') {
+      let didInstantReset = false;
+      setCarouselIndex((prev) => {
+        if (prev <= baseLen) {
+          didInstantReset = true;
+          return baseLen * 2 - 1; // jump to end of safe window
+        }
+        return prev - 1;
+      });
+      if (didInstantReset) {
+        setIsInstant(true);
+        setTimeout(() => setIsInstant(false), 0);
+      }
+    } else {
+      let didInstantReset = false;
+      setCarouselIndex((prev) => {
+        const next = prev + 1;
+        if (next >= baseLen * 3) {
+          didInstantReset = true;
+          return baseLen; // jump back to start of safe window
+        }
+        return next;
+      });
+      if (didInstantReset) {
+        setIsInstant(true);
+        setTimeout(() => setIsInstant(false), 0);
+      }
+    }
+  };
+
+  // Get items for carousel with duplicates for infinite scroll
+  const getCarouselItems = () => {
+    if (activeTab === "gallery") {
+      const galleryItems = [
+        { src: "engineering-service-provider-in-saudi-arabia1.webp", alt: "Gallery 1" },
+        { src: "engineering-service-provider-in-saudi-arabia.webp", alt: "Gallery 2" },
+        { src: "4466.webp", alt: "Gallery 3" },
+        { src: "close-up-metallic-gear.webp", alt: "Gallery 4" },
+        { src: "close-up-machine-part.webp", alt: "Gallery 5" },
+        { src: "hd-construction-site-architecture-scene-background-image.webp", alt: "Gallery 6" },
+      ];
+      // Create multiple copies for seamless infinite scroll
+      return [...galleryItems, ...galleryItems, ...galleryItems, ...galleryItems];
+    } else {
+      // Convert certification images to objects and duplicate for seamless loop
+      const certItems = certificationImages.map((src, idx) => ({ 
+        src, 
+        alt: `Certification ${idx + 1}` 
+      }));
+      return [...certItems, ...certItems, ...certItems, ...certItems];
+    }
+  };
 
   return (
     <div className="bg-white w-full min-h-screen overflow-x-hidden">
@@ -432,6 +525,7 @@ export const Desktop = (): JSX.Element => {
               className="absolute w-[195px] h-[35px] top-[25px] left-[945px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg"
               style={tDelay(300)}
               aria-label="View Our Projects"
+              onClick={() => navigate("/projects")}
             >
               <span className="font-bold text-black text-[19px] whitespace-nowrap">View Our Projects</span>
             </Button>
@@ -440,6 +534,7 @@ export const Desktop = (): JSX.Element => {
               className="absolute w-[133px] h-[35px] top-[25px] left-[1160px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg"
               style={tDelay(400)}
               aria-label="Contact Us"
+              onClick={() => navigate("/contact")}
             >
               <span className="font-bold text-black text-[19px] whitespace-nowrap">Contact Us</span>
             </Button>
@@ -610,68 +705,62 @@ export const Desktop = (): JSX.Element => {
               style={tDelay(400)}
             >
               <div
-                className="flex gap-4 transition-transform duration-500"
-                style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
+                className={`flex gap-4 transition-transform ${isInstant ? 'duration-0' : 'duration-500'}`}
+                style={{ 
+                  transform: `translateX(-${carouselIndex * (350 + 16)}px)`,
+                  width: `${getCarouselItems().length * (350 + 16)}px`
+                }}
               >
-                {(activeTab === "gallery"
-                  ? [
-                      { src: "engineering-service-provider-in-saudi-arabia1.webp", alt: "Gallery 1" },
-                      { src: "engineering-service-provider-in-saudi-arabia.webp", alt: "Gallery 2" },
-                      { src: "4466.webp", alt: "Gallery 3" },
-                      { src: "close-up-metallic-gear.webp", alt: "Gallery 4" },
-                      { src: "close-up-machine-part.webp", alt: "Gallery 5" },
-                      { src: "hd-construction-site-architecture-scene-background-image.webp", alt: "Gallery 6" },
-                    ]
-                  : certificationImages.map((src, idx) => ({ src, alt: `Certification ${idx + 1}` })))
-                  .map((item, idx) => (
-                    <div
-                      key={`${activeTab}-${idx}`}
-                      className="flex-shrink-0 w-[350px] h-[260px] rounded-2xl overflow-hidden shadow-lg relative group transition-all duration-500"
-                      style={tDelay(600 + idx * 100)}
-                    >
-                      <img
-                        src={item.src}
-                        alt={item.alt}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                      />
-                      {activeTab === "gallery" && (
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300" />
-                      )}
-                    </div>
-                  ))}
+                {getCarouselItems().map((item, idx) => (
+                  <div
+                    key={`${activeTab}-${idx}`}
+                    className="flex-shrink-0 w-[350px] h-[260px] rounded-2xl overflow-hidden shadow-lg relative group transition-all duration-500"
+                    style={tDelay(600 + (idx % 6) * 100)}
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                    {activeTab === "gallery" && (
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300" />
+                    )}
+                  </div>
+                ))}
               </div>
 
               {/* Controls */}
               <button
                 className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#f9a51a] text-black hover:text-white rounded-full p-2 shadow-lg z-10 transition-all duration-300"
-                onClick={() => setCarouselIndex((prev) => Math.max(prev - 1, 0))}
-                disabled={carouselIndex === 0}
+                onClick={() => handleCarouselControl('prev')}
                 aria-label="Previous"
-                style={{ pointerEvents: carouselIndex === 0 ? "none" : "auto", opacity: carouselIndex === 0 ? 0.5 : 1 }}
               >
                 &#8592;
               </button>
               <button
                 className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#f9a51a] text-black hover:text-white rounded-full p-2 shadow-lg z-10 transition-all duration-300"
-                onClick={() =>
-                  setCarouselIndex((prev) =>
-                    Math.min(prev + 1, (activeTab === "gallery" ? 6 : certificationImages.length) - visibleCount)
-                  )
-                }
-                disabled={carouselIndex >= (activeTab === "gallery" ? 6 : certificationImages.length) - visibleCount}
+                onClick={() => handleCarouselControl('next')}
                 aria-label="Next"
-                style={{
-                  pointerEvents:
-                    carouselIndex >= (activeTab === "gallery" ? 6 : certificationImages.length) - visibleCount
-                      ? "none"
-                      : "auto",
-                  opacity:
-                    carouselIndex >= (activeTab === "gallery" ? 6 : certificationImages.length) - visibleCount ? 0.5 : 1,
-                }}
               >
                 &#8594;
               </button>
+            </div>
+
+            {/* More from Gallery/Certifications Button */}
+            <div className="mt-8 transition-all duration-700" style={tDelay(800)}>
+              <Button
+                className="px-8 py-3 rounded-full font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#f9a51a] to-[#e09416] text-white border-2 border-[#f9a51a] hover:shadow-xl"
+                onClick={() => {
+                  if (activeTab === "gallery") {
+                    navigate("/gallery");
+                  } else {
+                    navigate("/certifications");
+                  }
+                }}
+              >
+                More from {activeTab === "gallery" ? "Gallery" : "Certifications"}
+              </Button>
             </div>
           </section>
 
@@ -926,6 +1015,7 @@ export const Desktop = (): JSX.Element => {
               className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gradient-to-r from-white to-gray-200 transition-all duration-300"
               style={tDelay(300)}
               aria-label="View Our Projects"
+              onClick={() => navigate("/projects")}
             >
               <span className="font-bold text-black text-base">View Our Projects</span>
             </Button>
@@ -933,6 +1023,7 @@ export const Desktop = (): JSX.Element => {
               className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gradient-to-r from-white to-gray-200 transition-all duration-300"
               style={tDelay(350)}
               aria-label="Contact Us"
+              onClick={() => navigate("/contact")}
             >
               <span className="font-bold text-black text-base">Contact Us</span>
             </Button>
@@ -1070,56 +1161,59 @@ export const Desktop = (): JSX.Element => {
               style={tDelay(400)}
             >
               <div
-                className="flex gap-3 transition-transform duration-500"
-                style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
+                className={`flex gap-3 transition-transform ${isInstant ? 'duration-0' : 'duration-500'}`}
+                style={{ 
+                  transform: `translateX(-${carouselIndex * (288 + 12)}px)`,
+                  width: `${getCarouselItems().length * (288 + 12)}px`
+                }}
               >
-                {(activeTab === "gallery"
-                  ? [
-                      { src: "engineering-service-provider-in-saudi-arabia1.webp", alt: "Gallery 1" },
-                      { src: "engineering-service-provider-in-saudi-arabia.webp", alt: "Gallery 2" },
-                      { src: "4466.webp", alt: "Gallery 3" },
-                      { src: "close-up-metallic-gear.webp", alt: "Gallery 4" },
-                      { src: "close-up-machine-part.webp", alt: "Gallery 5" },
-                      { src: "hd-construction-site-architecture-scene-background-image.webp", alt: "Gallery 6" },
-                    ]
-                  : certificationImages.map((src, idx) => ({ src, alt: `Certification ${idx + 1}` })))
-                  .map((item, idx) => (
-                    <div
-                      key={`mobile-${activeTab}-${idx}`}
-                      className="flex-shrink-0 w-72 h-56 rounded-2xl overflow-hidden shadow-lg relative"
-                      style={tDelay(600 + idx * 100)}
-                    >
-                      <img
-                        src={item.src}
-                        alt={item.alt}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
+                {getCarouselItems().map((item, idx) => (
+                  <div
+                    key={`mobile-${activeTab}-${idx}`}
+                    className="flex-shrink-0 w-72 h-56 rounded-2xl overflow-hidden shadow-lg relative"
+                    style={tDelay(600 + (idx % 6) * 100)}
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
               </div>
 
               {/* Controls */}
               <button
                 className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#f9a51a] text-black hover:text-white rounded-full p-2 shadow-lg z-10 transition-all duration-300"
-                onClick={() => setCarouselIndex((prev) => Math.max(prev - 1, 0))}
-                disabled={carouselIndex === 0}
+                onClick={() => handleCarouselControl('prev')}
                 aria-label="Previous"
               >
                 &#8592;
               </button>
               <button
                 className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#f9a51a] text-black hover:text-white rounded-full p-2 shadow-lg z-10 transition-all duration-300"
-                onClick={() =>
-                  setCarouselIndex((prev) =>
-                    Math.min(prev + 1, (activeTab === "gallery" ? 6 : certificationImages.length) - 1)
-                  )
-                }
-                disabled={carouselIndex >= (activeTab === "gallery" ? 6 : certificationImages.length) - 1}
+                onClick={() => handleCarouselControl('next')}
                 aria-label="Next"
               >
                 &#8594;
               </button>
+            </div>
+
+            {/* More from Gallery/Certifications Button */}
+            <div className="mt-8 text-center transition-all duration-700" style={tDelay(800)}>
+              <Button
+                className="px-6 py-3 rounded-full font-bold text-base shadow-lg transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#f9a51a] to-[#e09416] text-white border-2 border-[#f9a51a] hover:shadow-xl"
+                onClick={() => {
+                  if (activeTab === "gallery") {
+                    navigate("/gallery");
+                  } else {
+                    navigate("/certifications");
+                  }
+                }}
+              >
+                More from {activeTab === "gallery" ? "Gallery" : "Certifications"}
+              </Button>
             </div>
           </div>
         </section>
