@@ -1,4 +1,4 @@
-import { FileTextIcon, MailIcon, MapPinIcon } from "lucide-react";
+import { FileTextIcon, MailIcon, MapPinIcon, Instagram, Facebook, Twitter } from "lucide-react";
 import React from "react";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
@@ -450,9 +450,7 @@ export const Desktop = (): JSX.Element => {
             src="young-factory-worker-working-with-adept-robotic-arm.webp"
           />
 
-          <MailIcon className={`absolute w-6 h-6 top-[1395px] left-[708px] text-white transition-all duration-700 delay-1200 ${
-            visibleSections.has('services') ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-          }`} />
+        
         </section>
 
         {/* CTA Section */}
@@ -480,13 +478,13 @@ export const Desktop = (): JSX.Element => {
             </span>
           </div>
 
-          <Button className={`absolute w-[133px] h-[35px] top-[25px] left-[1160px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 delay-400 hover:scale-105 hover:shadow-lg ${
-            visibleSections.has('cta') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-          }`}>
-            <span className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-bold text-black text-[19px] tracking-[0] whitespace-nowrap">
-              Contact Us
-            </span>
-          </Button>
+                       <Button onClick={() => (window.location.href = 'mailto:info@vinsubco.co')} className={`absolute w-[133px] h-[35px] top-[25px] left-[1160px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 delay-400 hover:scale-105 hover:shadow-lg ${
+              visibleSections.has('cta') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}>
+              <span className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-bold text-black text-[19px] tracking-[0] whitespace-nowrap">
+                Contact Us
+              </span>
+            </Button>
 
           <Button className={`absolute w-[195px] h-[35px] top-[25px] left-[945px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 delay-300 hover:scale-105 hover:shadow-lg ${
             visibleSections.has('cta') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
@@ -841,13 +839,19 @@ export const Desktop = (): JSX.Element => {
 
               <div className="absolute w-[564px] h-[366px] top-0 left-0 bg-[#d9d9d9]" />
 
-              <img
-                className={`absolute w-[126px] h-[34px] top-[203px] left-[153px] transition-all duration-700 delay-300 ${
-                  visibleSections.has('footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-                }`}
-                alt="Groupss"
-              />
-
+                            <div className={`absolute top-[203px] left-[153px] z-10 flex items-center gap-2 transition-all duration-700 delay-300 ${
+                visibleSections.has('footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+              }`}>
+               <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
+                 <Instagram className="w-4 h-4 text-black" />
+               </a>
+               <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
+                 <Twitter className="w-4 h-4 text-black" />
+               </a>
+               <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
+                 <Facebook className="w-4 h-4 text-black" />
+               </a>
+             </div>
               <img
                 className={`absolute w-[340px] h-12 top-[70px] left-[152px] object-cover transition-all duration-700 delay-400 ${
                   visibleSections.has('footer') ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
@@ -919,7 +923,7 @@ export const Desktop = (): JSX.Element => {
             </span>
           </div>
 
-          {/* Email Contact */}
+                    {/* Email Contact */}
           <img
             className={`absolute w-5 h-5 top-[175px] left-[1026px] transition-all duration-700 delay-900 ${
               visibleSections.has('footer') ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
@@ -927,13 +931,19 @@ export const Desktop = (): JSX.Element => {
             alt="Vector"
             src="/vector.svg"
           />
-
+ 
           <div className={`flex items-center absolute top-[154px] left-[1069px] transition-all duration-700 delay-900 ${
             visibleSections.has('footer') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'
           }`}>
-            <span className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-medium text-white text-sm tracking-[0] leading-[60px] whitespace-nowrap">
-              info@vinsubco.co
-            </span>
+           <a 
+  href="https://mail.google.com/mail/?view=cm&to=info@vinsubco.co" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-medium text-white text-sm tracking-[0] leading-[60px] whitespace-nowrap"
+>
+  info@vinsubco.co
+</a>
+
           </div>
 
           {/* Location Contact */}
@@ -965,9 +975,10 @@ export const Desktop = (): JSX.Element => {
           <div className={`flex items-center absolute top-[234px] left-[1069px] transition-all duration-700 delay-1100 ${
             visibleSections.has('footer') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'
           }`}>
-            <span className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-medium text-white text-sm tracking-[0] leading-[60px] whitespace-nowrap">
+            <span className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-medium text-white text-sm tracking-[0] leading-[60px] whitespace-nowrap mr-4">
               CR-2050161120
             </span>
+         
           </div>
         </footer>
 
@@ -1293,9 +1304,9 @@ export const Desktop = (): JSX.Element => {
                 View Our Projects
               </span>
             </Button>
-            <Button className={`w-full sm:w-auto px-8 py-3 rounded-lg bg-gradient-to-r from-white to-gray-200 hover:scale-105 transition-all duration-300 delay-400 ${
-              visibleSections.has('mobile-cta') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-            }`}>
+                         <Button onClick={() => (window.location.href = 'mailto:info@vinsubco.co')} className={`w-full sm:w-auto px-8 py-3 rounded-lg bg-gradient-to-r from-white to-gray-200 hover:scale-105 transition-all duration-300 delay-400 ${
+               visibleSections.has('mobile-cta') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+             }`}>
               <span className="font-bold text-black text-base">
                 Contact Us
               </span>
@@ -1709,7 +1720,7 @@ export const Desktop = (): JSX.Element => {
             </div>
 
             {/* Contact Info */}
-            <div className={`mt-8 pt-8 border-t border-gray-600 text-center md:text-left transition-all duration-700 delay-600 ${
+                          <div className={`mt-8 pt-8 border-t border-gray-600 text-center md:text-left transition-all duration-700 delay-600 ${
               visibleSections.has('mobile-footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
             }`}>
               <h3 className="font-bold text-white text-lg mb-4">Get In Touch</h3>
@@ -1720,7 +1731,7 @@ export const Desktop = (): JSX.Element => {
                 </div>
                 <div className="flex items-center justify-center md:justify-start gap-3">
                   <img className="w-5 h-5" alt="Email" src="/vector.svg" />
-                  <span className="text-white text-sm font-medium">info@vinsubco.co</span>
+                  <a href="mailto:info@vinsubco.co" className="text-white text-sm font-medium">info@vinsubco.co</a>
                 </div>
                 <div className="flex items-center justify-center md:justify-start gap-3">
                   <img className="w-5 h-5" alt="Location" src="/vector-3.svg" />
@@ -1729,6 +1740,17 @@ export const Desktop = (): JSX.Element => {
                 <div className="flex items-center justify-center md:justify-start gap-3">
                   <img className="w-5 h-5" alt="Registration" src="/vector-4.svg" />
                   <span className="text-white text-sm font-medium">CR-2050161120</span>
+                </div>
+                <div className="flex items-center justify-center md:justify-start gap-3 pt-2">
+                  <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
+                    <Instagram className="w-4 h-4 text-black" />
+                  </a>
+                  <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
+                    <Twitter className="w-4 h-4 text-black" />
+                  </a>
+                  <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
+                    <Facebook className="w-4 h-4 text-black" />
+                  </a>
                 </div>
               </div>
             </div>
