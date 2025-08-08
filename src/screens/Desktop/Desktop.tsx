@@ -1232,8 +1232,9 @@ export const Desktop = (): JSX.Element => {
         <section
           id="mobile-mission"
           data-animate
-          className={`w-full py-14 px-4 bg-gradient-to-r from-white to-black transition-all duration-1000 ${visibleSections.has("mobile-mission") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+          className={`w-full py-14 px-4 bg-gradient-to-b from-black to-white transition-all duration-1000 ${
+            visibleSections.has("mobile-mission") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
         >
           <div className="max-w-4xl mx-auto text-center">
             <img
@@ -1266,8 +1267,9 @@ export const Desktop = (): JSX.Element => {
         <section
           id="mobile-vision"
           data-animate
-          className={`w-full py-14 px-4 bg-gradient-to-l from-white to-black transition-all duration-1000 ${visibleSections.has("mobile-vision") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+          className={`w-full py-14 px-4 bg-gradient-to-b from-black to-white transition-all duration-1000 ${
+            visibleSections.has("mobile-vision") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
         >
           <div className="max-w-4xl mx-auto text-center">
             <img
