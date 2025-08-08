@@ -891,7 +891,7 @@ export const Desktop = (): JSX.Element => {
         <section
           id="mobile-hero"
           data-animate
-          className={`relative w-full min-h-screen bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] transition-all duration-1000 ${visibleSections.has("mobile-hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          className={`relative w-full bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] transition-all duration-1000 ${visibleSections.has("mobile-hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
         >
           {/* Header */}
