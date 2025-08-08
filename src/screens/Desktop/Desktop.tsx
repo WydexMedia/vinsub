@@ -885,7 +885,7 @@ export const Desktop = (): JSX.Element => {
         </div>
       </div>
 
-      {/* MOBILE (rebuilt to be fluid; no fixed widths, clean nav, same content) */}
+      {/* MOBILE (rebuilt to be fluid; no fixed widths, clean nav, same conten.....t) */}
       <div className="lg:hidden w-full min-h-screen bg-white overflow-x-hidden">
         {/* Mobile Hero */}
         <section
