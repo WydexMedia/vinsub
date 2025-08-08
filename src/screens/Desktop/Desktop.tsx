@@ -74,6 +74,36 @@ export const Desktop = (): JSX.Element => {
 
   // Intersection Observer for scroll animations
   React.useEffect(() => {
+    // Disable scroll-triggered animations on mobile screens
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      setVisibleSections(
+        new Set([
+          // mobile sections
+          'mobile-hero',
+          'mobile-cta',
+          'mobile-about',
+          'mobile-services',
+          'mobile-gallery-certifications',
+          'mobile-mission',
+          'mobile-vision',
+          'mobile-clients',
+          'mobile-ceo-message',
+          'mobile-footer',
+          // desktop sections (safe to reveal; they are hidden on lg:hidden anyway)
+          'hero',
+          'cta',
+          'about',
+          'services',
+          'gallery-certifications',
+          'mission',
+          'vision',
+          'clients',
+          'footer',
+        ])
+      );
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -81,9 +111,9 @@ export const Desktop = (): JSX.Element => {
             setVisibleSections((prev) => new Set([...prev, entry.target.id]));
           }
         });
-            },
+      },
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-     );
+    );
 
     const sections = document.querySelectorAll("[data-animate]");
     sections.forEach((section) => observer.observe(section));
@@ -890,9 +920,7 @@ export const Desktop = (): JSX.Element => {
         {/* Mobile Hero */}
         <section
           id="mobile-hero"
-          data-animate
-          className={`relative w-full bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] transition-all duration-1000 ${visibleSections.has("mobile-hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            } pt-16`}
+          className="relative w-full bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] pt-16"
         >
           {/* Header */}
           <header
@@ -986,12 +1014,10 @@ export const Desktop = (): JSX.Element => {
         {/* CTA */}
         <section
           id="mobile-cta"
-          data-animate
-          className={`w-full py-8 px-4 bg-gradient-to-r from-black to-white transition-all duration-1000 ${visibleSections.has("mobile-cta") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+          className="w-full py-8 px-4 bg-gradient-to-r from-black to-white"
         >
           <div
-            className="text-center mb-5 transition-all duration-700"
+            className="text-center mb-5"
             style={tDelay(200)}
           >
             <span className="font-medium text-white text-lg">Looking for a </span>
