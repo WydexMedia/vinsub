@@ -1,4 +1,4 @@
-import { FileTextIcon, MailIcon, MapPinIcon, Instagram, Facebook, Twitter } from "lucide-react";
+import { MailIcon, Instagram, Facebook, Twitter } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
@@ -81,9 +81,9 @@ export const Desktop = (): JSX.Element => {
             setVisibleSections((prev) => new Set([...prev, entry.target.id]));
           }
         });
-      },
+            },
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-    );
+     );
 
     const sections = document.querySelectorAll("[data-animate]");
     sections.forEach((section) => observer.observe(section));
@@ -184,9 +184,9 @@ export const Desktop = (): JSX.Element => {
       return [...galleryItems, ...galleryItems, ...galleryItems, ...galleryItems];
     } else {
       // Convert certification images to objects and duplicate for seamless loop
-      const certItems = certificationImages.map((src, idx) => ({ 
-        src, 
-        alt: `Certification ${idx + 1}` 
+      const certItems = certificationImages.map((src, idx) => ({
+        src,
+        alt: `Certification ${idx + 1}`
       }));
       return [...certItems, ...certItems, ...certItems, ...certItems];
     }
@@ -201,9 +201,8 @@ export const Desktop = (): JSX.Element => {
           <section
             id="vision"
             data-animate
-            className={`absolute w-full h-[419px] top-[4754px] left-0 bg-[linear-gradient(270deg,rgba(255,255,255,1)_0%,rgba(0,0,0,1)_100%)] transition-all duration-1000 ${
-              visibleSections.has("vision") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`absolute w-full h-[419px] top-[4754px] left-0 bg-[linear-gradient(270deg,rgba(255,255,255,1)_0%,rgba(0,0,0,1)_100%)] transition-all duration-1000 ${visibleSections.has("vision") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             <Card className="absolute w-[507px] h-[185px] top-[117px] left-[786px] bg-transparent border-none shadow-none">
               <CardContent className="relative w-[511px] h-[185px] p-0">
@@ -238,9 +237,8 @@ export const Desktop = (): JSX.Element => {
           <section
             id="mission"
             data-animate
-            className={`absolute w-full h-[419px] top-[4335px] left-0 bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(0,0,0,1)_100%)] transition-all duration-1000 ${
-              visibleSections.has("mission") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`absolute w-full h-[419px] top-[4335px] left-0 bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(0,0,0,1)_100%)] transition-all duration-1000 ${visibleSections.has("mission") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             <img
               className="absolute w-[300px] h-[300px] top-16 left-[871px] object-cover transition-all duration-700"
@@ -275,9 +273,8 @@ export const Desktop = (): JSX.Element => {
           <section
             id="hero"
             data-animate
-            className={`absolute w-full h-[1072px] -top-0.5 left-0 bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] transition-all duration-1000 ${
-              visibleSections.has("hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`absolute w-full h-[1072px] -top-0.5 left-0 bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] transition-all duration-1000 ${visibleSections.has("hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             <header
               className="absolute w-full h-[101px] top-[58px] left-0 bg-white transition-all duration-700"
@@ -299,9 +296,8 @@ export const Desktop = (): JSX.Element => {
                     <NavigationMenuItem key={item.name}>
                       <NavigationMenuLink
                         href={item.href}
-                        className={`font-bold text-[15px] whitespace-nowrap transition-all duration-300 hover:scale-105 ${
-                          item.active ? "text-[#f9a51a]" : "text-neutral-900"
-                        }`}
+                        className={`font-bold text-[15px] whitespace-nowrap transition-all duration-300 hover:scale-105 ${item.active ? "text-[#f9a51a]" : "text-neutral-900"
+                          }`}
                         style={tDelay(500 + index * 100)}
                       >
                         {item.name}
@@ -377,9 +373,8 @@ export const Desktop = (): JSX.Element => {
           <section
             id="services"
             data-animate
-            className={`absolute w-full h-[2122px] top-[2117px] left-0 overflow-hidden bg-black transition-all duration-1000 ${
-              visibleSections.has("services") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`absolute w-full h-[2122px] top-[2117px] left-0 overflow-hidden bg-black transition-all duration-1000 ${visibleSections.has("services") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             <img
               className="absolute w-full h-[206px] top-0 left-0 opacity-30 object-cover transition-all duration-1000"
@@ -429,10 +424,10 @@ export const Desktop = (): JSX.Element => {
                       index === 0
                         ? 366
                         : index === 1
-                        ? 845
-                        : index === 2
-                        ? 1325
-                        : 109,
+                          ? 845
+                          : index === 2
+                            ? 1325
+                            : 109,
                     left: index === 0 || index === 2 ? 551 : index === 1 ? 36 : 0,
                     transform: index === 3 ? "translateY(1696px)" : "none",
                   }}
@@ -441,9 +436,8 @@ export const Desktop = (): JSX.Element => {
                 </div>
 
                 <Card
-                  className={`absolute w-[380px] h-[380px] bg-transparent border-none transition-all duration-700 hover:scale-105 ${
-                    visibleSections.has("services") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
-                  }`}
+                  className={`absolute w-[380px] h-[380px] bg-transparent border-none transition-all duration-700 hover:scale-105 ${visibleSections.has("services") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+                    }`}
                   style={{
                     ...tDelay(800 + index * 200),
                     top:
@@ -468,9 +462,8 @@ export const Desktop = (): JSX.Element => {
                 </Card>
 
                 <span
-                  className={`absolute font-extrabold text-[#f9a51a] text-[243px] leading-[180px] whitespace-nowrap transition-all duration-700 ${
-                    visibleSections.has("services") ? "opacity-100 scale-100" : "opacity-0 scale-75"
-                  }`}
+                  className={`absolute font-extrabold text-[#f9a51a] text-[243px] leading-[180px] whitespace-nowrap transition-all duration-700 ${visibleSections.has("services") ? "opacity-100 scale-100" : "opacity-0 scale-75"
+                    }`}
                   style={{
                     ...tDelay(1100 + index * 200),
                     top:
@@ -498,8 +491,6 @@ export const Desktop = (): JSX.Element => {
               loading="lazy"
             />
 
-        
-        </section>
             <MailIcon
               className="absolute w-6 h-6 top-[1395px] left-[708px] text-white transition-all duration-700"
               style={tDelay(1200)}
@@ -510,9 +501,8 @@ export const Desktop = (): JSX.Element => {
           <section
             id="cta"
             data-animate
-            className={`absolute w-full h-[79px] top-[1070px] left-0 bg-[linear-gradient(90deg,rgba(0,0,0,1)_0%,rgba(255,255,255,1)_100%)] transition-all duration-1000 ${
-              visibleSections.has("cta") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`absolute w-full h-[79px] top-[1070px] left-0 bg-[linear-gradient(90deg,rgba(0,0,0,1)_0%,rgba(255,255,255,1)_100%)] transition-all duration-1000 ${visibleSections.has("cta") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             <div
               className="absolute w-[713px] top-[9px] left-[146px] font-normal text-transparent text-xl leading-5 transition-all duration-700"
@@ -531,13 +521,6 @@ export const Desktop = (): JSX.Element => {
             >
               <span className="font-bold text-black text-[19px] whitespace-nowrap">View Our Projects</span>
             </Button>
-                       <Button onClick={() => (window.location.href = 'mailto:info@vinsubco.co')} className={`absolute w-[133px] h-[35px] top-[25px] left-[1160px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 delay-400 hover:scale-105 hover:shadow-lg ${
-              visibleSections.has('cta') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-            }`}>
-              <span className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-bold text-black text-[19px] tracking-[0] whitespace-nowrap">
-                Contact Us
-              </span>
-            </Button>
 
             <Button
               className="absolute w-[133px] h-[35px] top-[25px] left-[1160px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg"
@@ -553,9 +536,8 @@ export const Desktop = (): JSX.Element => {
           <section
             id="clients"
             data-animate
-            className={`absolute w-full h-[600px] top-[5268px] left-0 bg-[#d9d9d9] transition-all duration-1000 ${
-              visibleSections.has("clients") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`absolute w-full h-[600px] top-[5268px] left-0 bg-[#d9d9d9] transition-all duration-1000 ${visibleSections.has("clients") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             <div
               className="absolute w-44 h-[54px] top-[126px] left-[632px] transition-all duration-700"
@@ -587,7 +569,7 @@ export const Desktop = (): JSX.Element => {
                   key={i}
                   href={c.href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow"
                   className="absolute transition-all duration-500 hover:scale-110"
                   style={{ ...tDelay(500 + i * 100), width: c.w, height: c.h, top: c.top ?? 0, left: c.left ?? i * 162 }}
                 >
@@ -613,7 +595,7 @@ export const Desktop = (): JSX.Element => {
                   key={i}
                   href={c.href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow"
                   className="absolute transition-all duration-500 hover:scale-110"
                   style={{ ...tDelay(700 + i * 100), width: c.w, height: c.h, top: c.top ?? 0, left: c.left ?? i * 163 }}
                 >
@@ -627,9 +609,8 @@ export const Desktop = (): JSX.Element => {
           <section
             id="about"
             data-animate
-            className={`absolute w-[292px] h-[161px] top-[1156px] left-[574px] transition-all duration-1000 ${
-              visibleSections.has("about") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`absolute w-[292px] h-[161px] top-[1156px] left-[574px] transition-all duration-1000 ${visibleSections.has("about") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             <h2
               className="absolute w-[292px] top-0 left-0 bg-[linear-gradient(270deg,rgba(249,165,26,1)_0%,rgba(0,0,0,1)_100%)] [-webkit-background-clip:text] bg-clip-text text-transparent font-bold text-[65px] leading-[150px] whitespace-nowrap transition-all duration-700"
@@ -675,9 +656,8 @@ export const Desktop = (): JSX.Element => {
           <section
             id="gallery-certifications"
             data-animate
-            className={`absolute w-full left-0 top-[1649px] flex flex-col items-center transition-all duration-1000 ${
-              visibleSections.has("gallery-certifications") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`absolute w-full left-0 top-[1649px] flex flex-col items-center transition-all duration-1000 ${visibleSections.has("gallery-certifications") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             {/* Tabs */}
             <div
@@ -685,22 +665,20 @@ export const Desktop = (): JSX.Element => {
               style={tDelay(200)}
             >
               <button
-                className={`px-8 py-2 rounded-full font-bold text-lg shadow transition-all duration-300 border-2 hover:scale-105 ${
-                  activeTab === "gallery"
+                className={`px-8 py-2 rounded-full font-bold text-lg shadow transition-all duration-300 border-2 hover:scale-105 ${activeTab === "gallery"
                     ? "bg-[#f9a51a] text-white border-[#f9a51a]"
                     : "bg-white text-[#222] border-gray-300 hover:border-[#f9a51a]"
-                }`}
+                  }`}
                 onClick={() => setActiveTab("gallery")}
                 aria-pressed={activeTab === "gallery"}
               >
                 Gallery
               </button>
               <button
-                className={`px-8 py-2 rounded-full font-bold text-lg shadow transition-all duration-300 border-2 hover:scale-105 ${
-                  activeTab === "certifications"
+                className={`px-8 py-2 rounded-full font-bold text-lg shadow transition-all duration-300 border-2 hover:scale-105 ${activeTab === "certifications"
                     ? "bg-[#f9a51a] text-white border-[#f9a51a]"
                     : "bg-white text-[#222] border-gray-300 hover:border-[#f9a51a]"
-                }`}
+                  }`}
                 onClick={() => setActiveTab("certifications")}
                 aria-pressed={activeTab === "certifications"}
               >
@@ -715,7 +693,7 @@ export const Desktop = (): JSX.Element => {
             >
               <div
                 className={`flex gap-4 transition-transform ${isInstant ? 'duration-0' : 'duration-500'}`}
-                style={{ 
+                style={{
                   transform: `translateX(-${carouselIndex * (350 + 16)}px)`,
                   width: `${getCarouselItems().length * (350 + 16)}px`
                 }}
@@ -798,9 +776,8 @@ export const Desktop = (): JSX.Element => {
           <footer
             id="footer"
             data-animate
-            className={`absolute w-[1463px] h-[366px] top-[6238px] -left-1.5 transition-all duration-1000 ${
-              visibleSections.has("footer") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`absolute w-[1463px] h-[366px] top-[6238px] -left-1.5 transition-all duration-1000 ${visibleSections.has("footer") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             <div className="absolute w-[1463px] h-[366px] top-0 left-0">
               <div className="relative w-[1451px] h-[366px]">
@@ -811,29 +788,22 @@ export const Desktop = (): JSX.Element => {
                   src="/rectangle-8.svg"
                   loading="lazy"
                 />
+                <div className="absolute w-[564px] h-[366px] top-0 left-0 bg-[#d9d9d9]" />
+                 <div className={`absolute top-[203px] left-[153px] z-10 flex items-center gap-2 transition-all duration-700 delay-300 ${visibleSections.has('footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}> 
+                  <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity"> 
+                  <Instagram className="w-4 h-4 text-black" /> </a> <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
+                   <Twitter className="w-4 h-4 text-black" /> </a> <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity"> 
+                   <Facebook className="w-4 h-4 text-black" /> </a> </div>
 
                 <div className="absolute w-[564px] h-[366px] top-0 left-0 bg-[#d9d9d9]" />
 
-                            <div className={`absolute top-[203px] left-[153px] z-10 flex items-center gap-2 transition-all duration-700 delay-300 ${
-                visibleSections.has('footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-              }`}>
-               <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
-                 <Instagram className="w-4 h-4 text-black" />
-               </a>
-               <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
-                 <Twitter className="w-4 h-4 text-black" />
-               </a>
-               <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
-                 <Facebook className="w-4 h-4 text-black" />
-               </a>
-             </div>
-              <img
-                className={`absolute w-[340px] h-12 top-[70px] left-[152px] object-cover transition-all duration-700 delay-400 ${
-                  visibleSections.has('footer') ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-                }`}
-                src="/VINSUB.webp"
-                alt="Vinsub"
-              />
+                <img
+                  className="absolute w-[340px] h-12 top-[70px] left-[152px] object-cover transition-all duration-700"
+                  style={tDelay(400)}
+                  src="/VINSUB.webp"
+                  alt="Vinsub"
+                  loading="lazy"
+                />
 
                 <div
                   className="absolute top-[100px] left-[210px] text-xs font-normal italic text-black leading-[60px] whitespace-nowrap transition-all duration-700"
@@ -893,28 +863,10 @@ export const Desktop = (): JSX.Element => {
                   <span className="font-medium text-white text-sm leading-[60px] whitespace-nowrap">0509331315</span>
                 </div>
 
-                    {/* Email Contact */}
-          <img
-            className={`absolute w-5 h-5 top-[175px] left-[1026px] transition-all duration-700 delay-900 ${
-              visibleSections.has('footer') ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-            }`}
-            alt="Vector"
-            src="/vector.svg"
-          />
- 
-          <div className={`flex items-center absolute top-[154px] left-[1069px] transition-all duration-700 delay-900 ${
-            visibleSections.has('footer') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'
-          }`}>
-           <a 
-  href="https://mail.google.com/mail/?view=cm&to=info@vinsubco.co" 
-  target="_blank" 
-  rel="noopener noreferrer"
-  className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-medium text-white text-sm tracking-[0] leading-[60px] whitespace-nowrap"
->
-  info@vinsubco.co
-</a>
-
-          </div>
+                <div className="absolute top-[154px] left-[1069px] flex items-center gap-3" style={tDelay(900)}>
+                  <img className="w-5 h-5" alt="Email" src="/vector.svg" loading="lazy" />
+                  <span className="font-medium text-white text-sm leading-[60px] whitespace-nowrap">info@vinsubco.co</span>
+                </div>
 
                 <div className="absolute top-[194px] left-[1069px] flex items-center gap-3" style={tDelay(1000)}>
                   <img className="w-5 h-5" alt="Location" src="/vector-3.svg" loading="lazy" />
@@ -937,223 +889,10 @@ export const Desktop = (): JSX.Element => {
       <div className="lg:hidden w-full min-h-screen bg-white overflow-x-hidden">
         {/* Mobile Hero */}
         <section
-          {/* Registration Number Contact */}
-          <img
-            className={`absolute w-5 h-5 top-[255px] left-[1026px] transition-all duration-700 delay-1100 ${
-              visibleSections.has('footer') ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-            }`}
-            alt="Vector"
-            src="/vector-4.svg"
-          />
-
-          <div className={`flex items-center absolute top-[234px] left-[1069px] transition-all duration-700 delay-1100 ${
-            visibleSections.has('footer') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'
-          }`}>
-            <span className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-medium text-white text-sm tracking-[0] leading-[60px] whitespace-nowrap mr-4">
-              CR-2050161120
-            </span>
-         
-          </div>
-        </footer>
-
-        <Separator className="w-full top-[1537px] absolute h-px left-0" />
-
-        {/* CEO Message Section */}
-        <section className="absolute w-[668px] h-[175px] top-[5965px] left-[386px]">
-          <div className="relative w-[672px] h-[175px]">
-            <p className="absolute top-0 left-0 [font-family:'Plus_Jakarta_Sans',Helvetica] font-medium text-black text-[26px] text-center tracking-[0] leading-8">
-              &quot;No matter what size of project,
-              <br />
-              we look forward to providing value-driven excellence&quot;
-            </p>
-
-            <h3 className="absolute top-[143px] left-60 bg-[linear-gradient(90deg,rgba(249,165,26,1)_0%,rgba(147,97,15,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Plus_Jakarta_Sans',Helvetica] font-extrabold text-transparent text-[26px] text-center tracking-[0] leading-8 whitespace-nowrap">
-              CEO MESSAGE
-            </h3>
-
-            <div className="absolute flex flex-row gap-1 w-[155px] h-[26px] top-[94px] left-[257px]">
-              {[...Array(5)].map((_, i) => (
-                <img
-                  key={i}
-                  className="w-[30px] h-[30px] object-contain"
-                  src="geometric-star-shape.webp"
-                  alt="star"
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <img
-          className="absolute w-[54px] h-[33px] top-[6027px] left-[1240px]"
-          alt="Vector"
-          src="/vector-5.svg"
-        />
-
-        <img
-          className="absolute w-[54px] h-[33px] top-[6027px] left-[146px]"
-          alt="Vector"
-          src="/vector-2.svg"
-        />
-
-        {/* Gallery/Certification Collage Section */}
-        <section 
-          id="gallery-certifications"
-          data-animate
-          className={`absolute w-full max-w-full left-0 top-[1649px] flex flex-col items-center transition-all duration-1000 ${
-            visibleSections.has('gallery-certifications') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
-        >
-          {/* Tabs */}
-          <div className={`flex gap-4 mb-6 mt-2 transition-all duration-700 delay-200 ${
-            visibleSections.has('gallery-certifications') ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
-          }`}>
-            <button
-              className={`px-8 py-2 rounded-full font-bold text-lg shadow transition-all duration-300 border-2 hover:scale-105 ${
-                activeTab === 'gallery' 
-                  ? 'bg-[#f9a51a] text-white border-[#f9a51a]' 
-                  : 'bg-white text-[#222] border-gray-300 hover:border-[#f9a51a]'
-              }`}
-              onClick={() => setActiveTab('gallery')}
-            >
-              Gallery
-            </button>
-            <button
-              className={`px-8 py-2 rounded-full font-bold text-lg shadow transition-all duration-300 border-2 hover:scale-105 ${
-                activeTab === 'certifications' 
-                  ? 'bg-[#f9a51a] text-white border-[#f9a51a]' 
-                  : 'bg-white text-[#222] border-gray-300 hover:border-[#f9a51a]'
-              }`}
-              onClick={() => setActiveTab('certifications')}
-            >
-              Certifications
-            </button>
-          </div>
-
-          {/* Collage Carousel */}
-          <div className={`relative w-full max-w-5xl overflow-hidden transition-all duration-1000 delay-400 ${
-            visibleSections.has('gallery-certifications') ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-          }`}>
-            <div className="flex gap-4 transition-transform duration-500" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>
-              {(activeTab === 'gallery' ? [
-                { src: "engineering-service-provider-in-saudi-arabia1.webp", alt: "Gallery 1" },
-                { src: "engineering-service-provider-in-saudi-arabia.webp", alt: "Gallery 2" },
-                { src: "4466.webp", alt: "Gallery 3" },
-                { src: "close-up-metallic-gear.webp", alt: "Gallery 4" },
-                { src: "close-up-machine-part.webp", alt: "Gallery 5" },
-                { src: "hd-construction-site-architecture-scene-background-image.webp", alt: "Gallery 6" }
-              ] : certificationImages.map((src, idx) => ({ src, alt: `Certification ${idx + 1}` }))).map((item, idx) => (
-                <div key={`${activeTab}-${idx}`} className={`flex-shrink-0 w-[350px] h-[260px] rounded-2xl overflow-hidden shadow-lg relative group transition-all duration-500 delay-${600 + idx * 100} hover:scale-105 ${
-                  visibleSections.has('gallery-certifications') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}>
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {/* Collage effect: overlay for gallery */}
-                  {activeTab === 'gallery' && (
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300" />
-                  )}
-                </div>
-              ))}
-            </div>
-            {/* Carousel Controls */}
-            <button
-              className={`absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#f9a51a] text-black hover:text-white rounded-full p-2 shadow-lg z-10 transition-all duration-300 hover:scale-110 ${
-                visibleSections.has('gallery-certifications') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-5'
-              }`}
-              onClick={() => setCarouselIndex((prev) => Math.max(prev - 1, 0))}
-              disabled={carouselIndex === 0}
-              aria-label="Previous"
-              style={{ pointerEvents: carouselIndex === 0 ? 'none' : 'auto', opacity: carouselIndex === 0 ? 0.5 : 1 }}
-            >
-              &#8592;
-            </button>
-            <button
-              className={`absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#f9a51a] text-black hover:text-white rounded-full p-2 shadow-lg z-10 transition-all duration-300 hover:scale-110 ${
-                visibleSections.has('gallery-certifications') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'
-              }`}
-              onClick={() => setCarouselIndex((prev) => Math.min(prev + 1, (activeTab === 'gallery' ? 6 : certificationImages.length) - visibleCount))}
-              disabled={carouselIndex >= (activeTab === 'gallery' ? 6 : certificationImages.length) - visibleCount}
-              aria-label="Next"
-              style={{ pointerEvents: carouselIndex >= (activeTab === 'gallery' ? 6 : certificationImages.length) - visibleCount ? 'none' : 'auto', opacity: carouselIndex >= (activeTab === 'gallery' ? 6 : certificationImages.length) - visibleCount ? 0.5 : 1 }}
-            >
-              &#8594;
-            </button>
-          </div>
-        </section>
-
-        <Separator className={`w-full top-[1537px] absolute h-px left-0 transition-all duration-700 delay-300 ${
-          visibleSections.has('gallery-certifications') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
-        }`} />
-
-        {/* CEO Message Section */}
-        <section 
-          id="ceo-message"
-          data-animate
-          className={`absolute w-[668px] h-[175px] top-[5965px] left-[386px] transition-all duration-1000 ${
-            visibleSections.has('ceo-message') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
-        >
-          <div className="relative w-[672px] h-[175px]">
-            <p className={`absolute top-0 left-0 [font-family:'Plus_Jakarta_Sans',Helvetica] font-medium text-black text-[26px] text-center tracking-[0] leading-8 transition-all duration-700 delay-200 ${
-              visibleSections.has('ceo-message') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-            }`}>
-              &quot;No matter what size of project,
-              <br />
-              we look forward to providing value-driven excellence&quot;
-            </p>
-
-            <h3 className={`absolute top-[143px] left-60 bg-[linear-gradient(90deg,rgba(249,165,26,1)_0%,rgba(147,97,15,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Plus_Jakarta_Sans',Helvetica] font-extrabold text-transparent text-[26px] text-center tracking-[0] leading-8 whitespace-nowrap transition-all duration-700 delay-400 ${
-              visibleSections.has('ceo-message') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-            }`}>
-              CEO MESSAGE
-            </h3>
-
-            <div className={`absolute flex flex-row gap-1 w-[155px] h-[26px] top-[94px] left-[257px] transition-all duration-700 delay-300 ${
-              visibleSections.has('ceo-message') ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-            }`}>
-              {[...Array(5)].map((_, i) => (
-                <img
-                  key={i}
-                  className={`w-[30px] h-[30px] object-contain transition-all duration-300 delay-${500 + i * 100} hover:scale-110 ${
-                    visibleSections.has('ceo-message') ? 'opacity-100 rotate-0' : 'opacity-0 rotate-12'
-                  }`}
-                  src="geometric-star-shape.webp"
-                  alt="star"
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <img
-          className={`absolute w-[54px] h-[33px] top-[6027px] left-[1240px] transition-all duration-700 delay-600 ${
-            visibleSections.has('ceo-message') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-          }`}
-          alt="Vector"
-          src="/vector-5.svg"
-        />
-
-        <img
-          className={`absolute w-[54px] h-[33px] top-[6027px] left-[146px] transition-all duration-700 delay-600 ${
-            visibleSections.has('ceo-message') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-          }`}
-          alt="Vector"
-          src="/vector-2.svg"
-        />
-      </div>
-
-      {/* Mobile View */}
-      <div className="lg:hidden w-full min-h-screen bg-white">
-        {/* Mobile Hero Section */}
-        <section 
           id="mobile-hero"
           data-animate
-          className={`relative w-full min-h-screen bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] transition-all duration-1000 ${
-            visibleSections.has("mobile-hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`relative w-full min-h-screen bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] transition-all duration-1000 ${visibleSections.has("mobile-hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           {/* Header */}
           <header
@@ -1187,9 +926,8 @@ export const Desktop = (): JSX.Element => {
                     <a
                       key={item.name}
                       href={item.href}
-                      className={`px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-gray-50 ${
-                        item.active ? "text-[#f9a51a] bg-gray-50" : "text-neutral-900"
-                      }`}
+                      className={`px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-gray-50 ${item.active ? "text-[#f9a51a] bg-gray-50" : "text-neutral-900"
+                        }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                       style={tDelay(100 + index * 50)}
                     >
@@ -1249,9 +987,8 @@ export const Desktop = (): JSX.Element => {
         <section
           id="mobile-cta"
           data-animate
-          className={`w-full py-8 px-4 bg-gradient-to-r from-black to-white transition-all duration-1000 ${
-            visibleSections.has("mobile-cta") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`w-full py-8 px-4 bg-gradient-to-r from-black to-white transition-all duration-1000 ${visibleSections.has("mobile-cta") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div
             className="text-center mb-5 transition-all duration-700"
@@ -1278,12 +1015,6 @@ export const Desktop = (): JSX.Element => {
               onClick={() => navigate("/contact")}
             >
               <span className="font-bold text-black text-base">Contact Us</span>
-                         <Button onClick={() => (window.location.href = 'mailto:info@vinsubco.co')} className={`w-full sm:w-auto px-8 py-3 rounded-lg bg-gradient-to-r from-white to-gray-200 hover:scale-105 transition-all duration-300 delay-400 ${
-               visibleSections.has('mobile-cta') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-             }`}>
-              <span className="font-bold text-black text-base">
-                Contact Us
-              </span>
             </Button>
           </div>
         </section>
@@ -1292,9 +1023,8 @@ export const Desktop = (): JSX.Element => {
         <section
           id="mobile-about"
           data-animate
-          className={`w-full py-14 px-4 bg-white transition-all duration-1000 ${
-            visibleSections.has("mobile-about") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`w-full py-14 px-4 bg-white transition-all duration-1000 ${visibleSections.has("mobile-about") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div className="max-w-4xl mx-auto text-center">
             <h2
@@ -1330,9 +1060,8 @@ export const Desktop = (): JSX.Element => {
         <section
           id="mobile-services"
           data-animate
-          className={`w-full py-14 px-4 bg-black transition-all duration-1000 ${
-            visibleSections.has("mobile-services") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`w-full py-14 px-4 bg-black transition-all duration-1000 ${visibleSections.has("mobile-services") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div className="max-w-4xl mx-auto">
             <h2
@@ -1379,9 +1108,8 @@ export const Desktop = (): JSX.Element => {
         <section
           id="mobile-gallery-certifications"
           data-animate
-          className={`w-full py-14 px-4 bg-white transition-all duration-1000 ${
-            visibleSections.has("mobile-gallery-certifications") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`w-full py-14 px-4 bg-white transition-all duration-1000 ${visibleSections.has("mobile-gallery-certifications") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div className="max-w-4xl mx-auto">
             {/* Tabs */}
@@ -1390,22 +1118,20 @@ export const Desktop = (): JSX.Element => {
               style={tDelay(200)}
             >
               <button
-                className={`px-5 py-2 rounded-full font-bold text-base shadow border-2 ${
-                  activeTab === "gallery"
+                className={`px-5 py-2 rounded-full font-bold text-base shadow border-2 ${activeTab === "gallery"
                     ? "bg-[#f9a51a] text-white border-[#f9a51a]"
                     : "bg-white text-[#222] border-gray-300"
-                }`}
+                  }`}
                 onClick={() => setActiveTab("gallery")}
                 aria-pressed={activeTab === "gallery"}
               >
                 Gallery
               </button>
               <button
-                className={`px-5 py-2 rounded-full font-bold text-base shadow border-2 ${
-                  activeTab === "certifications"
+                className={`px-5 py-2 rounded-full font-bold text-base shadow border-2 ${activeTab === "certifications"
                     ? "bg-[#f9a51a] text-white border-[#f9a51a]"
                     : "bg-white text-[#222] border-gray-300"
-                }`}
+                  }`}
                 onClick={() => setActiveTab("certifications")}
                 aria-pressed={activeTab === "certifications"}
               >
@@ -1420,7 +1146,7 @@ export const Desktop = (): JSX.Element => {
             >
               <div
                 className={`flex gap-3 transition-transform ${isInstant ? 'duration-0' : 'duration-500'}`}
-                style={{ 
+                style={{
                   transform: `translateX(-${carouselIndex * (288 + 12)}px)`,
                   width: `${getCarouselItems().length * (288 + 12)}px`
                 }}
@@ -1480,9 +1206,8 @@ export const Desktop = (): JSX.Element => {
         <section
           id="mobile-mission"
           data-animate
-          className={`w-full py-14 px-4 bg-gradient-to-r from-white to-black transition-all duration-1000 ${
-            visibleSections.has("mobile-mission") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`w-full py-14 px-4 bg-gradient-to-r from-white to-black transition-all duration-1000 ${visibleSections.has("mobile-mission") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div className="max-w-4xl mx-auto text-center">
             <img
@@ -1515,9 +1240,8 @@ export const Desktop = (): JSX.Element => {
         <section
           id="mobile-vision"
           data-animate
-          className={`w-full py-14 px-4 bg-gradient-to-l from-white to-black transition-all duration-1000 ${
-            visibleSections.has("mobile-vision") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`w-full py-14 px-4 bg-gradient-to-l from-white to-black transition-all duration-1000 ${visibleSections.has("mobile-vision") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div className="max-w-4xl mx-auto text-center">
             <img
@@ -1549,9 +1273,8 @@ export const Desktop = (): JSX.Element => {
         <section
           id="mobile-clients"
           data-animate
-          className={`w-full py-14 px-4 bg-[#d9d9d9] transition-all duration-1000 ${
-            visibleSections.has("mobile-clients") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`w-full py-14 px-4 bg-[#d9d9d9] transition-all duration-1000 ${visibleSections.has("mobile-clients") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div className="max-w-4xl mx-auto text-center">
             <h2
@@ -1583,7 +1306,7 @@ export const Desktop = (): JSX.Element => {
                   key={client.href}
                   href={client.href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow"
                   className="block p-3 bg-white rounded-lg shadow-md"
                   style={tDelay(500 + i * 50)}
                 >
@@ -1598,9 +1321,8 @@ export const Desktop = (): JSX.Element => {
         <section
           id="mobile-ceo-message"
           data-animate
-          className={`w-full py-14 px-4 bg-white transition-all duration-1000 ${
-            visibleSections.has("mobile-ceo-message") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`w-full py-14 px-4 bg-white transition-all duration-1000 ${visibleSections.has("mobile-ceo-message") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div className="max-w-4xl mx-auto text-center">
             <p
@@ -1630,9 +1352,8 @@ export const Desktop = (): JSX.Element => {
         <footer
           id="mobile-footer"
           data-animate
-          className={`w-full py-14 px-4 bg-gradient-to-r from-[#d9d9d9] to-gray-800 transition-all duration-1000 ${
-            visibleSections.has("mobile-footer") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`w-full py-14 px-4 bg-gradient-to-r from-[#d9d9d9] to-gray-800 transition-all duration-1000 ${visibleSections.has("mobile-footer") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1649,7 +1370,7 @@ export const Desktop = (): JSX.Element => {
                   {quickLinks.map((link, index) => (
                     <a
                       key={link}
-                      href="#"
+                      href=''
                       className="block text-white text-sm font-semibold hover:text-[#f9a51a] transition-colors"
                       style={tDelay(350 + index * 50)}
                     >
@@ -1663,19 +1384,13 @@ export const Desktop = (): JSX.Element => {
             <div className="mt-8 pt-6 border-t border-gray-600 text-center md:text-left" style={tDelay(500)}>
               <h3 className="font-bold text-white text-lg mb-3">Get In Touch</h3>
               <div className="space-y-2">
-            {/* Contact Info */}
-                          <div className={`mt-8 pt-8 border-t border-gray-600 text-center md:text-left transition-all duration-700 delay-600 ${
-              visibleSections.has('mobile-footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-            }`}>
-              <h3 className="font-bold text-white text-lg mb-4">Get In Touch</h3>
-              <div className="space-y-3">
                 <div className="flex items-center justify-center md:justify-start gap-3">
                   <img className="w-5 h-5" alt="Phone" src="/vector-1.svg" loading="lazy" />
                   <span className="text-white text-sm font-medium">0509331315</span>
                 </div>
                 <div className="flex items-center justify-center md:justify-start gap-3">
-                  <img className="w-5 h-5" alt="Email" src="/vector.svg" />
-                  <a href="mailto:info@vinsubco.co" className="text-white text-sm font-medium">info@vinsubco.co</a>
+                  <img className="w-5 h-5" alt="Email" src="/vector.svg" loading="lazy" />
+                  <span className="text-white text-sm font-medium">info@vinsubco.co</span>
                 </div>
                 <div className="flex items-center justify-center md:justify-start gap-3">
                   <img className="w-5 h-5" alt="Location" src="/vector-3.svg" loading="lazy" />
@@ -1684,17 +1399,6 @@ export const Desktop = (): JSX.Element => {
                 <div className="flex items-center justify-center md:justify-start gap-3">
                   <img className="w-5 h-5" alt="Registration" src="/vector-4.svg" loading="lazy" />
                   <span className="text-white text-sm font-medium">CR-2050161120</span>
-                </div>
-                <div className="flex items-center justify-center md:justify-start gap-3 pt-2">
-                  <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
-                    <Instagram className="w-4 h-4 text-black" />
-                  </a>
-                  <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
-                    <Twitter className="w-4 h-4 text-black" />
-                  </a>
-                  <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
-                    <Facebook className="w-4 h-4 text-black" />
-                  </a>
                 </div>
               </div>
             </div>
