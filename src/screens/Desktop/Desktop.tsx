@@ -520,11 +520,6 @@ export const Desktop = (): JSX.Element => {
               src="young-factory-worker-working-with-adept-robotic-arm.webp"
               loading="lazy"
             />
-
-            <MailIcon
-              className="absolute w-6 h-6 top-[1395px] left-[708px] text-white transition-all duration-700"
-              style={tDelay(1200)}
-            />
           </section>
 
           {/* CTA */}
