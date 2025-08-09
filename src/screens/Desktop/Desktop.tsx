@@ -1,4 +1,4 @@
-import { MailIcon, Instagram, Facebook, Twitter } from "lucide-react";
+import { Instagram, Facebook, Twitter } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
@@ -71,6 +71,24 @@ export const Desktop = (): JSX.Element => {
   const [isInstant, setIsInstant] = React.useState(false);
   // desktop carousel visible count
   const navigate = useNavigate();
+
+  // Desktop scaling: keep 13" MacBook (1480px design width) perfect, scale down on smaller laptops
+  const DESIGN_WIDTH = 1480;
+  const DESIGN_HEIGHT = 6617;
+  const [desktopScale, setDesktopScale] = React.useState(1);
+
+  React.useEffect(() => {
+    const updateScale = () => {
+      if (typeof window === 'undefined') return;
+      const vw = window.innerWidth;
+      // Never upscale beyond 1; scale down to fit narrower laptop screens
+      const nextScale = Math.min(1, vw / DESIGN_WIDTH);
+      setDesktopScale(nextScale);
+    };
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
 
   // Intersection Observer for scroll animations
   React.useEffect(() => {
@@ -224,9 +242,24 @@ export const Desktop = (): JSX.Element => {
 
   return (
     <div className="bg-white w-full min-h-screen overflow-x-hidden">
-      {/* DESKTOP (unchanged visuals; constrained to container instead of fixed width) */}
+      {/* DESKTOP (scaled wrapper keeps baseline perfect on 1480px, fits other laptop widths) */}
       <div className="hidden lg:block bg-white overflow-hidden w-full">
-        <div className="relative mx-auto max-w-[1480px] min-h-[6617px]">
+        {/* Spacer wrapper preserves scaled height in the normal flow */}
+        <div
+          className="relative mx-auto"
+          style={{ height: DESIGN_HEIGHT * desktopScale }}
+        >
+          {/* Fixed-size inner canvas that scales responsively */}
+          <div
+            className="relative"
+            style={{
+              width: DESIGN_WIDTH,
+              height: DESIGN_HEIGHT,
+              transform: `scale(${desktopScale})`,
+              transformOrigin: 'top center',
+              margin: '0 auto',
+            }}
+          >
           {/* Vision */}
           <section
             id="vision"
@@ -907,6 +940,7 @@ export const Desktop = (): JSX.Element => {
               </div>
             </div>
           </footer>
+          </div>
         </div>
       </div>
 
