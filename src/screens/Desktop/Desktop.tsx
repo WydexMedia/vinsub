@@ -589,11 +589,11 @@ export const Desktop = (): JSX.Element => {
             >
               {[
                 { href: "https://www.alrashed-fasteners.com/", src: "clients/Fasteners-AlRashed-logo-retina.webp", alt: "Fasteners AlRashed", w: 100, h: 75 },
-                { href: "https://www.gerflorme.com/", src: "clients/nov-white-logo.webp", alt: "NOV White", w: 100, h: 30, top: 22, left: 162 },
-                { href: "https://www.sgn.com.sa/public/index.php", src: "clients/cropped-OUR-LOGO1-2.webp", alt: "SGN Logo", w: 100, h: 33, top: 21, left: 324 },
+                { href: "https://www.nov.com/", src: "clients/nov-white-logo.webp", alt: "NOV (National Oilwell Varco)", w: 100, h: 30, top: 22, left: 162 },
+                { href: "https://www.sgn.com.sa/public/index.php", src: "clients/cropped-OUR-LOGO1-2.webp", alt: "SGN (Saudi German Nonwovens)", w: 100, h: 33, top: 21, left: 324 },
                 { href: "https://www.zamilladders.com/home/", src: "clients/logo_light.webp", alt: "Zamil Ladders", w: 100, h: 72, top: 1, left: 486 },
-                { href: "https://www.zamilindustrial.com/en/", src: "clients/Eaton-Arabia-JV-mark-rectangle-l.webp", alt: "Eaton Arabia JV", w: 100, h: 21, top: 27, left: 648 },
-                { href: "https://samcorebars.com/", src: "clients/logo-1.webp", alt: "Samco Rebars", w: 100, h: 54, top: 10, left: 810 },
+                { href: "https://eatonarabia.com/", src: "clients/Eaton-Arabia-JV-mark-rectangle-l.webp", alt: "Eaton Arabia", w: 100, h: 21, top: 27, left: 648 },
+                { href: "https://samcorebars.com/", src: "clients/logo-1.webp", alt: "SAMCO (Saudi Metal Coating Company)", w: 100, h: 54, top: 10, left: 810 },
               ].map((c, i) => (
                 <a
                   key={i}
@@ -614,12 +614,12 @@ export const Desktop = (): JSX.Element => {
               style={tDelay(600)}
             >
               {[
-                { href: "https://alupco.com/", src: "clients/alupco_logo-50.webp", alt: "Alupco", w: 100, h: 43 },
-                { href: "https://jazeera-steel.co/", src: "clients/logo2.webp", alt: "Jazeera Steel", w: 100, h: 21, top: 11, left: 163 },
-                { href: "https://www.eastpipes.com/", src: "clients/logo.webp", alt: "East Pipes", w: 100, h: 22, top: 11, left: 326 },
-                { href: "https://www.alrashed-steel.com/", src: "clients/EAST-PIPES_BILINGUAL_LOGO-01-e16.webp", alt: "Al Rashed Steel", w: 100, h: 14, top: 15, left: 489 },
-                { href: "https://velan.com/", src: "clients/Logo-AL-Jazeera-Steel.webp", alt: "AL Jazeera Steel", w: 100, h: 41, top: 1, left: 652 },
-                { href: "https://www.almajdouie.com/almajdouie_metal", src: "clients/logo (1).webp", alt: "Al Majdouie Metal", w: 100, h: 23, top: 10, left: 815 },
+                { href: "https://alupco.com/", src: "clients/alupco_logo-50.webp", alt: "ALUPCO (Aluminium Products Company)", w: 100, h: 43 },
+                { href: "https://jazeerasteel.com/", src: "clients/logo2.webp", alt: "Al Jazeera Steel Products Co. (AJSP)", w: 100, h: 21, top: 11, left: 163 },
+                { href: "https://www.eastpipes.com/", src: "clients/logo.webp", alt: "East Pipes Integrated Company", w: 100, h: 22, top: 11, left: 326 },
+                { href: "https://www.alrashed-steel.com/", src: "clients/EAST-PIPES_BILINGUAL_LOGO-01-e16.webp", alt: "Al Rashed Steel", w: 100, h: 55, top: 0, left: 489 },
+                { href: "https://jazeerasteel.com/", src: "clients/Logo-AL-Jazeera-Steel.webp", alt: "Al Jazeera Steel Products Co. (AJSP)", w: 100, h: 41, top: 1, left: 652 },
+                { href: "https://www.almajdouie.com/almajdouie_metal", src: "clients/logo (1).webp", alt: "Almajdouie Metal Industry", w: 100, h: 23, top: 10, left: 815 },
               ].map((c, i) => (
                 <a
                   key={i}
@@ -1316,26 +1316,27 @@ export const Desktop = (): JSX.Element => {
               className="grid grid-cols-2 sm:grid-cols-3 gap-4"
               style={tDelay(400)}
             >
-              {[
-                { src: "clients/Fasteners-AlRashed-logo-retina.webp", alt: "Fasteners AlRashed", href: "https://www.alrashed-fasteners.com/" },
-                { src: "clients/nov-white-logo.webp", alt: "NOV White", href: "https://www.gerflorme.com/" },
-                { src: "clients/cropped-OUR-LOGO1-2.webp", alt: "SGN", href: "https://www.sgn.com.sa/public/index.php" },
-                { src: "clients/logo_light.webp", alt: "Zamil Ladders", href: "https://www.zamilladders.com/home/" },
-                { src: "clients/Eaton-Arabia-JV-mark-rectangle-l.webp", alt: "Eaton Arabia JV", href: "https://www.zamilindustrial.com/en/" },
-                { src: "clients/logo-1.webp", alt: "Samco Rebars", href: "https://samcorebars.com/" },
-                { src: "clients/alupco_logo-50.webp", alt: "Alupco", href: "https://alupco.com/" },
-                { src: "clients/logo2.webp", alt: "Jazeera Steel", href: "https://jazeera-steel.co/" },
-                { src: "clients/logo.webp", alt: "East Pipes", href: "https://www.eastpipes.com/" },
-                { src: "clients/EAST-PIPES_BILINGUAL_LOGO-01-e16.webp", alt: "Al Rashed Steel", href: "https://www.alrashed-steel.com/" },
-                { src: "clients/Logo-AL-Jazeera-Steel.webp", alt: "AL Jazeera Steel", href: "https://velan.com/" },
-                { src: "clients/logo (1).webp", alt: "Al Majdouie Metal", href: "https://www.almajdouie.com/almajdouie_metal" },
-              ].map((client, i) => (
+              {
+[
+  { src: "clients/Fasteners-AlRashed-logo-retina.webp", alt: "Al Rashed Fasteners", href: "https://www.alrashed-fasteners.com/" }, // :contentReference[oaicite:0]{index=0}
+  { src: "clients/nov-white-logo.webp", alt: "NOV (National Oilwell Varco)", href: "https://www.nov.com/" }, // :contentReference[oaicite:1]{index=1}
+  { src: "clients/cropped-OUR-LOGO1-2.webp", alt: "SGN (Saudi German Nonwovens)", href: "https://www.sgn.com.sa/public/index.php" }, // :contentReference[oaicite:2]{index=2}
+  { src: "clients/logo_light.webp", alt: "Zamil Ladders", href: "https://www.zamilladders.com/home/" }, // :contentReference[oaicite:3]{index=3}
+  { src: "clients/Eaton-Arabia-JV-mark-rectangle-l.webp", alt: "Eaton Arabia", href: "https://eatonarabia.com/" }, // :contentReference[oaicite:4]{index=4}
+  { src: "clients/logo-1.webp", alt: "SAMCO (Saudi Metal Coating Company)", href: "https://samcorebars.com/" }, // :contentReference[oaicite:5]{index=5}
+  { src: "clients/alupco_logo-50.webp", alt: "ALUPCO (Aluminium Products Company)", href: "https://alupco.com/" }, // :contentReference[oaicite:6]{index=6}
+  { src: "clients/logo2.webp", alt: "Al Jazeera Steel Products Co. (AJSP)", href: "https://jazeerasteel.com/" }, // :contentReference[oaicite:7]{index=7}
+  { src: "clients/logo.webp", alt: "East Pipes Integrated Company", href: "https://www.eastpipes.com/" }, // :contentReference[oaicite:8]{index=8}
+  { src: "clients/EAST-PIPES_BILINGUAL_LOGO-01-e16.webp", alt: "Al Rashed Steel", href: "https://www.alrashed-steel.com/" }, // (filename is misleading, link & alt are correct) :contentReference[oaicite:9]{index=9}
+  { src: "clients/Logo-AL-Jazeera-Steel.webp", alt: "Al Jazeera Steel Products Co. (AJSP)", href: "https://jazeerasteel.com/" }, // :contentReference[oaicite:10]{index=10}
+  { src: "clients/logo (1).webp", alt: "Almajdouie Metal Industry", href: "https://www.almajdouie.com/almajdouie_metal" } // :contentReference[oaicite:11]{index=11}
+].map((client, i) => (
                 <a
                   key={client.href}
                   href={client.href}
                   target="_blank"
                   rel="nofollow"
-                  className="block p-3 bg-white rounded-lg shadow-md"
+                  className="block p-3 bg-gray-100 rounded-lg shadow-md"
                   style={tDelay(500 + i * 50)}
                 >
                   <img className="w-full h-10 object-contain" alt={client.alt} src={client.src} loading="lazy" />
