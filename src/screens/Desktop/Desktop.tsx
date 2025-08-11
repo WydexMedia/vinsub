@@ -72,23 +72,11 @@ export const Desktop = (): JSX.Element => {
   // desktop carousel visible count
   const navigate = useNavigate();
 
-  // Desktop scaling: keep 13" MacBook (1480px design width) perfect, scale down on smaller laptops
-  const DESIGN_WIDTH = 1480;
+  // Desktop base design height for canvas
   const DESIGN_HEIGHT = 6617;
-  const [desktopScale, setDesktopScale] = React.useState(1);
+  // No scaling needed when using full-width canvas
 
-  React.useEffect(() => {
-    const updateScale = () => {
-      if (typeof window === 'undefined') return;
-      const vw = window.innerWidth;
-      // Never upscale beyond 1; scale down to fit narrower laptop screens
-      const nextScale = Math.min(1, vw / DESIGN_WIDTH);
-      setDesktopScale(nextScale);
-    };
-    updateScale();
-    window.addEventListener('resize', updateScale);
-    return () => window.removeEventListener('resize', updateScale);
-  }, []);
+  // No scaling effect needed; using full-width canvas
 
   // Intersection Observer for scroll animations
   React.useEffect(() => {
@@ -246,16 +234,16 @@ export const Desktop = (): JSX.Element => {
       <div className="hidden lg:block bg-white overflow-hidden w-full">
         {/* Spacer wrapper preserves scaled height in the normal flow */}
         <div
-          className="relative mx-auto"
-          style={{ height: DESIGN_HEIGHT * desktopScale }}
+          className="relative w-full mx-auto"
+          style={{ height: DESIGN_HEIGHT }}
         >
           {/* Fixed-size inner canvas that scales responsively */}
           <div
             className="relative"
             style={{
-              width: DESIGN_WIDTH,
+              width: '100%',
               height: DESIGN_HEIGHT,
-              transform: `scale(${desktopScale})`,
+              transform: 'none',
               transformOrigin: 'top center',
               margin: '0 auto',
             }}
