@@ -249,9 +249,38 @@ export const Desktop = (): JSX.Element => {
           className="relative mx-auto"
           style={{ height: DESIGN_HEIGHT * desktopScale }}
         >
+          {/* Full-bleed background layers for ultra-wide screens (sit under the scaled canvas) */}
+          <div
+            className="absolute left-0 right-0 pointer-events-none"
+            style={{ top: 0 * desktopScale, height: 1072 * desktopScale, zIndex: 0 }}
+            aria-hidden
+          >
+            <div className="w-full h-full bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)]" />
+          </div>
+          <div
+            className="absolute left-0 right-0 pointer-events-none"
+            style={{ top: 1070 * desktopScale, height: 79 * desktopScale, zIndex: 0 }}
+            aria-hidden
+          >
+            <div className="w-full h-full bg-[linear-gradient(90deg,rgba(0,0,0,1)_0%,rgba(255,255,255,1)_100%)]" />
+          </div>
+          <div
+            className="absolute left-0 right-0 pointer-events-none"
+            style={{ top: 4335 * desktopScale, height: 419 * desktopScale, zIndex: 0 }}
+            aria-hidden
+          >
+            <div className="w-full h-full bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(0,0,0,1)_100%)]" />
+          </div>
+          <div
+            className="absolute left-0 right-0 pointer-events-none"
+            style={{ top: 4754 * desktopScale, height: 419 * desktopScale, zIndex: 0 }}
+            aria-hidden
+          >
+            <div className="w-full h-full bg-[linear-gradient(270deg,rgba(255,255,255,1)_0%,rgba(0,0,0,1)_100%)]" />
+          </div>
           {/* Fixed-size inner canvas that scales responsively */}
           <div
-            className="relative"
+            className="relative z-10"
             style={{
               width: DESIGN_WIDTH,
               height: DESIGN_HEIGHT,
