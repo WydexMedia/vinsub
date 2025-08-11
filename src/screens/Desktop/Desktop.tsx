@@ -276,7 +276,9 @@ export const Desktop = (): JSX.Element => {
               </CardContent>
             </Card>
             <img
-              className="absolute w-[300px] h-[300px] top-[70px] left-60 object-cover transition-all duration-700"
+              className={`absolute w-[300px] h-[300px] top-[70px] left-60 object-cover transition-all duration-700 ${
+                visibleSections.has("vision") ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-16"
+              }`}
               style={tDelay(200)}
               alt="Vision"
               src="vision.webp"
@@ -292,7 +294,9 @@ export const Desktop = (): JSX.Element => {
               }`}
           >
             <img
-              className="absolute w-[300px] h-[300px] top-16 left-[871px] object-cover transition-all duration-700"
+              className={`absolute w-[300px] h-[300px] top-16 left-[871px] object-cover transition-all duration-700 ${
+                visibleSections.has("mission") ? "opacity-100 translate-x-0" : "opacity-0 translate-x-16"
+              }`}
               style={tDelay(200)}
               alt="Mission"
               src="mission.webp"
