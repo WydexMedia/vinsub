@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Twitter } from "lucide-react";
+import { Instagram, Facebook, Twitter, Cog, Wrench, Hammer, Factory, Fuel, SprayCan } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
@@ -10,6 +10,7 @@ import {
   NavigationMenuList,
 } from "../../components/ui/navigation-menu";
 import { Separator } from "../../components/ui/separator";
+import { FloatingCallButton } from "../../components/FloatingCallButton";
 
 // Data for navigation menu
 const navigationItems = [
@@ -17,9 +18,9 @@ const navigationItems = [
   { name: "About Us", href: "#about", active: false },
   { name: "Gallery", href: "#gallery-certifications", active: false },
   { name: "Services", href: "#services", active: false },
-  { name: "Projects", href: "#", active: false },
-  { name: "Purchase", href: "#", active: false },
-  { name: "Contact Us", href: "#footer", active: true },
+  { name: "Projects", href: "/projects", active: false },
+  { name: "Certifications", href: "/certifications", active: false },
+  { name: "Contact Us", href: "tel:0509331315", active: true },
 ];
 
 // Data for services section (fixed typos)
@@ -53,17 +54,19 @@ const services = [
 // Data for quick links
 const quickLinks = ["Home", "About Us", "Our projects", "Latest news", "Quality", "Contact Us"];
 
-// Gallery sources
-const certificationImages = [
-  "https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
+// Gallery items (icons + names)
+const certifications = [
+  { title: "Carbon & Stainless Steel Fabrication", icons: [Cog] },
+  { title: "CNC Laser Cutting", icons: [Wrench, Hammer] },
+  { title: "Machining Works", icons: [Wrench] },
+  { title: "Oil Field & Rig Fabrication", icons: [Fuel] },
+  { title: "General Steel Fabrication", icons: [Factory] },
+  { title: "Sandblasting & Painting", icons: [SprayCan] },
 ];
 
+// Note: Certifications moved to top navbar; inline certifications carousel removed from homepage
+
 export const Desktop = (): JSX.Element => {
-  const [activeTab, setActiveTab] = React.useState<"gallery" | "certifications">("gallery");
   const [carouselIndex, setCarouselIndex] = React.useState(0);
   const [visibleSections, setVisibleSections] = React.useState<Set<string>>(new Set());
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -134,37 +137,25 @@ export const Desktop = (): JSX.Element => {
   React.useEffect(() => {
     const interval = setInterval(() => {
       if ((visibleSections.has("gallery-certifications") || visibleSections.has("mobile-gallery-certifications")) && !isCarouselPaused) {
-        const baseLen = activeTab === "gallery" ? 6 : certificationImages.length;
+        const baseLen = certifications.length;
         let didInstantReset = false;
         setCarouselIndex((prev) => {
           const next = prev + 1;
-          // keep index within [baseLen, baseLen*3)
           if (next >= baseLen * 3) {
-            // instant jump back by one window of baseLen
             didInstantReset = true;
             return baseLen + (next - baseLen * 3);
           }
           return next;
         });
         if (didInstantReset) {
-          // disable transition just for this instant correction
           setIsInstant(true);
-          // re-enable on next frame
           setTimeout(() => setIsInstant(false), 0);
         }
       }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [activeTab, certificationImages.length, visibleSections, isCarouselPaused]);
-
-  // Reset carousel index when tab changes: start in the middle window to allow both directions seamlessly
-  React.useEffect(() => {
-    const baseLen = activeTab === "gallery" ? 6 : certificationImages.length;
-    setIsInstant(true);
-    setCarouselIndex(baseLen);
-    setTimeout(() => setIsInstant(false), 0);
-  }, [activeTab, certificationImages.length]);
+  }, [certifications.length, visibleSections, isCarouselPaused]);
 
   // Helper: transition delay via style (avoid dynamic tailwind classes)
   const tDelay = (ms: number) => ({ transitionDelay: `${ms}ms` });
@@ -173,7 +164,7 @@ export const Desktop = (): JSX.Element => {
   const handleCarouselControl = (direction: 'prev' | 'next') => {
     setIsCarouselPaused(true);
     setTimeout(() => setIsCarouselPaused(false), 3000); // Resume after 3 seconds
-    const baseLen = activeTab === "gallery" ? 6 : certificationImages.length;
+    const baseLen = certifications.length;
 
     if (direction === 'prev') {
       let didInstantReset = false;
@@ -207,25 +198,8 @@ export const Desktop = (): JSX.Element => {
 
   // Get items for carousel with duplicates for infinite scroll
   const getCarouselItems = () => {
-    if (activeTab === "gallery") {
-      const galleryItems = [
-        { src: "engineering-service-provider-in-saudi-arabia1.webp", alt: "Gallery 1" },
-        { src: "engineering-service-provider-in-saudi-arabia.webp", alt: "Gallery 2" },
-        { src: "4466.webp", alt: "Gallery 3" },
-        { src: "close-up-metallic-gear.webp", alt: "Gallery 4" },
-        { src: "close-up-machine-part.webp", alt: "Gallery 5" },
-        { src: "hd-construction-site-architecture-scene-background-image.webp", alt: "Gallery 6" },
-      ];
-      // Create multiple copies for seamless infinite scroll
-      return [...galleryItems, ...galleryItems, ...galleryItems, ...galleryItems];
-    } else {
-      // Convert certification images to objects and duplicate for seamless loop
-      const certItems = certificationImages.map((src, idx) => ({
-        src,
-        alt: `Certification ${idx + 1}`
-      }));
-      return [...certItems, ...certItems, ...certItems, ...certItems];
-    }
+    // Duplicate icon items for seamless loop
+    return [...certifications, ...certifications, ...certifications, ...certifications];
   };
 
   return (
@@ -572,14 +546,14 @@ export const Desktop = (): JSX.Element => {
               <span className="font-bold text-black text-[19px] whitespace-nowrap">View Our Projects</span>
             </Button>
 
-            <Button
-              className="absolute w-[133px] h-[35px] top-[25px] left-[1160px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            <a
+              href="tel:0509331315"
+              className="absolute w-[133px] h-[35px] top-[25px] left-[1160px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center"
               style={tDelay(400)}
-              aria-label="Contact Us"
-              onClick={() => navigate("/contact")}
+              aria-label="Call 0509331315"
             >
-              <span className="font-bold text-black text-[19px] whitespace-nowrap">Contact Us</span>
-            </Button>
+              <span className="font-bold text-black text-[19px] whitespace-nowrap">Call Now</span>
+            </a>
           </section>
 
           {/* Clients */}
@@ -702,38 +676,17 @@ export const Desktop = (): JSX.Element => {
             </p>
           </div>
 
-          {/* Gallery/Certifications */}
+          {/* Gallery */}
           <section
             id="gallery-certifications"
             data-animate
             className={`absolute w-full left-0 top-[1649px] flex flex-col items-center transition-all duration-1000 ${visibleSections.has("gallery-certifications") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
-            {/* Tabs */}
-            <div
-              className="flex gap-4 mb-6 mt-2 transition-all duration-700"
-              style={tDelay(200)}
-            >
-              <button
-                className={`px-8 py-2 rounded-full font-bold text-lg shadow transition-all duration-300 border-2 hover:scale-105 ${activeTab === "gallery"
-                    ? "bg-[#f9a51a] text-white border-[#f9a51a]"
-                    : "bg-white text-[#222] border-gray-300 hover:border-[#f9a51a]"
-                  }`}
-                onClick={() => setActiveTab("gallery")}
-                aria-pressed={activeTab === "gallery"}
-              >
-                Gallery
-              </button>
-              <button
-                className={`px-8 py-2 rounded-full font-bold text-lg shadow transition-all duration-300 border-2 hover:scale-105 ${activeTab === "certifications"
-                    ? "bg-[#f9a51a] text-white border-[#f9a51a]"
-                    : "bg-white text-[#222] border-gray-300 hover:border-[#f9a51a]"
-                  }`}
-                onClick={() => setActiveTab("certifications")}
-                aria-pressed={activeTab === "certifications"}
-              >
-                Certifications
-              </button>
+            {/* Heading */}
+            <div className="text-center transition-all duration-700 mt-2 mb-8" style={tDelay(200)}>
+              <h2 className="text-4xl font-bold text-transparent bg-gradient-to-r from-[#f9a51a] to-black bg-clip-text mb-2">Gallery</h2>
+              <Separator className="w-32 mx-auto" />
             </div>
 
             {/* Collage Carousel */}
@@ -748,21 +701,24 @@ export const Desktop = (): JSX.Element => {
                   width: `${getCarouselItems().length * (350 + 16)}px`
                 }}
               >
-                {getCarouselItems().map((item, idx) => (
+                    {getCarouselItems().map((item, idx) => (
                   <div
-                    key={`${activeTab}-${idx}`}
-                    className="flex-shrink-0 w-[350px] h-[260px] rounded-2xl overflow-hidden shadow-lg relative group transition-all duration-500"
+                    key={`${idx}`}
+                    className="flex-shrink-0 w-[350px] h-[260px] rounded-2xl overflow-hidden shadow-lg relative group transition-all duration-500 bg-white"
                     style={tDelay(600 + (idx % 6) * 100)}
                   >
-                    <img
-                      src={item.src}
-                      alt={item.alt}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                    {activeTab === "gallery" && (
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300" />
-                    )}
+                        <div className="w-full h-full flex flex-col items-center justify-center gap-4 p-6">
+                          <div className="flex items-center justify-center gap-3 text-[#f9a51a]">
+                            {(item as any).icons.map((Icon: any, i: number) => (
+                              <Icon key={i} className="w-16 h-16" />
+                            ))}
+                          </div>
+                          <div className="text-center px-2">
+                            <p className="font-semibold text-neutral-900 text-base leading-snug">
+                              {(item as any).title}
+                            </p>
+                          </div>
+                        </div>
                   </div>
                 ))}
               </div>
@@ -784,19 +740,13 @@ export const Desktop = (): JSX.Element => {
               </button>
             </div>
 
-            {/* More from Gallery/Certifications Button */}
+            {/* More from Gallery Button */}
             <div className="mt-8 transition-all duration-700" style={tDelay(800)}>
               <Button
                 className="px-8 py-3 rounded-full font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#f9a51a] to-[#e09416] text-white border-2 border-[#f9a51a] hover:shadow-xl"
-                onClick={() => {
-                  if (activeTab === "gallery") {
-                    navigate("/gallery");
-                  } else {
-                    navigate("/certifications");
-                  }
-                }}
+                onClick={() => navigate("/gallery")}
               >
-                More from {activeTab === "gallery" ? "Gallery" : "Certifications"}
+                More from Gallery
               </Button>
             </div>
           </section>
@@ -1055,14 +1005,14 @@ export const Desktop = (): JSX.Element => {
             >
               <span className="font-bold text-black text-base">View Our Projects</span>
             </Button>
-            <Button
-              className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gradient-to-r from-white to-gray-200 transition-all duration-300"
+            <a
+              href="tel:0509331315"
+              className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gradient-to-r from-white to-gray-200 transition-all duration-300 text-center"
               style={tDelay(350)}
-              aria-label="Contact Us"
-              onClick={() => navigate("/contact")}
+              aria-label="Call 0509331315"
             >
-              <span className="font-bold text-black text-base">Contact Us</span>
-            </Button>
+              <span className="font-bold text-black text-base">Call Now</span>
+            </a>
           </div>
         </section>
 
@@ -1159,32 +1109,7 @@ export const Desktop = (): JSX.Element => {
             }`}
         >
           <div className="max-w-4xl mx-auto">
-            {/* Tabs */}
-            <div
-              className="flex gap-3 mb-6 justify-center"
-              style={tDelay(200)}
-            >
-              <button
-                className={`px-5 py-2 rounded-full font-bold text-base shadow border-2 ${activeTab === "gallery"
-                    ? "bg-[#f9a51a] text-white border-[#f9a51a]"
-                    : "bg-white text-[#222] border-gray-300"
-                  }`}
-                onClick={() => setActiveTab("gallery")}
-                aria-pressed={activeTab === "gallery"}
-              >
-                Gallery
-              </button>
-              <button
-                className={`px-5 py-2 rounded-full font-bold text-base shadow border-2 ${activeTab === "certifications"
-                    ? "bg-[#f9a51a] text-white border-[#f9a51a]"
-                    : "bg-white text-[#222] border-gray-300"
-                  }`}
-                onClick={() => setActiveTab("certifications")}
-                aria-pressed={activeTab === "certifications"}
-              >
-                Certifications
-              </button>
-            </div>
+            {/* Quick links removed; heading used above */}
 
             {/* Mobile carousel with snap */}
             <div
@@ -1198,18 +1123,22 @@ export const Desktop = (): JSX.Element => {
                   width: `${getCarouselItems().length * (288 + 12)}px`
                 }}
               >
-                {getCarouselItems().map((item, idx) => (
+                    {getCarouselItems().map((item, idx) => (
                   <div
-                    key={`mobile-${activeTab}-${idx}`}
-                    className="flex-shrink-0 w-72 h-56 rounded-2xl overflow-hidden shadow-lg relative"
+                    key={`mobile-${idx}`}
+                    className="flex-shrink-0 w-72 h-56 rounded-2xl overflow-hidden shadow-lg relative bg-white"
                     style={tDelay(600 + (idx % 6) * 100)}
                   >
-                    <img
-                      src={item.src}
-                      alt={item.alt}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-4 p-4">
+                      <div className="flex items-center justify-center gap-3 text-[#f9a51a]">
+                        {(item as any).icons.map((Icon: any, i: number) => (
+                          <Icon key={i} className="w-12 h-12" />
+                        ))}
+                      </div>
+                      <p className="text-center font-semibold text-neutral-900 text-base leading-snug px-2">
+                        {(item as any).title}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1231,19 +1160,13 @@ export const Desktop = (): JSX.Element => {
               </button>
             </div>
 
-            {/* More from Gallery/Certifications Button */}
+            {/* More from Gallery Button */}
             <div className="mt-8 text-center transition-all duration-700" style={tDelay(800)}>
               <Button
                 className="px-6 py-3 rounded-full font-bold text-base shadow-lg transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#f9a51a] to-[#e09416] text-white border-2 border-[#f9a51a] hover:shadow-xl"
-                onClick={() => {
-                  if (activeTab === "gallery") {
-                    navigate("/gallery");
-                  } else {
-                    navigate("/certifications");
-                  }
-                }}
+                onClick={() => navigate('/gallery')}
               >
-                More from {activeTab === "gallery" ? "Gallery" : "Certifications"}
+                More from Gallery
               </Button>
             </div>
           </div>
@@ -1455,6 +1378,7 @@ export const Desktop = (): JSX.Element => {
           </div>
         </footer>
       </div>
+      <FloatingCallButton />
     </div>
   );
 };
