@@ -921,18 +921,37 @@ export const Desktop = (): JSX.Element => {
             {isMobileMenuOpen && (
               <div className="absolute top-full left-0 w-full bg-white shadow-lg z-50">
                 <nav className="flex flex-col py-2">
-                  {navigationItems.map((item, index) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className={`px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-gray-50 ${item.active ? "text-[#f9a51a] bg-gray-50" : "text-neutral-900"
-                        }`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      style={tDelay(100 + index * 50)}
-                    >
-                      {item.name}
-                    </a>
-                  ))}
+                  {navigationItems.map((item, index) => {
+                    const anchorMap: Record<string, string> = {
+                      '#': '#mobile-hero',
+                      '#about': '#mobile-about',
+                      '#services': '#mobile-services',
+                      '#gallery-certifications': '#mobile-gallery-certifications',
+                      '#mission': '#mobile-mission',
+                      '#vision': '#mobile-vision',
+                      '#clients': '#mobile-clients',
+                      '#footer': '#mobile-footer',
+                    };
+                    const href = item.href.startsWith('#') ? (anchorMap[item.href] ?? item.href) : item.href;
+                    const isRoute = href.startsWith('/');
+                    return (
+                      <a
+                        key={item.name}
+                        href={href}
+                        className={`px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-gray-50 ${item.active ? "text-[#f9a51a] bg-gray-50" : "text-neutral-900"}`}
+                        onClick={(e) => {
+                          setIsMobileMenuOpen(false);
+                          if (isRoute) {
+                            e.preventDefault();
+                            navigate(href);
+                          }
+                        }}
+                        style={tDelay(100 + index * 50)}
+                      >
+                        {item.name}
+                      </a>
+                    );
+                  })}
                 </nav>
               </div>
             )}
