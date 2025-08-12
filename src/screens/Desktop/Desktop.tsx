@@ -972,7 +972,8 @@ export const Desktop = (): JSX.Element => {
               ].map((src, i) => (
                 <img
                   key={src}
-                  className="w-full h-24 sm:h-32 object-cover rounded-lg"
+                  className="w-full h-24 sm:h-32 object-cover rounded-lg animate-gentle-float"
+                  style={{ animationDelay: `${i * 0.2}s` }}
                   alt={`Hero image ${i + 1}`}
                   src={src}
                   loading="lazy"
