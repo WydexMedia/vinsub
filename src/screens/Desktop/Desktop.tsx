@@ -18,8 +18,8 @@ const navigationItems = [
   { name: "About Us", href: "#about", active: false },
   { name: "Gallery", href: "#gallery-certifications", active: false },
   { name: "Services", href: "#services", active: false },
-  { name: "Projects", href: "/projects", active: false },
-  { name: "Certifications", href: "/certifications", active: false },
+  { name: "Projects", href: "#/gallery", active: false },
+  { name: "Certifications", href: "#/certifications", active: false },
   { name: "Contact Us", href: "tel:0509331315", active: true },
 ];
 
