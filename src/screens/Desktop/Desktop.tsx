@@ -446,7 +446,7 @@ export const Desktop = (): JSX.Element => {
                     href="tel:0509331315"
                     className="rounded-xl font-bold px-4 py-2 bg-[#f9a51a] text-black hover:opacity-90"
                   >
-                    Call 050 933 1315
+                    Contact Us
                   </a>
                 </div>
               </div>
