@@ -215,6 +215,20 @@ export const Gallery = (): JSX.Element => {
     return () => clearTimeout(timer);
   }, []);
 
+  // After load, if URL has a hash, scroll to that section
+  React.useEffect(() => {
+    if (isLoading) return;
+    if (typeof window === 'undefined') return;
+    const hash = window.location.hash?.replace('#', '');
+    if (hash) {
+      const el = document.getElementById(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActiveSection(hash);
+      }
+    }
+  }, [isLoading]);
+
   // Active section tracking with intersection observer
   React.useEffect(() => {
     const observer = new IntersectionObserver(

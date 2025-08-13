@@ -64,6 +64,16 @@ const certifications = [
   { title: "Sandblasting & Painting", icons: [SprayCan] },
 ];
 
+// Map homepage gallery card titles to Gallery section IDs
+const gallerySectionMap: Record<string, string> = {
+  "Carbon & Stainless Steel Fabrication": "fabrications",
+  "CNC Laser Cutting": "cnc-lazer",
+  "Machining Works": "machines",
+  "Oil Field & Rig Fabrication": "fabrications",
+  "General Steel Fabrication": "fabrications",
+  "Sandblasting & Painting": "fabrications",
+};
+
 // Note: Certifications moved to top navbar; inline certifications carousel removed from homepage
 
 // Full-bleed hero images (reuse your existing assets)
@@ -775,23 +785,28 @@ export const Desktop = (): JSX.Element => {
 
             {/* Collage Carousel */}
             <div
-              className="relative w-full max-w-5xl overflow-hidden transition-all duration-1000"
+              className="relative w-full max-w-5xl overflow-hidden transition-all duration-1000 px-6 py-2"
               style={tDelay(400)}
               onMouseEnter={() => setIsCarouselPaused(true)}
               onMouseLeave={() => setIsCarouselPaused(false)}
             >
               <div
-                className={`flex gap-4 transition-transform ${isInstant ? 'duration-0' : 'duration-500'}`}
+                className={`flex gap-6 transition-transform ${isInstant ? 'duration-0' : 'duration-500'}`}
                 style={{
-                  transform: `translateX(-${carouselIndex * (350 + 16)}px)`,
-                  width: `${getCarouselItems().length * (350 + 16)}px`
+                  transform: `translateX(-${carouselIndex * (350 + 24)}px)`,
+                  width: `${getCarouselItems().length * (350 + 24)}px`
                 }}
               >
                     {getCarouselItems().map((item, idx) => (
                   <div
                     key={`${idx}`}
-                    className="flex-shrink-0 w-[350px] h-[260px] rounded-2xl overflow-hidden shadow-lg relative group transition-all duration-500 bg-white"
+                    className="flex-shrink-0 w-[350px] h-[260px] rounded-2xl overflow-hidden shadow-lg relative group transition-all duration-500 bg-white cursor-pointer"
                     style={tDelay(600 + (idx % 6) * 100)}
+                    onClick={() => {
+                      const title = (item as any).title as string;
+                      const sectionId = gallerySectionMap[title] ?? 'engineering';
+                      navigate(`/gallery#${sectionId}`);
+                    }}
                   >
                         <div className="w-full h-full flex flex-col items-center justify-center gap-4 p-6">
                           <div className="flex items-center justify-center gap-3 text-[#f9a51a]">
@@ -1273,6 +1288,11 @@ export const Desktop = (): JSX.Element => {
                     key={`mobile-${idx}`}
                     className="flex-shrink-0 w-72 h-56 rounded-2xl overflow-hidden shadow-lg relative bg-white"
                     style={tDelay(600 + (idx % 6) * 100)}
+                    onClick={() => {
+                      const title = (item as any).title as string;
+                      const sectionId = gallerySectionMap[title] ?? 'engineering';
+                      navigate(`/gallery#${sectionId}`);
+                    }}
                   >
                     <div className="w-full h-full flex flex-col items-center justify-center gap-4 p-4">
                       <div className="flex items-center justify-center gap-3 text-[#f9a51a]">
