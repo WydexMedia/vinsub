@@ -620,32 +620,32 @@ export const Desktop = (): JSX.Element => {
             className={`absolute w-full h-[79px] top-[1070px] left-0 bg-[linear-gradient(90deg,rgba(0,0,0,1)_0%,rgba(255,255,255,1)_100%)] transition-all duration-1000 ${visibleSections.has("cta") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
-            <div
-              className="absolute w-[713px] top-[9px] left-[146px] font-normal text-transparent text-xl leading-5 transition-all duration-700"
-              style={tDelay(200)}
-            >
-              <span className="font-medium text-white leading-[60px]">Looking for a </span>
-              <span className="font-extrabold text-white leading-[60px]">quality contract</span>
-              <span className="font-medium text-white leading-[60px]"> for your project?</span>
+            <div className="absolute inset-0 flex items-center justify-center gap-6 px-4">
+              <div
+                className="font-normal text-white text-base md:text-xl leading-5 text-center md:text-left"
+                style={tDelay(200)}
+              >
+                <span className="font-medium">Looking for a </span>
+                <span className="font-extrabold">quality contract</span>
+                <span className="font-medium"> for your project?</span>
+              </div>
+              <Button
+                className="rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                style={tDelay(300)}
+                aria-label="View Our Projects"
+                onClick={() => navigate("/gallery")}
+              >
+                <span className="font-bold text-black text-[16px] md:text-[19px] whitespace-nowrap">View Our Projects</span>
+              </Button>
+              <a
+                href="tel:0509331315"
+                className="rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center px-4 py-2"
+                style={tDelay(400)}
+                aria-label="Call 0509331315"
+              >
+                <span className="font-bold text-black text-[16px] md:text-[19px] whitespace-nowrap">Call Now</span>
+              </a>
             </div>
-
-            <Button
-              className="absolute w-[195px] h-[35px] top-[25px] left-[945px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg"
-              style={tDelay(300)}
-              aria-label="View Our Projects"
-              onClick={() => navigate("/gallery")}
-            >
-              <span className="font-bold text-black text-[19px] whitespace-nowrap">View Our Projects</span>
-            </Button>
-
-            <a
-              href="tel:0509331315"
-              className="absolute w-[133px] h-[35px] top-[25px] left-[1160px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center"
-              style={tDelay(400)}
-              aria-label="Call 0509331315"
-            >
-              <span className="font-bold text-black text-[19px] whitespace-nowrap">Call Now</span>
-            </a>
           </section>
 
           {/* Clients */}
@@ -656,7 +656,7 @@ export const Desktop = (): JSX.Element => {
               }`}
           >
             <div
-              className="absolute w-44 h-[54px] top-[126px] left-[632px] transition-all duration-700"
+              className="absolute w-44 h-[54px] top-[126px] left-1/2 -translate-x-1/2 transition-all duration-700"
               style={tDelay(200)}
             >
               <h2 className="w-44 top-0 left-0 text-black text-[26px] absolute font-extrabold leading-[60px]">
@@ -670,7 +670,7 @@ export const Desktop = (): JSX.Element => {
 
             {/* First row */}
             <div
-              className="absolute w-[910px] h-[75px] top-[235px] left-[265px] transition-all duration-1000"
+              className="absolute w-[910px] h-[75px] top-[235px] left-1/2 -translate-x-1/2 transition-all duration-1000"
               style={tDelay(400)}
             >
               {[
@@ -696,7 +696,7 @@ export const Desktop = (): JSX.Element => {
 
             {/* Second row */}
             <div
-              className="absolute w-[915px] h-[43px] top-[402px] left-[263px] transition-all duration-1000"
+              className="absolute w-[915px] h-[43px] top-[402px] left-1/2 -translate-x-1/2 transition-all duration-1000"
               style={tDelay(600)}
             >
               {[
