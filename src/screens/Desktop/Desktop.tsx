@@ -269,17 +269,17 @@ export const Desktop = (): JSX.Element => {
             className={`absolute w-full h-[419px] top-[4754px] left-0 bg-[linear-gradient(270deg,rgba(255,255,255,1)_0%,rgba(0,0,0,1)_100%)] transition-all duration-1000 ${visibleSections.has("vision") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
-            <Card className="absolute w-[507px] h-[185px] top-[117px] left-[786px] bg-transparent border-none shadow-none">
+            <Card className="absolute w-[507px] h-[185px] top-[117px] left-1/2 -translate-x-1/2 bg-transparent border-none shadow-none">
               <CardContent className="relative w-[511px] h-[185px] p-0">
                 <h2
-                  className="w-[157px] top-0 left-[175px] text-black text-[26px] absolute font-extrabold leading-[60px] whitespace-nowrap transition-all duration-700"
+                  className="w-[157px] top-0 left-1/2 -translate-x-1/2 text-black text-[26px] absolute font-extrabold leading-[60px] whitespace-nowrap transition-all duration-700 text-center"
                   style={tDelay(300)}
                 >
                   OUR VISION
                 </h2>
 
                 <p
-                  className="absolute w-[507px] top-[77px] left-0 font-medium text-black text-sm text-justify leading-[18px] transition-all duration-700"
+                  className="absolute w-[507px] top-[77px] left-1/2 -translate-x-1/2 font-medium text-black text-sm text-justify leading-[18px] transition-all duration-700"
                   style={tDelay(500)}
                 >
                   We aspire to be the top provider of structural steel solutions in the world. As an Engineering
@@ -290,7 +290,7 @@ export const Desktop = (): JSX.Element => {
               </CardContent>
             </Card>
             <img
-              className={`absolute w-[300px] h-[300px] top-[70px] left-60 object-cover transition-all duration-700 ${
+              className={`absolute w-[300px] h-[300px] top-[70px] left-1/2 -translate-x-[300px] object-cover transition-all duration-700 ${
                 visibleSections.has("vision") ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-16"
               }`}
               style={tDelay(200)}
@@ -308,7 +308,7 @@ export const Desktop = (): JSX.Element => {
               }`}
           >
             <img
-              className={`absolute w-[300px] h-[300px] top-16 left-[871px] object-cover transition-all duration-700 ${
+              className={`absolute w-[300px] h-[300px] top-16 left-1/2 translate-x-[300px] object-cover transition-all duration-700 ${
                 visibleSections.has("mission") ? "opacity-100 translate-x-0" : "opacity-0 translate-x-16"
               }`}
               style={tDelay(200)}
@@ -316,16 +316,16 @@ export const Desktop = (): JSX.Element => {
               src="mission.webp"
               loading="lazy"
             />
-            <Card className="absolute w-[501px] h-[203px] top-[108px] left-[147px] bg-transparent border-none shadow-none">
+            <Card className="absolute w-[501px] h-[203px] top-[108px] left-1/2 -translate-x-1/2 bg-transparent border-none shadow-none">
               <CardContent className="p-0">
                 <h2
-                  className="w-[181px] top-0 left-[158px] text-black text-[26px] absolute font-extrabold leading-[60px] whitespace-nowrap transition-all duration-700"
+                  className="w-[181px] top-0 left-1/2 -translate-x-1/2 text-black text-[26px] absolute font-extrabold leading-[60px] whitespace-nowrap transition-all duration-700 text-center"
                   style={tDelay(300)}
                 >
                   OUR MISSION
                 </h2>
                 <p
-                  className="absolute w-[497px] top-[77px] left-0 font-medium text-black text-sm text-justify leading-[18px] transition-all duration-700"
+                  className="absolute w-[497px] top-[77px] left-1/2 -translate-x-1/2 font-medium text-black text-sm text-justify leading-[18px] transition-all duration-700"
                   style={tDelay(500)}
                 >
                   To deliver top-notch fabrication, installation, and erection of structural steel and process
@@ -852,18 +852,18 @@ export const Desktop = (): JSX.Element => {
 
           <Separator className="w-full top-[1537px] absolute h-px left-0" />
 
-          {/* CEO line quote (kept) */}
-          <section className="absolute w-[668px] h-[175px] top-[5965px] left-[386px]">
+          {/* CEO line quote */}
+          <section className="absolute w-[668px] h-[175px] top-[5965px] left-1/2 -translate-x-1/2">
             <div className="relative w-[672px] h-[175px]">
-              <p className="absolute top-0 left-0 font-medium text-black text-[26px] text-center leading-8">
+              <p className="absolute top-0 left-1/2 -translate-x-1/2 font-medium text-black text-[26px] text-center leading-8 w-full">
                 &quot;No matter what size of project,
                 <br />
                 we look forward to providing value-driven excellence&quot;
               </p>
-              <h3 className="absolute top-[143px] left-60 bg-[linear-gradient(90deg,rgba(249,165,26,1)_0%,rgba(147,97,15,1)_100%)] [-webkit-background-clip:text] bg-clip-text text-transparent font-extrabold text-[26px] text-center leading-8 whitespace-nowrap">
+              <h3 className="absolute top-[143px] left-1/2 -translate-x-1/2 bg-[linear-gradient(90deg,rgba(249,165,26,1)_0%,rgba(147,97,15,1)_100%)] [-webkit-background-clip:text] bg-clip-text text-transparent font-extrabold text-[26px] text-center leading-8 whitespace-nowrap">
                 CEO MESSAGE
               </h3>
-              <div className="absolute flex flex-row gap-1 w-[155px] h-[26px] top-[94px] left-[257px]">
+              <div className="absolute flex flex-row gap-1 w-[155px] h-[26px] top-[94px] left-1/2 -translate-x-1/2">
                 {[...Array(5)].map((_, i) => (
                   <img key={i} className="w-[30px] h-[30px] object-contain" src="geometric-star-shape.webp" alt="star" loading="lazy" />
                 ))}
@@ -875,7 +875,7 @@ export const Desktop = (): JSX.Element => {
           <footer
             id="footer"
             data-animate
-            className={`absolute w-[1463px] h-[366px] top-[6238px] -left-1.5 transition-all duration-1000 ${visibleSections.has("footer") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            className={`absolute w-[1463px] h-[366px] top-[6238px] left-1/2 -translate-x-1/2 transition-all duration-1000 ${visibleSections.has("footer") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
             <div className="absolute w-[1463px] h-[366px] top-0 left-0">
