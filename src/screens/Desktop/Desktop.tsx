@@ -66,17 +66,32 @@ const certifications = [
 
 // Note: Certifications moved to top navbar; inline certifications carousel removed from homepage
 
+// Full-bleed hero images (reuse your existing assets)
+const heroImages = [
+  "engineering-service-provider-in-saudi-arabia.webp",
+  "4466.webp",
+  "engineering-service-provider-in-saudi-arabia1.webp",
+  "close-up-metallic-gear.webp",
+];
+
 export const Desktop = (): JSX.Element => {
   const [carouselIndex, setCarouselIndex] = React.useState(0);
   const [visibleSections, setVisibleSections] = React.useState<Set<string>>(new Set());
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isCarouselPaused, setIsCarouselPaused] = React.useState(false);
   const [isInstant, setIsInstant] = React.useState(false);
+  // Hero carousel (desktop + mobile share this)
+  const [heroIndex, setHeroIndex] = React.useState(0);
+  const [heroPaused, setHeroPaused] = React.useState(false);
   // desktop carousel visible count
   const navigate = useNavigate();
 
   // Desktop base design height for canvas
   const DESIGN_HEIGHT = 6617;
+  const ORIGINAL_HERO_HEIGHT = 1072;
+  const HERO_HEIGHT = 700; // adjust as needed
+  const DELTA = ORIGINAL_HERO_HEIGHT - HERO_HEIGHT;
+  const ADJUSTED_DESIGN_HEIGHT = DESIGN_HEIGHT - DELTA;
   // No scaling needed when using full-width canvas
 
   // No scaling effect needed; using full-width canvas
@@ -157,6 +172,15 @@ export const Desktop = (): JSX.Element => {
     return () => clearInterval(interval);
   }, [certifications.length, visibleSections, isCarouselPaused]);
 
+  // Auto-play (hero carousel)
+  React.useEffect(() => {
+    if (heroPaused) return;
+    const id = setInterval(() => {
+      setHeroIndex((i) => (i + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [heroPaused, heroImages.length]);
+
   // Helper: transition delay via style (avoid dynamic tailwind classes)
   const tDelay = (ms: number) => ({ transitionDelay: `${ms}ms` });
 
@@ -204,20 +228,26 @@ export const Desktop = (): JSX.Element => {
 
   return (
     <div className="bg-white w-full min-h-screen overflow-x-hidden">
+      <style>{`
+        @keyframes kenburns {
+          0% { transform: scale(1.08) translateZ(0); }
+          100% { transform: scale(1.0) translateZ(0); }
+        }
+      `}</style>
       {/* DESKTOP (scaled wrapper keeps baseline perfect on 1480px, fits other laptop widths) */}
       <div className="hidden lg:block bg-white overflow-hidden w-full">
         {/* Spacer wrapper preserves scaled height in the normal flow */}
-        <div
-          className="relative w-full mx-auto"
-          style={{ height: DESIGN_HEIGHT }}
-        >
+          <div
+            className="relative w-full mx-auto"
+            style={{ height: ADJUSTED_DESIGN_HEIGHT }}
+          >
           {/* Fixed-size inner canvas that scales responsively */}
           <div
             className="relative"
             style={{
               width: '100%',
-              height: DESIGN_HEIGHT,
-              transform: 'none',
+              height: ADJUSTED_DESIGN_HEIGHT,
+              transform: `translateY(-${DELTA}px)`,
               transformOrigin: 'top center',
               margin: '0 auto',
             }}
@@ -298,103 +328,157 @@ export const Desktop = (): JSX.Element => {
             </Card>
           </section>
 
-          {/* Hero */}
+          {/* HERO (DESKTOP) */}
           <section
             id="hero"
             data-animate
-            className={`absolute w-full h-[1072px] -top-0.5 left-0 bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] transition-all duration-1000 ${visibleSections.has("hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
+            className={`absolute w-full -top-0.5 left-0 transition-all duration-1000 ${
+              visibleSections.has("hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+            style={{ height: HERO_HEIGHT, transform: `translateY(${DELTA}px)` }}
           >
+            {/* NAVBAR with angled "cut" bottom */}
             <header
-              className="absolute w-full h-[101px] top-[58px] left-0 bg-white transition-all duration-700"
+              className="fixed z-50 top-[58px] left-0 w-full h-[101px] backdrop-blur-md bg-white/90 shadow-sm"
               style={tDelay(200)}
             >
-              <img
-                className="absolute w-[341px] h-12 top-[26px] left-[146px] object-cover transition-all duration-700"
-                style={tDelay(300)}
-                alt="Vinsub"
-                src="VINSUB.webp"
-              />
+              <div className="relative max-w-[1280px] mx-auto h-full flex items-center justify-between px-6">
+                <img
+                  className="w-[220px] h-10 object-contain transition-all duration-700"
+                  style={tDelay(300)}
+                  alt="Vinsub"
+                  src="VINSUB.webp"
+                />
 
-              <NavigationMenu
-                className="absolute w-[648px] h-2 top-[46px] left-[660px] transition-all duration-700"
-                style={tDelay(400)}
-              >
-                <NavigationMenuList className="flex gap-[30px]">
-                  {navigationItems.map((item, index) => (
-                    <NavigationMenuItem key={item.name}>
-                      <NavigationMenuLink
-                        href={item.href}
-                        className={`font-bold text-[15px] whitespace-nowrap transition-all duration-300 hover:scale-105 ${item.active ? "text-[#f9a51a]" : "text-neutral-900"
+                <NavigationMenu className="hidden xl:block transition-all duration-700" style={tDelay(400)}>
+                  <NavigationMenuList className="flex gap-8">
+                    {navigationItems.map((item, index) => (
+                      <NavigationMenuItem key={item.name}>
+                        <NavigationMenuLink
+                          href={item.href}
+                          className={`font-bold text-[15px] whitespace-nowrap transition-all duration-300 hover:scale-105 ${
+                            item.active ? "text-[#f9a51a]" : "text-neutral-900"
                           }`}
-                        style={tDelay(500 + index * 100)}
-                      >
-                        {item.name}
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  ))}
-                </NavigationMenuList>
-              </NavigationMenu>
+                          style={tDelay(500 + index * 80)}
+                        >
+                          {item.name}
+                        </NavigationMenuLink>
+                      </NavigationMenuItem>
+                    ))}
+                  </NavigationMenuList>
+                </NavigationMenu>
+
+                <div className="hidden xl:flex items-center gap-3">
+                  <Button
+                    className="rounded-xl font-bold bg-gradient-to-r from-[#f9a51a] to-[#e09416] hover:opacity-90"
+                    onClick={() => navigate("/projects")}
+                  >
+                    View Projects
+                  </Button>
+                  <a
+                    href="tel:0509331315"
+                    className="rounded-xl font-bold px-4 py-2 bg-neutral-900 text-white hover:opacity-90"
+                    aria-label="Call 0509331315"
+                  >
+                    Call Now
+                  </a>
+                </div>
+              </div>
             </header>
 
+            {/* FULL-BLEED IMAGE CAROUSEL with angled "cut" bottom */}
             <div
-              className="absolute w-[826px] h-[174px] top-[183px] left-[307px] transition-all duration-700"
-              style={tDelay(500)}
+              className="absolute inset-0 overflow-hidden bg-black"
             >
-              <h1
-                className="absolute w-[826px] top-0 left-0 bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(249,165,26,1)_100%)] [-webkit-background-clip:text] bg-clip-text text-transparent font-bold text-[85px] transition-all duration-700"
-                style={tDelay(600)}
+              {/* Slides */}
+              {heroImages.map((src, i) => {
+                const active = i === heroIndex;
+                return (
+                  <img
+                    key={src}
+                    src={src}
+                    alt={`Hero ${i + 1}`}
+                    className={`absolute inset-0 w-full h-full object-cover 
+                     transition-opacity duration-700 ease-out 
+                     ${active ? "opacity-100" : "opacity-0"}`}
+                    style={active ? { animation: "kenburns 4s ease-out both" } : undefined}
+                    loading="eager"
+                  />
+                );
+              })}
+
+              {/* Dark-to-transparent overlay for text legibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+
+              {/* Headline + tagline */}
+              <div
+                className="absolute left-1/2 -translate-x-1/2 xl:left-[146px] xl:translate-x-0 top-[260px] w-[min(100%,1100px)] px-6"
+                onMouseEnter={() => setHeroPaused(true)}
+                onMouseLeave={() => setHeroPaused(false)}
               >
-                Vinsub international
-              </h1>
+                <h1
+                  className="text-white font-extrabold tracking-tight leading-[1.05]
+                   text-5xl md:text-6xl xl:text-7xl drop-shadow-sm"
+                  style={tDelay(600)}
+                >
+                  Vinsub International
+                  <br className="hidden md:block" />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f9a51a] to-white">
+                    Contracting Co.
+                  </span>
+                </h1>
 
-              <h1
-                className="absolute h-[100px] w-[671px] top-20 left-[78px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(249,165,26,1)_100%)] [-webkit-background-clip:text] bg-clip-text text-transparent font-bold text-[85px] leading-[94px] transition-all duration-700"
-                style={tDelay(700)}
+                <p
+                  className="mt-5 text-white/90 text-lg md:text-2xl font-medium"
+                  style={tDelay(700)}
+                >
+                  Engineering Service Provider in Saudi Arabia
+                </p>
+
+                <div className="mt-8 flex items-center gap-4" style={tDelay(800)}>
+                  <Button
+                    className="rounded-xl font-bold text-black bg-white hover:opacity-90"
+                    onClick={() => navigate("/projects")}
+                  >
+                    Explore Projects
+                  </Button>
+                  <a
+                    href="tel:0509331315"
+                    className="rounded-xl font-bold px-4 py-2 bg-[#f9a51a] text-black hover:opacity-90"
+                  >
+                    Call 050 933 1315
+                  </a>
+                </div>
+              </div>
+
+              {/* Controls */}
+              <button
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-white/80 hover:bg-white shadow"
+                aria-label="Previous"
+                onClick={() => setHeroIndex((i) => (i - 1 + heroImages.length) % heroImages.length)}
               >
-                Contracting Co.
-              </h1>
-            </div>
+                &#8592;
+              </button>
+              <button
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-white/80 hover:bg-white shadow"
+                aria-label="Next"
+                onClick={() => setHeroIndex((i) => (i + 1) % heroImages.length)}
+              >
+                &#8594;
+              </button>
 
-            <div
-              className="w-[545px] top-[365px] left-[448px] font-medium text-[25px] leading-10 absolute text-white transition-all duration-700"
-              style={tDelay(800)}
-            >
-              Engineering Service Provider in Saudi Arabia
-            </div>
-
-            <div
-              className="absolute w-[1148px] h-[514px] top-[478px] left-[146px] transition-all duration-1000"
-              style={tDelay(900)}
-            >
-              <img
-                className="absolute w-[275px] h-[456px] top-0 -left-1 transition-all duration-700 hover:scale-105"
-                style={tDelay(1000)}
-                alt="Gallery image"
-                src="engineering-service-provider-in-saudi-arabia.webp"
-                loading="lazy"
-              />
-              <img
-                className="absolute w-[276px] h-[435px] top-[87px] left-[289px] transition-all duration-700 hover:scale-105"
-                style={tDelay(1100)}
-                alt="Gallery image"
-                src="4466.webp"
-                loading="lazy"
-              />
-              <img
-                className="absolute w-[276px] h-[389px] top-0 left-[583px] object-cover transition-all duration-700 hover:scale-105"
-                style={tDelay(1200)}
-                alt="Gallery image"
-                src="engineering-service-provider-in-saudi-arabia1.webp"
-                loading="lazy"
-              />
-              <img
-                className="absolute w-[275px] h-[396px] top-[106px] left-[877px] object-cover transition-all duration-700 hover:scale-105"
-                style={tDelay(1300)}
-                alt="Gallery image"
-                src="close-up-metallic-gear.webp"
-                loading="lazy"
-              />
+              {/* Dots */}
+              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+                {heroImages.map((_, i) => (
+                  <button
+                    key={i}
+                    aria-label={`Go to slide ${i + 1}`}
+                    className={`h-2 w-6 rounded-full transition-all 
+                      ${i === heroIndex ? "bg-white" : "bg-white/50 hover:bg-white/70"}`}
+                    onClick={() => setHeroIndex(i)}
+                  />
+                ))}
+              </div>
             </div>
           </section>
 
@@ -886,16 +970,15 @@ export const Desktop = (): JSX.Element => {
         </div>
       </div>
 
-      {/* MOBILE (rebuilt to be fluid; no fixed widths, clean nav, same conten.....t) */}
+      {/* MOBILE HERO (angled navbar + carousel) */}
       <div className="lg:hidden w-full min-h-screen bg-white overflow-x-hidden">
-        {/* Mobile Hero */}
         <section
           id="mobile-hero"
-          className="relative w-full bg-[linear-gradient(180deg,rgba(0,0,0,1)_0%,rgba(203,126,0,1)_100%)] pt-16"
+          className="relative w-full pt-16 overflow-hidden"
         >
-          {/* Header */}
+          {/* Mobile Navbar with cut bottom */}
           <header
-            className="fixed top-0 left-0 z-50 w-full h-16 bg-white/95 backdrop-blur-sm transition-all duration-700"
+            className="fixed top-0 left-0 z-50 w-full h-16 bg-white/90 backdrop-blur-md shadow-sm"
             style={tDelay(200)}
           >
             <div className="flex items-center justify-between px-4 h-full w-full">
@@ -917,7 +1000,6 @@ export const Desktop = (): JSX.Element => {
               </button>
             </div>
 
-            {/* Dropdown */}
             {isMobileMenuOpen && (
               <div className="absolute top-full left-0 w-full bg-white shadow-lg z-50">
                 <nav className="flex flex-col py-2">
@@ -938,7 +1020,9 @@ export const Desktop = (): JSX.Element => {
                       <a
                         key={item.name}
                         href={href}
-                        className={`px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-gray-50 ${item.active ? "text-[#f9a51a] bg-gray-50" : "text-neutral-900"}`}
+                        className={`px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-gray-50 ${
+                          item.active ? "text-[#f9a51a] bg-gray-50" : "text-neutral-900"
+                        }`}
                         onClick={(e) => {
                           setIsMobileMenuOpen(false);
                           if (isRoute) {
@@ -957,45 +1041,82 @@ export const Desktop = (): JSX.Element => {
             )}
           </header>
 
-          {/* Copy */}
-          <div className="flex flex-col items-center justify-center px-4 pt-10 pb-10 text-center w-full">
-            <h1
-              className="text-3xl sm:text-4xl font-bold text-transparent bg-gradient-to-r from-white to-[#f9a51a] bg-clip-text mb-2 transition-all duration-700 px-2 break-words"
-              style={tDelay(600)}
-            >
-              Vinsub international
-            </h1>
-            <h2
-              className="text-2xl sm:text-3xl font-bold text-transparent bg-gradient-to-r from-white to-[#f9a51a] bg-clip-text mb-4 transition-all duration-700 px-2 break-words"
-              style={tDelay(700)}
-            >
-              Contracting Co.
-            </h2>
-            <p
-              className="text-sm sm:text-base text-white font-medium mb-6 transition-all duration-700 px-2 text-center"
-              style={tDelay(800)}
-            >
-              Engineering Service Provider in Saudi Arabia
-            </p>
-
-            {/* Media grid */}
-            <div
-              className="grid grid-cols-2 gap-3 w-full max-w-md transition-all duration-1000 px-4"
-              style={tDelay(900)}
-            >
-              {[
-                "engineering-service-provider-in-saudi-arabia.webp",
-                "4466.webp",
-                "engineering-service-provider-in-saudi-arabia1.webp",
-                "close-up-metallic-gear.webp",
-              ].map((src, i) => (
+          {/* Full-bleed mobile carousel with angled bottom */}
+          <div
+            className="relative h-[70vh] min-h-[480px] bg-black"
+            onMouseEnter={() => setHeroPaused(true)}
+            onMouseLeave={() => setHeroPaused(false)}
+          >
+            {heroImages.map((src, i) => {
+              const active = i === heroIndex;
+              return (
                 <img
                   key={src}
-                  className="w-full h-24 sm:h-32 object-cover rounded-lg animate-gentle-float"
-                  style={{ animationDelay: `${i * 0.2}s` }}
-                  alt={`Hero image ${i + 1}`}
                   src={src}
-                  loading="lazy"
+                  alt={`Hero ${i + 1}`}
+                  className={`absolute inset-0 w-full h-full object-cover 
+                     transition-opacity duration-700 ease-out 
+                     ${active ? "opacity-100" : "opacity-0"}`}
+                  style={active ? { animation: "kenburns 4s ease-out both" } : undefined}
+                  loading="eager"
+                />
+              );
+            })}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+
+            {/* Copy */}
+            <div className="absolute inset-x-0 bottom-20 px-4 text-center">
+              <h1
+                className="text-3xl sm:text-4xl font-extrabold text-white leading-tight"
+                style={tDelay(600)}
+              >
+                Vinsub International
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-[#f9a51a]">
+                  Contracting Co.
+                </span>
+              </h1>
+              <p className="mt-3 text-white/90 text-base sm:text-lg" style={tDelay(700)}>
+                Engineering Service Provider in Saudi Arabia
+              </p>
+              <div className="mt-5 flex items-center justify-center gap-3" style={tDelay(800)}>
+                <Button
+                  className="rounded-lg bg-white text-black font-bold"
+                  onClick={() => navigate("/projects")}
+                >
+                  Explore Projects
+                </Button>
+                <a
+                  href="tel:0509331315"
+                  className="rounded-lg px-4 py-2 bg-[#f9a51a] text-black font-bold"
+                >
+                  Call Now
+                </a>
+              </div>
+            </div>
+
+            {/* Controls */}
+            <button
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-white/80 hover:bg-white shadow"
+              aria-label="Previous"
+              onClick={() => setHeroIndex((i) => (i - 1 + heroImages.length) % heroImages.length)}
+            >
+              &#8592;
+            </button>
+            <button
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-white/80 hover:bg-white shadow"
+              aria-label="Next"
+              onClick={() => setHeroIndex((i) => (i + 1) % heroImages.length)}
+            >
+              &#8594;
+            </button>
+
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+              {heroImages.map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Go to slide ${i + 1}`}
+                  className={`h-2 w-5 rounded-full ${i === heroIndex ? "bg-white" : "bg-white/50"}`}
+                  onClick={() => setHeroIndex(i)}
                 />
               ))}
             </div>
