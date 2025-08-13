@@ -593,7 +593,7 @@ export const Desktop = (): JSX.Element => {
                     ...tDelay(1100 + index * 200),
                     top:
                       index === 0 ? 348 : index === 1 ? 828 : index === 2 ? 1307 : 1786,
-                    left: index === 0 ? 147 : index === 1 ? 1148 : index === 2 ? 144 : 1140,
+                    left: index % 2 === 0 ? 'calc(50% - 600px)' : 'calc(50% + 130px)',
                   }}
                 >
                   {service.id}
