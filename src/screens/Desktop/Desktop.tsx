@@ -269,7 +269,9 @@ export const Desktop = (): JSX.Element => {
             className={`absolute w-full h-[419px] top-[4754px] left-0 bg-[linear-gradient(270deg,rgba(255,255,255,1)_0%,rgba(0,0,0,1)_100%)] transition-all duration-1000 ${visibleSections.has("vision") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
-            <Card className="absolute w-[507px] h-[185px] top-[117px] left-1/2 -translate-x-1/2 bg-transparent border-none shadow-none">
+            <Card className="absolute w-[507px] h-[185px] top-[117px] left-1/2 bg-transparent border-none shadow-none"
+              style={{ transform: 'translate(-50%, 0) translateX(380px)' }}
+            >
               <CardContent className="relative w-[511px] h-[185px] p-0">
                 <h2
                   className="w-[157px] top-0 left-1/2 -translate-x-1/2 text-black text-[26px] absolute font-extrabold leading-[60px] whitespace-nowrap transition-all duration-700 text-center"
@@ -290,10 +292,10 @@ export const Desktop = (): JSX.Element => {
               </CardContent>
             </Card>
             <img
-              className={`absolute w-[300px] h-[300px] top-[70px] left-1/2 -translate-x-[300px] object-cover transition-all duration-700 ${
-                visibleSections.has("vision") ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-16"
+              className={`absolute w-[300px] h-[300px] top-[70px] left-1/2 object-cover transition-opacity duration-700 ${
+                visibleSections.has("vision") ? "opacity-100" : "opacity-0"
               }`}
-              style={tDelay(200)}
+              style={{ ...tDelay(200), transform: 'translate(-50%, 0) translateX(-380px)' }}
               alt="Vision"
               src="vision.webp"
               loading="lazy"
@@ -308,15 +310,17 @@ export const Desktop = (): JSX.Element => {
               }`}
           >
             <img
-              className={`absolute w-[300px] h-[300px] top-16 left-1/2 translate-x-[300px] object-cover transition-all duration-700 ${
-                visibleSections.has("mission") ? "opacity-100 translate-x-0" : "opacity-0 translate-x-16"
+              className={`absolute w-[300px] h-[300px] top-16 left-1/2 object-cover transition-opacity duration-700 ${
+                visibleSections.has("mission") ? "opacity-100" : "opacity-0"
               }`}
-              style={tDelay(200)}
+              style={{ ...tDelay(200), transform: 'translate(-50%, 0) translateX(380px)' }}
               alt="Mission"
               src="mission.webp"
               loading="lazy"
             />
-            <Card className="absolute w-[501px] h-[203px] top-[108px] left-1/2 -translate-x-1/2 bg-transparent border-none shadow-none">
+            <Card className="absolute w-[501px] h-[203px] top-[108px] left-1/2 bg-transparent border-none shadow-none"
+              style={{ transform: 'translate(-50%, 0) translateX(-380px)' }}
+            >
               <CardContent className="p-0">
                 <h2
                   className="w-[181px] top-0 left-1/2 -translate-x-1/2 text-black text-[26px] absolute font-extrabold leading-[60px] whitespace-nowrap transition-all duration-700 text-center"
@@ -557,13 +561,13 @@ export const Desktop = (): JSX.Element => {
                 </div>
 
                 <Card
-                  className={`absolute w-[380px] h-[380px] bg-transparent border-none transition-all duration-700 hover:scale-105 left-1/2 -translate-x-1/2 ${visibleSections.has("services") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+                  className={`absolute w-[380px] h-[380px] bg-transparent border-none transition-all duration-700 hover:scale-105 ${visibleSections.has("services") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
                     }`}
                   style={{
                     ...tDelay(800 + index * 200),
                     top:
                       index === 0 ? 268 : index === 1 ? 712 : index === 2 ? 1215 : 1696,
-                    transform: `${index === 0 ? "translate(-330px, 0)" : index === 1 ? "translate(330px, 0)" : index === 2 ? "translate(-330px, 0)" : "translate(330px, 0)"}`,
+                    left: index % 2 === 0 ? 'calc(50% - 330px)' : 'calc(50% + 330px)',
                   }}
                 >
                   <CardContent className="p-0">
