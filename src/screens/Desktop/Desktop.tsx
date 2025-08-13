@@ -492,7 +492,7 @@ export const Desktop = (): JSX.Element => {
             </div>
           </section>
 
-          {/* SERVICES (unchanged visuals; added inline delays) */}
+          {/* SERVICES */}
           <section
             id="services"
             data-animate
@@ -525,12 +525,11 @@ export const Desktop = (): JSX.Element => {
               loading="lazy"
             />
 
-            <h2
-              className="w-[481px] top-[68px] left-[480px] bg-[linear-gradient(90deg,rgba(249,165,26,1)_0%,rgba(255,255,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text text-transparent text-[65px] absolute font-extrabold leading-[60px] whitespace-nowrap transition-all duration-700"
-              style={tDelay(500)}
-            >
-              OUR SERVICES
-            </h2>
+            <div className="absolute top-[68px] left-1/2 -translate-x-1/2 transition-all duration-700" style={tDelay(500)}>
+              <h2 className="w-[481px] bg-[linear-gradient(90deg,rgba(249,165,26,1)_0%,rgba(255,255,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text text-transparent text-[65px] font-extrabold leading-[60px] whitespace-nowrap text-center">
+                OUR SERVICES
+              </h2>
+            </div>
 
             <Separator
               className="w-full top-[204px] absolute h-px left-0 transition-all duration-700"
@@ -540,7 +539,7 @@ export const Desktop = (): JSX.Element => {
             {services.map((service, index) => (
               <React.Fragment key={service.id}>
                 <div
-                  className="absolute w-[746px] opacity-30 font-extrabold text-transparent text-[196px] leading-[156px] transition-all duration-1000 bg-[linear-gradient(90deg,rgba(0,0,0,1)_14%,rgba(255,255,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text"
+                  className="absolute w-[746px] opacity-30 font-extrabold text-transparent text-[196px] leading-[156px] transition-all duration-1000 bg-[linear-gradient(90deg,rgba(0,0,0,1)_14%,rgba(255,255,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text left-1/2 -translate-x-1/2"
                   style={{
                     ...tDelay(700 + index * 200),
                     top:
@@ -551,21 +550,20 @@ export const Desktop = (): JSX.Element => {
                           : index === 2
                             ? 1325
                             : 109,
-                    left: index === 0 || index === 2 ? 551 : index === 1 ? 36 : 0,
-                    transform: index === 3 ? "translateY(1696px)" : "none",
+                    transform: `${index === 3 ? "translate(-50%, 1696px)" : "translateX(-50%)"}`,
                   }}
                 >
                   VINSUB
                 </div>
 
                 <Card
-                  className={`absolute w-[380px] h-[380px] bg-transparent border-none transition-all duration-700 hover:scale-105 ${visibleSections.has("services") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+                  className={`absolute w-[380px] h-[380px] bg-transparent border-none transition-all duration-700 hover:scale-105 left-1/2 -translate-x-1/2 ${visibleSections.has("services") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
                     }`}
                   style={{
                     ...tDelay(800 + index * 200),
                     top:
                       index === 0 ? 268 : index === 1 ? 712 : index === 2 ? 1215 : 1696,
-                    left: index === 0 ? 334 : index === 1 ? 733 : index === 2 ? 325 : 587,
+                    transform: `${index === 0 ? "translate(-330px, 0)" : index === 1 ? "translate(330px, 0)" : index === 2 ? "translate(-330px, 0)" : "translate(330px, 0)"}`,
                   }}
                 >
                   <CardContent className="p-0">
@@ -727,7 +725,7 @@ export const Desktop = (): JSX.Element => {
           <section
             id="about"
             data-animate
-            className={`absolute w-[292px] h-[161px] top-[1156px] left-[574px] transition-all duration-1000 ${visibleSections.has("about") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            className={`absolute w-[292px] h-[161px] top-[1156px] left-1/2 -translate-x-1/2 transition-all duration-1000 ${visibleSections.has("about") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
             <h2
@@ -743,7 +741,7 @@ export const Desktop = (): JSX.Element => {
           </section>
 
           <div
-            className="absolute w-[847px] h-[152px] top-[1317px] left-[297px] transition-all duration-1000"
+            className="absolute w-[847px] h-[152px] top-[1317px] left-1/2 -translate-x-1/2 transition-all duration-1000"
             style={tDelay(400)}
           >
             <h3
