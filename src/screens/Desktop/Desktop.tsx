@@ -567,10 +567,10 @@ export const Desktop = (): JSX.Element => {
                     ...tDelay(800 + index * 200),
                     top:
                       index === 0 ? 268 : index === 1 ? 712 : index === 2 ? 1215 : 1696,
-                    left: index % 2 === 0 ? 'calc(50% - 330px)' : 'calc(50% + 330px)',
+                    left: index % 2 === 0 ? 'calc(50% - 330px)' : 'calc(45% + 220px)',
                   }}
                 >
-                  <CardContent className="p-0">
+                  <CardContent className={`p-0 ${index % 2 === 1 ? 'pr-2' : ''}`}>
                     <h3
                       className="font-extrabold text-[27px] leading-[30px] text-white transition-all duration-500"
                       style={tDelay(900 + index * 200)}
@@ -593,7 +593,7 @@ export const Desktop = (): JSX.Element => {
                     ...tDelay(1100 + index * 200),
                     top:
                       index === 0 ? 348 : index === 1 ? 828 : index === 2 ? 1307 : 1786,
-                    left: index % 2 === 0 ? 'calc(50% - 600px)' : 'calc(50% + 130px)',
+                    left: index % 2 === 0 ? 'calc(50% - 600px)' : 'calc(45% - 20px)',
                   }}
                 >
                   {service.id}
