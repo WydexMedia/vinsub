@@ -70,7 +70,7 @@ const certifications = [
 const heroImages = [
   "engineering-service-provider-in-saudi-arabia.webp",
   "4466.webp",
-  "engineering-service-provider-in-saudi-arabia1.webp",
+  "vinsub.jpg",
   "close-up-metallic-gear.webp",
 ];
 
@@ -167,7 +167,7 @@ export const Desktop = (): JSX.Element => {
           setTimeout(() => setIsInstant(false), 0);
         }
       }
-    }, 1000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [certifications.length, visibleSections, isCarouselPaused]);
@@ -339,7 +339,7 @@ export const Desktop = (): JSX.Element => {
           >
             {/* NAVBAR with angled "cut" bottom */}
             <header
-              className="fixed z-50 top-[58px] left-0 w-full h-[101px] backdrop-blur-md bg-white/90 shadow-sm"
+              className="fixed z-50 top-0 left-0 w-full h-[101px] bg-white/20 backdrop-blur-xl backdrop-saturate-150 border-b-0 shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
               style={tDelay(200)}
             >
               <div className="relative max-w-[1280px] mx-auto h-full flex items-center justify-between px-6">
@@ -371,7 +371,7 @@ export const Desktop = (): JSX.Element => {
                 <div className="hidden xl:flex items-center gap-3">
                   <Button
                     className="rounded-xl font-bold bg-gradient-to-r from-[#f9a51a] to-[#e09416] hover:opacity-90"
-                    onClick={() => navigate("/projects")}
+                    onClick={() => navigate("/gallery")}
                   >
                     View Projects
                   </Button>
@@ -417,7 +417,7 @@ export const Desktop = (): JSX.Element => {
                 onMouseLeave={() => setHeroPaused(false)}
               >
                 <h1
-                  className="text-white font-extrabold tracking-tight leading-[1.05]
+                  className="text-white font-extrabold tracking-tight leading-[1.15] pb-1
                    text-5xl md:text-6xl xl:text-7xl drop-shadow-sm"
                   style={tDelay(600)}
                 >
@@ -438,7 +438,7 @@ export const Desktop = (): JSX.Element => {
                 <div className="mt-8 flex items-center gap-4" style={tDelay(800)}>
                   <Button
                     className="rounded-xl font-bold text-black bg-white hover:opacity-90"
-                    onClick={() => navigate("/projects")}
+                    onClick={() => navigate("/gallery")}
                   >
                     Explore Projects
                   </Button>
@@ -625,7 +625,7 @@ export const Desktop = (): JSX.Element => {
               className="absolute w-[195px] h-[35px] top-[25px] left-[945px] rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg"
               style={tDelay(300)}
               aria-label="View Our Projects"
-              onClick={() => navigate("/projects")}
+              onClick={() => navigate("/gallery")}
             >
               <span className="font-bold text-black text-[19px] whitespace-nowrap">View Our Projects</span>
             </Button>
@@ -777,6 +777,8 @@ export const Desktop = (): JSX.Element => {
             <div
               className="relative w-full max-w-5xl overflow-hidden transition-all duration-1000"
               style={tDelay(400)}
+              onMouseEnter={() => setIsCarouselPaused(true)}
+              onMouseLeave={() => setIsCarouselPaused(false)}
             >
               <div
                 className={`flex gap-4 transition-transform ${isInstant ? 'duration-0' : 'duration-500'}`}
@@ -978,7 +980,7 @@ export const Desktop = (): JSX.Element => {
         >
           {/* Mobile Navbar with cut bottom */}
           <header
-            className="fixed top-0 left-0 z-50 w-full h-16 bg-white/90 backdrop-blur-md shadow-sm"
+            className="fixed top-0 left-0 z-50 w-full h-16 bg-white/20 backdrop-blur-xl backdrop-saturate-150 border-b-0 shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
             style={tDelay(200)}
           >
             <div className="flex items-center justify-between px-4 h-full w-full">
@@ -1081,7 +1083,7 @@ export const Desktop = (): JSX.Element => {
               <div className="mt-5 flex items-center justify-center gap-3" style={tDelay(800)}>
                 <Button
                   className="rounded-lg bg-white text-black font-bold"
-                  onClick={() => navigate("/projects")}
+                  onClick={() => navigate("/gallery")}
                 >
                   Explore Projects
                 </Button>
@@ -1142,7 +1144,7 @@ export const Desktop = (): JSX.Element => {
               className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gradient-to-r from-white to-gray-200 transition-all duration-300"
               style={tDelay(300)}
               aria-label="View Our Projects"
-              onClick={() => navigate("/projects")}
+              onClick={() => navigate("/gallery")}
             >
               <span className="font-bold text-black text-base">View Our Projects</span>
             </Button>
@@ -1256,6 +1258,8 @@ export const Desktop = (): JSX.Element => {
             <div
               className="relative overflow-hidden"
               style={tDelay(400)}
+              onMouseEnter={() => setIsCarouselPaused(true)}
+              onMouseLeave={() => setIsCarouselPaused(false)}
             >
               <div
                 className={`flex gap-3 transition-transform ${isInstant ? 'duration-0' : 'duration-500'}`}
