@@ -95,6 +95,8 @@ export const Desktop = (): JSX.Element => {
   const [heroPaused, setHeroPaused] = React.useState(false);
   // desktop carousel visible count
   const navigate = useNavigate();
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = React.useState(false);
+  const [pendingDownloadHref, setPendingDownloadHref] = React.useState<string | null>(null);
 
   // Desktop base design height for canvas
   const DESIGN_HEIGHT = 6617;
@@ -194,6 +196,37 @@ export const Desktop = (): JSX.Element => {
   // Helper: transition delay via style (avoid dynamic tailwind classes)
   const tDelay = (ms: number) => ({ transitionDelay: `${ms}ms` });
 
+  const requestDownload = (href: string) => {
+    setPendingDownloadHref(href);
+    setIsDownloadModalOpen(true);
+  };
+
+  const confirmDownload = () => {
+    if (!pendingDownloadHref) return;
+    const a = document.createElement('a');
+    a.href = pendingDownloadHref;
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setIsDownloadModalOpen(false);
+    setPendingDownloadHref(null);
+  };
+
+  const cancelDownload = () => {
+    setIsDownloadModalOpen(false);
+    setPendingDownloadHref(null);
+  };
+
+  React.useEffect(() => {
+    if (!isDownloadModalOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') cancelDownload();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isDownloadModalOpen]);
+
   // Carousel control handlers - seamless circular navigation within safe window
   const handleCarouselControl = (direction: 'prev' | 'next') => {
     setIsCarouselPaused(true);
@@ -244,6 +277,35 @@ export const Desktop = (): JSX.Element => {
           100% { transform: scale(1.0) translateZ(0); }
         }
       `}</style>
+      {/* Download confirmation modal (global, works on desktop and mobile) */}
+      {isDownloadModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/50" onClick={cancelDownload} />
+          <div className="relative w-full max-w-md rounded-2xl shadow-2xl overflow-hidden">
+            <div className="bg-gradient-to-r from-black to-white px-6 py-4">
+              <h3 className="text-white font-extrabold text-lg">Download Brochure</h3>
+            </div>
+            <div className="bg-white px-6 py-6">
+              <p className="text-neutral-900 text-sm">Do you want to download the brochure now?</p>
+              <div className="mt-6 flex items-center justify-end gap-3">
+                <button
+                  onClick={cancelDownload}
+                  className="px-4 py-2 rounded-md font-semibold text-neutral-800 bg-gray-100 hover:bg-gray-200 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDownload}
+                  className="px-4 py-2 rounded-md font-bold text-white bg-gradient-to-r from-[#f9a51a] to-[#e09416] hover:opacity-90"
+                >
+                  Download
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* DESKTOP (scaled wrapper keeps baseline perfect on 1480px, fits other laptop widths) */}
       <div className="hidden lg:block bg-white overflow-hidden w-full">
         {/* Spacer wrapper preserves scaled height in the normal flow */}
@@ -383,12 +445,13 @@ export const Desktop = (): JSX.Element => {
                 </NavigationMenu>
 
                 <div className="hidden xl:flex items-center gap-3">
-                  <Button
-                    className="rounded-xl font-bold bg-gradient-to-r from-[#f9a51a] to-[#e09416] hover:opacity-90"
-                    onClick={() => navigate("/gallery")}
+                  <a
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); requestDownload('/brochure-vinsub.pdf'); }}
+                    className="rounded-xl font-bold px-4 py-2 bg-gradient-to-r from-[#f9a51a] to-[#e09416] hover:opacity-90 text-black"
                   >
-                    View Projects
-                  </Button>
+                    Download Brochure
+                  </a>
                   <a
                     href="tel:0509331315"
                     className="rounded-xl font-bold px-4 py-2 bg-neutral-900 text-white hover:opacity-90"
@@ -450,12 +513,13 @@ export const Desktop = (): JSX.Element => {
                 </p>
 
                 <div className="mt-8 flex items-center gap-4" style={tDelay(800)}>
-                  <Button
-                    className="rounded-xl font-bold text-black bg-white hover:opacity-90"
-                    onClick={() => navigate("/gallery")}
+                  <a
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); requestDownload('/brochure-vinsub.pdf'); }}
+                    className="rounded-xl font-bold px-4 py-2 bg-white text-black hover:opacity-90"
                   >
-                    Explore Projects
-                  </Button>
+                    Download Brochure
+                  </a>
                   <a
                     href="tel:0509331315"
                     className="rounded-xl font-bold px-4 py-2 bg-[#f9a51a] text-black hover:opacity-90"
@@ -628,7 +692,7 @@ export const Desktop = (): JSX.Element => {
             className={`absolute w-full h-[79px] top-[1070px] left-0 bg-[linear-gradient(90deg,rgba(0,0,0,1)_0%,rgba(255,255,255,1)_100%)] transition-all duration-1000 ${visibleSections.has("cta") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
-            <div className="absolute inset-0 flex items-center justify-center gap-6 px-4">
+              <div className="absolute inset-0 flex items-center justify-center gap-6 px-4">
               <div
                 className="font-normal text-white text-base md:text-xl leading-5 text-center md:text-left"
                 style={tDelay(200)}
@@ -637,14 +701,15 @@ export const Desktop = (): JSX.Element => {
                 <span className="font-extrabold">quality contract</span>
                 <span className="font-medium"> for your project?</span>
               </div>
-              <Button
-                className="rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                style={tDelay(300)}
-                aria-label="View Our Projects"
-                onClick={() => navigate("/gallery")}
-              >
-                <span className="font-bold text-black text-[16px] md:text-[19px] whitespace-nowrap">View Our Projects</span>
-              </Button>
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); requestDownload('/brochure-vinsub.pdf'); }}
+                  className="rounded-[10px] px-4 py-2 bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  style={tDelay(300)}
+                  aria-label="Download Brochure"
+                >
+                  <span className="font-bold text-black text-[16px] md:text-[19px] whitespace-nowrap">Download Brochure</span>
+                </a>
               <a
                 href="tel:0509331315"
                 className="rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center px-4 py-2"
@@ -849,12 +914,13 @@ export const Desktop = (): JSX.Element => {
 
             {/* More from Gallery Button */}
             <div className="mt-8 transition-all duration-700" style={tDelay(800)}>
-              <Button
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); requestDownload('/brochure-vinsub.pdf'); }}
                 className="px-8 py-3 rounded-full font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#f9a51a] to-[#e09416] text-white border-2 border-[#f9a51a] hover:shadow-xl"
-                onClick={() => navigate("/gallery")}
               >
-                More from Gallery
-              </Button>
+                Download Brochure
+              </a>
             </div>
           </section>
 
@@ -1101,13 +1167,14 @@ export const Desktop = (): JSX.Element => {
               <p className="mt-3 text-white/90 text-base sm:text-lg" style={tDelay(700)}>
                 Engineering Service Provider in Saudi Arabia
               </p>
-              <div className="mt-5 flex items-center justify-center gap-3" style={tDelay(800)}>
-                <Button
-                  className="rounded-lg bg-white text-black font-bold"
-                  onClick={() => navigate("/gallery")}
-                >
-                  Explore Projects
-                </Button>
+            <div className="mt-5 flex items-center justify-center gap-3" style={tDelay(800)}>
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); requestDownload('/brochure-vinsub.pdf'); }}
+                className="rounded-lg bg-white text-black font-bold px-4 py-2"
+              >
+                Download Brochure
+              </a>
                 <a
                   href="tel:0509331315"
                   className="rounded-lg px-4 py-2 bg-[#f9a51a] text-black font-bold"
@@ -1333,12 +1400,13 @@ export const Desktop = (): JSX.Element => {
 
             {/* More from Gallery Button */}
             <div className="mt-8 text-center transition-all duration-700" style={tDelay(800)}>
-              <Button
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); requestDownload('/brochure-vinsub.pdf'); }}
                 className="px-6 py-3 rounded-full font-bold text-base shadow-lg transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#f9a51a] to-[#e09416] text-white border-2 border-[#f9a51a] hover:shadow-xl"
-                onClick={() => navigate('/gallery')}
               >
-                More from Gallery
-              </Button>
+                Download Brochure
+              </a>
             </div>
           </div>
         </section>
