@@ -543,7 +543,11 @@ export const Desktop = (): JSX.Element => {
             {services.map((service, index) => (
               <React.Fragment key={service.id}>
                 <div
-                  className="absolute w-[746px] opacity-30 font-extrabold text-transparent text-[196px] leading-[156px] transition-all duration-1000 bg-[linear-gradient(90deg,rgba(0,0,0,1)_14%,rgba(255,255,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text left-1/2 -translate-x-1/2"
+                  className={`absolute w-[746px] opacity-30 font-extrabold text-[196px] leading-[156px] transition-all duration-1000 left-1/2 -translate-x-1/2 text-transparent bg-clip-text ${
+                    index % 2 === 1
+                      ? 'bg-gradient-to-r from-white via-white/70 to-white/10'
+                      : 'bg-gradient-to-r from-white/10 via-white/70 to-white'
+                  }`}
                   style={{
                     ...tDelay(700 + index * 200),
                     top:
