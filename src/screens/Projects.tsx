@@ -86,9 +86,9 @@ export const Projects = (): JSX.Element => {
             className="transform hover:scale-110 transition-all duration-300 cursor-pointer p-0 bg-transparent border-0"
           >
             <img
-              className="w-32 h-10 object-contain filter brightness-0 invert"
+              className="w-32 h-auto max-h-10 object-contain filter brightness-0 invert"
               alt="Vinsub"
-              src="VINSUB.webp"
+              src="/VINSUB.webp"
             />
           </button>
         </div>

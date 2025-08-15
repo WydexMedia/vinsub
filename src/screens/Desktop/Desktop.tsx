@@ -420,10 +420,11 @@ export const Desktop = (): JSX.Element => {
             >
               <div className="relative max-w-[1280px] mx-auto h-full flex items-center justify-between px-6">
                 <img
-                  className="w-[220px] h-10 object-contain transition-all duration-700"
+                  className="w-[220px] h-auto max-h-10 object-contain transition-all duration-700"
                   style={tDelay(300)}
                   alt="Vinsub"
-                  src="VINSUB.webp"
+                  src="/VINSUB.webp"
+                  decoding="async"
                 />
 
                 <NavigationMenu className="hidden xl:block transition-all duration-700" style={tDelay(400)}>
@@ -971,7 +972,7 @@ export const Desktop = (): JSX.Element => {
                 <div className="absolute w-[564px] h-[366px] top-0 left-0 bg-[#d9d9d9]" />
 
                 <img
-                  className="absolute w-[340px] h-12 top-[70px] left-[152px] object-cover transition-all duration-700"
+                  className="absolute w-[340px] h-auto max-h-12 top-[70px] left-[152px] object-contain transition-all duration-700"
                   style={tDelay(400)}
                   src="/VINSUB.webp"
                   alt="Vinsub"
@@ -1072,10 +1073,10 @@ export const Desktop = (): JSX.Element => {
           >
             <div className="flex items-center justify-between px-4 h-full w-full">
               <img
-                className="w-28 h-8 object-contain transition-all duration-700"
+                className="w-28 h-auto max-h-8 object-contain transition-all duration-700"
                 style={tDelay(300)}
                 alt="Vinsub"
-                src="VINSUB.webp"
+                src="/VINSUB.webp"
               />
               <button
                 onClick={() => setIsMobileMenuOpen((s) => !s)}
@@ -1570,7 +1571,7 @@ export const Desktop = (): JSX.Element => {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="text-center md:text-left" style={tDelay(200)}>
-                <img className="w-28 h-8 mx-auto md:mx-0 mb-3 object-contain" src="/VINSUB.webp" alt="Vinsub" loading="lazy" />
+                <img className="w-28 h-auto max-h-8 mx-auto md:mx-0 mb-3 object-contain" src="/VINSUB.webp" alt="Vinsub" loading="lazy" />
                 <p className="text-xs text-black italic mb-1">Engineering Service Provider in Saudi Arabia, Dammam</p>
                 <p className="text-xs text-black italic mb-1">vinsubinternational © 2025. All Rights Reserved</p>
                 <p className="text-xs text-black font-semibold">Developed by Wydex</p>
