@@ -23,9 +23,9 @@ export const Certifications = (): JSX.Element => {
             className="p-0 bg-transparent border-0"
           >
             <img
-              className="w-28 h-8 object-contain cursor-pointer"
+              className="w-28 h-auto max-h-8 object-contain cursor-pointer"
               alt="Vinsub"
-              src="VINSUB.webp"
+              src="/VINSUB.webp"
             />
           </button>
         </div>
