@@ -205,7 +205,8 @@ export const Desktop = (): JSX.Element => {
     }
     const el = document.getElementById(id);
     if (el) {
-      const headerOffset = 101; // fixed navbar height
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+      const headerOffset = isMobile ? 64 : 101; // fixed navbar height per layout
       const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - headerOffset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
@@ -1140,7 +1141,6 @@ export const Desktop = (): JSX.Element => {
                       '#footer': '#mobile-footer',
                     };
                     const href = item.href.startsWith('#') ? (anchorMap[item.href] ?? item.href) : item.href;
-                    const isRoute = href.startsWith('/');
                     return (
                       <a
                         key={item.name}
@@ -1150,9 +1150,22 @@ export const Desktop = (): JSX.Element => {
                         }`}
                         onClick={(e) => {
                           setIsMobileMenuOpen(false);
-                          if (isRoute) {
+                          // route links
+                          if (href.startsWith('#/')) {
+                            e.preventDefault();
+                            navigate(href.slice(1));
+                            return;
+                          }
+                          if (href.startsWith('/')) {
                             e.preventDefault();
                             navigate(href);
+                            return;
+                          }
+                          // in-page anchors
+                          if (href.startsWith('#')) {
+                            e.preventDefault();
+                            scrollToSection(href);
+                            return;
                           }
                         }}
                         style={tDelay(100 + index * 50)}
