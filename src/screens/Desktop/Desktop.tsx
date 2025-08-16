@@ -196,6 +196,22 @@ export const Desktop = (): JSX.Element => {
   // Helper: transition delay via style (avoid dynamic tailwind classes)
   const tDelay = (ms: number) => ({ transitionDelay: `${ms}ms` });
 
+  // Helper: scroll to in-page section with fixed header offset
+  const scrollToSection = (hash: string) => {
+    const id = hash.replace(/^#/, '');
+    if (!id) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) {
+      const headerOffset = 101; // fixed navbar height
+      const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
+
   const requestDownload = (href: string) => {
     setPendingDownloadHref(href);
     setIsDownloadModalOpen(true);
@@ -437,6 +453,25 @@ export const Desktop = (): JSX.Element => {
                             item.active ? "text-[#f9a51a]" : "text-neutral-900"
                           }`}
                           style={tDelay(500 + index * 80)}
+                          onClick={(e) => {
+                            const href = item.href;
+                            // Telephone link: allow default
+                            if (href.startsWith('tel:')) {
+                              return;
+                            }
+                            // Route links encoded as hash (e.g., '#/gallery')
+                            if (href.startsWith('#/')) {
+                              e.preventDefault();
+                              navigate(href.slice(1));
+                              return;
+                            }
+                            // In-page anchors (e.g., '#about')
+                            if (href.startsWith('#')) {
+                              e.preventDefault();
+                              scrollToSection(href);
+                              return;
+                            }
+                          }}
                         >
                           {item.name}
                         </NavigationMenuLink>
@@ -516,10 +551,11 @@ export const Desktop = (): JSX.Element => {
                 <div className="mt-8 flex items-center gap-4" style={tDelay(800)}>
                   <a
                     href="#"
-                    onClick={(e) => { e.preventDefault(); requestDownload('/brochure-vinsub.pdf'); }}
+                    onClick={(e) => { e.preventDefault(); navigate('/gallery'); }}
                     className="rounded-xl font-bold px-4 py-2 bg-white text-black hover:opacity-90"
+                    aria-label="More from Gallery"
                   >
-                    Download Brochure
+                    View Our Gallery
                   </a>
                   <a
                     href="tel:0509331315"
@@ -857,7 +893,7 @@ export const Desktop = (): JSX.Element => {
 
             {/* Collage Carousel */}
             <div
-              className="relative w-full max-w-5xl overflow-hidden transition-all duration-1000 px-6 py-2"
+              className="relative w-full max-w-none overflow-hidden transition-all duration-1000 px-6 py-2"
               style={tDelay(400)}
               onMouseEnter={() => setIsCarouselPaused(true)}
               onMouseLeave={() => setIsCarouselPaused(false)}
@@ -877,7 +913,7 @@ export const Desktop = (): JSX.Element => {
                     onClick={() => {
                       const title = (item as any).title as string;
                       const sectionId = gallerySectionMap[title] ?? 'engineering';
-                      navigate(`/gallery#${sectionId}`);
+                      navigate(`/gallery?section=${sectionId}`);
                     }}
                   >
                         <div className="w-full h-full flex flex-col items-center justify-center gap-4 p-6">
@@ -917,10 +953,11 @@ export const Desktop = (): JSX.Element => {
             <div className="mt-8 transition-all duration-700" style={tDelay(800)}>
               <a
                 href="#"
-                onClick={(e) => { e.preventDefault(); requestDownload('/brochure-vinsub.pdf'); }}
+                onClick={(e) => { e.preventDefault(); navigate('/gallery'); }}
                 className="px-8 py-3 rounded-full font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#f9a51a] to-[#e09416] text-white border-2 border-[#f9a51a] hover:shadow-xl"
+                aria-label="More from Gallery"
               >
-                Download Brochure
+                More from Gallery
               </a>
             </div>
           </section>
@@ -950,26 +987,24 @@ export const Desktop = (): JSX.Element => {
           <footer
             id="footer"
             data-animate
-            className={`absolute w-[1463px] h-[366px] top-[6238px] left-1/2 -translate-x-1/2 transition-all duration-1000 ${visibleSections.has("footer") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            className={`absolute w-full h-[366px] top-[6238px] left-0 transition-all duration-1000 ${visibleSections.has("footer") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
-            <div className="absolute w-[1463px] h-[366px] top-0 left-0">
-              <div className="relative w-[1451px] h-[366px]">
-                <img
-                  className="absolute w-full h-[366px] top-0 left-[11px] transition-all duration-1000"
+            <div className="absolute w-full h-[366px] top-0 left-0">
+              <div className="relative w-full h-[366px]">
+                <div
+                  className="absolute inset-0 bg-black transition-all duration-1000"
                   style={tDelay(200)}
-                  alt="Footer background"
-                  src="/rectangle-8.svg"
-                  loading="lazy"
+                  aria-hidden="true"
                 />
-                <div className="absolute w-[564px] h-[366px] top-0 left-0 bg-[#d9d9d9]" />
+                <div className="absolute top-0 left-0 h-full w-2/5 bg-[#d9d9d9]" />
                  <div className={`absolute top-[203px] left-[153px] z-10 flex items-center gap-2 transition-all duration-700 delay-300 ${visibleSections.has('footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}> 
                   <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity"> 
                   <Instagram className="w-4 h-4 text-black" /> </a> <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
                    <Twitter className="w-4 h-4 text-black" /> </a> <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity"> 
                    <Facebook className="w-4 h-4 text-black" /> </a> </div>
 
-                <div className="absolute w-[564px] h-[366px] top-0 left-0 bg-[#d9d9d9]" />
+                
 
                 <img
                   className="absolute w-[340px] h-auto max-h-12 top-[70px] left-[152px] object-contain transition-all duration-700"
@@ -1001,14 +1036,14 @@ export const Desktop = (): JSX.Element => {
                 </div>
 
                 <div
-                  className="absolute top-[55px] left-[741px] font-bold text-white text-[21px] leading-[60px] whitespace-nowrap transition-all duration-700"
+                  className="absolute top-[55px] left-[42%] font-bold text-white text-[21px] leading-[60px] whitespace-nowrap transition-all duration-700"
                   style={tDelay(400)}
                 >
                   Quick Links
                 </div>
 
                 <div
-                  className="absolute w-[209px] top-[122px] left-[741px] font-semibold text-white text-[15px] leading-[29px] transition-all duration-700"
+                  className="absolute w-[209px] top-[122px] left-[42%] font-semibold text-white text-[15px] leading-[29px] transition-all duration-700"
                   style={tDelay(500)}
                 >
                   {quickLinks.map((link, index) => (
@@ -1025,31 +1060,31 @@ export const Desktop = (): JSX.Element => {
                 </div>
 
                 <div
-                  className="absolute top-[55px] left-[1026px] font-bold text-white text-[21px] leading-[60px] whitespace-nowrap transition-all duration-700"
+                  className="absolute top-[55px] left-[70%] font-bold text-white text-[21px] leading-[60px] whitespace-nowrap transition-all duration-700"
                   style={tDelay(400)}
                 >
                   Get In Touch
                 </div>
 
                 {/* Contacts */}
-                <div className="absolute top-[114px] left-[1069px] flex items-center gap-3" style={tDelay(800)}>
+                <div className="absolute top-[114px] left-[70%] flex items-center gap-3" style={tDelay(800)}>
                   <img className="w-5 h-5" alt="Phone" src="/vector-1.svg" loading="lazy" />
                   <span className="font-medium text-white text-sm leading-[60px] whitespace-nowrap">0509331315</span>
                 </div>
 
-                <div className="absolute top-[154px] left-[1069px] flex items-center gap-3" style={tDelay(900)}>
+                <div className="absolute top-[154px] left-[70%] flex items-center gap-3" style={tDelay(900)}>
                   <img className="w-5 h-5" alt="Email" src="/vector.svg" loading="lazy" />
                   <span className="font-medium text-white text-sm leading-[60px] whitespace-nowrap">info@vinsubco.co</span>
                 </div>
 
-                <div className="absolute top-[194px] left-[1069px] flex items-center gap-3" style={tDelay(1000)}>
+                <div className="absolute top-[194px] left-[70%] flex items-center gap-3" style={tDelay(1000)}>
                   <img className="w-5 h-5" alt="Location" src="/vector-3.svg" loading="lazy" />
                   <span className="font-medium text-white text-sm leading-[60px] whitespace-nowrap">
                     Dammam, Kingdom of Saudi Arabia
                   </span>
                 </div>
 
-                <div className="absolute top-[234px] left-[1069px] flex items-center gap-3" style={tDelay(1100)}>
+                <div className="absolute top-[234px] left-[70%] flex items-center gap-3" style={tDelay(1100)}>
                   <img className="w-5 h-5" alt="Registration" src="/vector-4.svg" loading="lazy" />
                   <span className="font-medium text-white text-sm leading-[60px] whitespace-nowrap">CR-2050161120</span>
                 </div>
@@ -1365,7 +1400,7 @@ export const Desktop = (): JSX.Element => {
                     onClick={() => {
                       const title = (item as any).title as string;
                       const sectionId = gallerySectionMap[title] ?? 'engineering';
-                      navigate(`/gallery#${sectionId}`);
+                      navigate(`/gallery?section=${sectionId}`);
                     }}
                   >
                     <div className="w-full h-full flex flex-col items-center justify-center gap-4 p-4">
@@ -1403,10 +1438,11 @@ export const Desktop = (): JSX.Element => {
             <div className="mt-8 text-center transition-all duration-700" style={tDelay(800)}>
               <a
                 href="#"
-                onClick={(e) => { e.preventDefault(); requestDownload('/brochure-vinsub.pdf'); }}
+                onClick={(e) => { e.preventDefault(); navigate('/gallery'); }}
                 className="px-6 py-3 rounded-full font-bold text-base shadow-lg transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#f9a51a] to-[#e09416] text-white border-2 border-[#f9a51a] hover:shadow-xl"
+                aria-label="More from Gallery"
               >
-                Download Brochure
+                View Our Gallery
               </a>
             </div>
           </div>
