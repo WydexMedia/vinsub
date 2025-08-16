@@ -215,16 +215,35 @@ export const Gallery = (): JSX.Element => {
     return () => clearTimeout(timer);
   }, []);
 
-  // After load, if URL has a hash, scroll to that section
+  // After load, if URL has a hash or query (?section=), scroll to that section
   React.useEffect(() => {
     if (isLoading) return;
     if (typeof window === 'undefined') return;
-    const hash = window.location.hash?.replace('#', '');
-    if (hash) {
-      const el = document.getElementById(hash);
+    const { hash, search } = window.location;
+    // BrowserRouter style (?section=...) in search
+    const params = new URLSearchParams(search);
+    const sectionFromQuery = params.get('section') ?? '';
+
+    // HashRouter style: everything is inside hash (e.g., #/gallery?section=fabrications)
+    let sectionFromHashQuery = '';
+    if (hash && hash.includes('?')) {
+      const queryString = hash.substring(hash.indexOf('?') + 1);
+      const hashParams = new URLSearchParams(queryString);
+      sectionFromHashQuery = hashParams.get('section') ?? '';
+    }
+
+    // Direct hash to an id (e.g., #fabrications)
+    const directHashId = hash && !hash.includes('?') ? hash.replace('#', '') : '';
+
+    const target = sectionFromQuery || sectionFromHashQuery || directHashId;
+    if (target) {
+      const el = document.getElementById(target);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setActiveSection(hash);
+        // account for fixed top bar
+        const offset = 150;
+        const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+        setActiveSection(target);
       }
     }
   }, [isLoading]);
