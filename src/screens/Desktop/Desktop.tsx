@@ -435,7 +435,7 @@ export const Desktop = (): JSX.Element => {
               className="fixed z-50 top-0 left-0 w-full h-[101px] bg-white/20 backdrop-blur-xl backdrop-saturate-150 border-b-0 shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
               style={tDelay(200)}
             >
-              <div className="relative max-w-[1280px] mx-auto h-full flex items-center justify-between px-6">
+              <div className="relative mx-auto h-full flex items-center justify-between px-12">
                 <img
                   className="w-[220px] h-auto max-h-10 object-contain transition-all duration-700"
                   style={tDelay(300)}
