@@ -20,166 +20,206 @@ const buildMediaItems = (folder: string, files: string[], titlePrefix: string): 
     type: file.toLowerCase().endsWith(".mov") ? "video" : "image",
   }));
 
+// Machining
+const machiningFiles = [
+  "Engineering Service Provider in Saudi Arabia machining 11.webp",
+  "Engineering Service Provider in Saudi Arabia machining 110.webp",
+  "Engineering Service Provider in Saudi Arabia machining 111.webp",
+  "Engineering Service Provider in Saudi Arabia machining 112.webp",
+  "Engineering Service Provider in Saudi Arabia machining 113.webp",
+  "Engineering Service Provider in Saudi Arabia machining 114.webp",
+  "Engineering Service Provider in Saudi Arabia machining 12.webp",
+  "Engineering Service Provider in Saudi Arabia machining 13.webp",
+  "Engineering Service Provider in Saudi Arabia machining 14.webp",
+  "Engineering Service Provider in Saudi Arabia machining 15.webp",
+  "Engineering Service Provider in Saudi Arabia machining 16.webp",
+  "Engineering Service Provider in Saudi Arabia machining 17.webp",
+  "Engineering Service Provider in Saudi Arabia machining 18.webp",
+  "Engineering Service Provider in Saudi Arabia machining 19.webp",
+];
+const machiningItems = buildMediaItems(
+  "/machining",
+  machiningFiles,
+  "Machining"
+);
+
+// CNC
+const cncFiles = [
+  "Engineering Service Provider in Saudi Arabia cnc 11.MOV",
+  "Engineering Service Provider in Saudi Arabia cnc 12.webp",
+  "Engineering Service Provider in Saudi Arabia cnc 13.webp",
+  "Engineering Service Provider in Saudi Arabia, cnc file.mov",
+];
+const cncItems = buildMediaItems(
+  "/cnc",
+  cncFiles,
+  "CNC"
+);
+
+// Civil
+const civilFiles = [
+  "Engineering Service Provider in Saudi Arabia civil 11.webp",
+  "Engineering Service Provider in Saudi Arabia civil 110.webp",
+  "Engineering Service Provider in Saudi Arabia civil 111.webp",
+  "Engineering Service Provider in Saudi Arabia civil 12.webp",
+  "Engineering Service Provider in Saudi Arabia civil 13.webp",
+  "Engineering Service Provider in Saudi Arabia civil 14.webp",
+  "Engineering Service Provider in Saudi Arabia civil 15.webp",
+  "Engineering Service Provider in Saudi Arabia civil 16.webp",
+  "Engineering Service Provider in Saudi Arabia civil 17.webp",
+  "Engineering Service Provider in Saudi Arabia civil 18.webp",
+  "Engineering Service Provider in Saudi Arabia civil 19.webp",
+];
+const civilItems = buildMediaItems(
+  "/civil",
+  civilFiles,
+  "Civil"
+);
+
 // Engineering
 const engineeringFiles = [
-  "Engineering Service Provider in Saudi arabia - Engineering 1.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 10.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 11.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 12.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 13.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 14.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 15.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 16.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 17.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 18.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 2.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 3.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 4.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 5.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 6.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 7.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 8.webp",
-  "Engineering Service Provider in Saudi arabia - Engineering 9.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 11.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 110.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 111.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 112.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 113.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 114.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 115.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 116.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 117.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 118.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 12.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 13.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 14.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 15.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 16.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 17.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 18.webp",
+  "Engineering Service Provider in Saudi Arabia engineering 19.webp",
+  "Engineering Service Provider in Saudi Arabia engineering.jpeg",
 ];
 const engineeringItems = buildMediaItems(
-  "/engineering renamed_files",
+  "/engineering",
   engineeringFiles,
   "Engineering"
 );
 
-// Fabrications
-const fabricationFiles = [
-  "Engineering Service Provider in Saudi arabia - fabrication1.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication10.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication11.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication12.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication13.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication14.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication15.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication16.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication17.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication18.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication19.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication2.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication20.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication21.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication22.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication23.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication24.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication25.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication26.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication27.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication28.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication29.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication3.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication30.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication31.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication32.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication33.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication34.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication35.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication36.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication37.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication38.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication39.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication4.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication40.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication41.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication5.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication6.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication7.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication8.webp",
-  "Engineering Service Provider in Saudi arabia - fabrication9.webp",
+// Pipeline
+const pipelineFiles = [
+  "Engineering Service Provider in Saudi Arabia pipeline 11.webp",
+  "Engineering Service Provider in Saudi Arabia pipeline 110.webp",
+  "Engineering Service Provider in Saudi Arabia pipeline 111.webp",
+  "Engineering Service Provider in Saudi Arabia pipeline 112.webp",
+  "Engineering Service Provider in Saudi Arabia pipeline 12.webp",
+  "Engineering Service Provider in Saudi Arabia pipeline 13.webp",
+  "Engineering Service Provider in Saudi Arabia pipeline 14.webp",
+  "Engineering Service Provider in Saudi Arabia pipeline 15.webp",
+  "Engineering Service Provider in Saudi Arabia pipeline 16.webp",
+  "Engineering Service Provider in Saudi Arabia pipeline 17.webp",
+  "Engineering Service Provider in Saudi Arabia pipeline 18.webp",
+  "Engineering Service Provider in Saudi Arabia pipeline 19.webp",
 ];
-const fabricationItems = buildMediaItems(
-  "/fabrications renamed_files",
-  fabricationFiles,
-  "Fabrications"
+const pipelineItems = buildMediaItems(
+  "/pipeline",
+  pipelineFiles,
+  "Pipeline"
 );
 
 // Safety Bollards
 const safetyFiles = [
-  "Engineering Service Provider in Saudi arabia - safety ballards1.webp",
-  "Engineering Service Provider in Saudi arabia - safety ballards2.webp",
-  "Engineering Service Provider in Saudi arabia - safety ballards3.webp",
-  "Engineering Service Provider in Saudi arabia - safety ballards4.webp",
+  "Engineering Service Provider in Saudi Arabia safety ballbards1.webp",
+  "Engineering Service Provider in Saudi Arabia safety ballbards2.webp",
+  "Engineering Service Provider in Saudi Arabia safety ballbards3.webp",
+  "Engineering Service Provider in Saudi Arabia safety ballbards4.webp",
 ];
 const safetyItems = buildMediaItems(
-  "/safety ballards renamed_files",
+  "/safety-ballards",
   safetyFiles,
   "Safety Bollards"
 );
 
-// Machines
-const machineFiles = [
-  "Engineering Service Provider in Saudi arabia - machining1.webp",
-  "Engineering Service Provider in Saudi arabia - machining10.webp",
-  "Engineering Service Provider in Saudi arabia - machining11.webp",
-  "Engineering Service Provider in Saudi arabia - machining12.webp",
-  "Engineering Service Provider in Saudi arabia - machining13.webp",
-  "Engineering Service Provider in Saudi arabia - machining14.webp",
-  "Engineering Service Provider in Saudi arabia - machining2.webp",
-  "Engineering Service Provider in Saudi arabia - machining3.webp",
-  "Engineering Service Provider in Saudi arabia - machining4.webp",
-  "Engineering Service Provider in Saudi arabia - machining5.webp",
-  "Engineering Service Provider in Saudi arabia - machining6.webp",
-  "Engineering Service Provider in Saudi arabia - machining7.webp",
-  "Engineering Service Provider in Saudi arabia - machining8.webp",
-  "Engineering Service Provider in Saudi arabia - machining9.webp",
+// Sleeves (folder name is 'sleaves')
+const sleevesFiles = [
+  "Engineering Service Provider in Saudi Arabia  damam sleaves1.webp",
+  "Engineering Service Provider in Saudi Arabia  damam sleaves3.webp",
+  "Engineering Service Provider in Saudi Arabia  damam sleaves4.webp",
+  "Engineering Service Provider in Saudi Arabia  damam sleaves5.webp",
+  "Engineering Service Provider in Saudi Arabia  damam sleaves6.webp",
+  "Engineering Service Provider in Saudi Arabia  damam sleaves7.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 11.MOV",
+  "Engineering Service Provider in Saudi Arabia sleaves 110.MOV",
+  "Engineering Service Provider in Saudi Arabia sleaves 111.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 112.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 113.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 114.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 115.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 116.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 117.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 118.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 119.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 12.MOV",
+  "Engineering Service Provider in Saudi Arabia sleaves 13.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 14.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 15.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 16.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 17.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 18.webp",
+  "Engineering Service Provider in Saudi Arabia sleaves 19.MOV",
 ];
-const machineItems = buildMediaItems(
-  "/machines_files",
-  machineFiles,
-  "Machines"
+const sleevesItems = buildMediaItems(
+  "/sleaves",
+  sleevesFiles,
+  "Sleeves"
 );
 
-// CNC Lazer (includes a video)
-const cncFiles = [
-  "Engineering Service Provider in Saudi arabia - cnc lazer1.MOV",
-  "Engineering Service Provider in Saudi arabia - cnc lazer2.webp",
-  "Engineering Service Provider in Saudi arabia - cnc lazer3.webp",
-];
-const cncItems = buildMediaItems(
-  "/cnc lazer renamed_files",
-  cncFiles,
-  "CNC Lazer"
-);
-
-const sections: Array<{ 
-  id: string; 
-  title: string; 
-  items: MediaItem[]; 
+const sections: Array<{
+  id: string;
+  title: string;
+  items: MediaItem[];
   description: string;
   icon: React.ComponentType<{ className?: string }>;
   gradient: string;
   stats?: string;
 }> = [
   {
-    id: "machines",
+    id: "machining",
     title: "Machining/milling",
-    items: machineItems,
+    items: machiningItems,
     description: "Precision machining and milling of custom components with tight tolerances: turning, drilling, threading, and finishing for production and prototyping.",
     icon: Wrench,
     gradient: "from-[#f9a51a] to-[#e09416]",
-    stats: "14+ Projects"
   },
   {
-    id: "cnc-lazer",
+    id: "cnc",
     title: "CNC lazer",
     items: cncItems,
-    description: "High-precision CNC laser cutting for MS/SS/Aluminum with clean edges and repeatability — from single pieces to large batches.",
+    description: "High-precision CNC cutting/processing including videos of machines in action.",
     icon: Zap,
     gradient: "from-[#f9a51a] to-[#e09416]",
-    stats: "3+ Projects"
   },
   {
-    id: "fabrications",
-    title: "Steel fabrication",
-    items: fabricationItems,
-    description: "Fabrication of SS & MS Steel: Cutting, bending, welding, and assembling stainless steel (SS) and mild steel (MS) to build structures, equipment, and components as per design.",
+    id: "civil",
+    title: "Civil",
+    items: civilItems,
+    description: "Civil works and site installations across industrial and infrastructure projects.",
     icon: Hammer,
     gradient: "from-[#f9a51a] to-[#e09416]",
-    stats: "41+ Projects"
+  },
+  {
+    id: "engineering",
+    title: "Steel fabrication",
+    items: engineeringItems,
+    description: "Engineering design, detailing, drafting, value engineering, and site support for industrial and infrastructure projects.",
+    icon: Ruler,
+    gradient: "from-[#f9a51a] to-[#e09416]",
+  },
+  {
+    id: "pipeline",
+    title: "Pipeline",
+    items: pipelineItems,
+    description: "Pipeline fabrication, components, and project executions.",
+    icon: Ruler,
+    gradient: "from-[#f9a51a] to-[#e09416]",
   },
   {
     id: "safety-bollards",
@@ -188,16 +228,14 @@ const sections: Array<{
     description: "Design, fabrication, and installation of safety bollards and barriers for site protection — custom sizes, finishes, and coatings.",
     icon: Shield,
     gradient: "from-[#f9a51a] to-[#e09416]",
-    stats: "4+ Projects"
   },
   {
-    id: "engineering",
-    title: "Engineering",
-    items: engineeringItems,
-    description: "Engineering design, detailing, drafting, value engineering, and site support for industrial and infrastructure projects.",
-    icon: Ruler,
+    id: "sleeves",
+    title: "Sleeves",
+    items: sleevesItems,
+    description: "Protective sleeves and related installations with image and video references.",
+    icon: Hammer,
     gradient: "from-[#f9a51a] to-[#e09416]",
-    stats: "18+ Projects"
   },
 ];
 
@@ -207,6 +245,7 @@ export const Gallery = (): JSX.Element => {
   const [selectedIndex, setSelectedIndex] = React.useState<number>(-1);
   const [activeSection, setActiveSection] = React.useState<string>("");
   const [isLoading, setIsLoading] = React.useState(true);
+  const [activeModalSectionId, setActiveModalSectionId] = React.useState<string>("");
   const navigate = useNavigate();
 
   // Simulate loading effect
@@ -401,6 +440,7 @@ export const Gallery = (): JSX.Element => {
                     setSelectedList(section.items);
                     setSelectedIndex(index);
                     setSelectedMedia(item);
+                    setActiveModalSectionId(section.id);
                   }}
                   style={{
                     animationDelay: `${index * 0.1}s`
@@ -473,24 +513,26 @@ export const Gallery = (): JSX.Element => {
 
       {/* Enhanced Media Modal */}
       {selectedMedia && (
+        <>
         <div
           className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-xl"
           onClick={() => setSelectedMedia(null)}
         >
-          <div className="relative max-w-6xl max-h-full animate-fade-in-up">
-            <div className="relative overflow-hidden rounded-2xl border border-orange-400/30 shadow-2xl shadow-orange-400/20">
+          <div className="relative w-full max-w-6xl max-h-full animate-fade-in-up flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
+
+            <div className="relative overflow-hidden rounded-2xl border border-orange-400/30 shadow-2xl shadow-orange-400/20 mx-auto">
               {selectedMedia.type === "image" ? (
                 <img
                   src={selectedMedia.src}
                   alt={selectedMedia.alt}
-                  className="max-w-full max-h-[80vh] object-contain"
+                  className="max-w-full max-h-[80vh] object-contain mx-auto block"
                 />
               ) : (
                 <video
                   src={selectedMedia.src}
                   controls
                   autoPlay
-                  className="max-w-full max-h-[80vh] rounded-xl"
+                  className="max-w-full max-h-[80vh] rounded-xl mx-auto block"
                 />
               )}
             </div>
@@ -498,12 +540,12 @@ export const Gallery = (): JSX.Element => {
             {/* Close Button */}
             <button
               onClick={() => setSelectedMedia(null)}
-              className="absolute -top-4 -right-4 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-400 hover:to-red-500 text-white rounded-full w-12 h-12 flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg"
+              className="absolute top-2 right-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-400 hover:to-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg"
             >
               ✕
             </button>
             
-            {/* Navigation Buttons */}
+            {/* Navigation Buttons (respects active modal section items) */}
             {selectedList && selectedList.length > 0 && (
               <>
                 <button
@@ -539,8 +581,41 @@ export const Gallery = (): JSX.Element => {
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-md rounded-full px-4 py-2 text-white text-sm">
               {selectedIndex + 1} / {selectedList?.length || 1}
             </div>
+            {/* Bottom floating section nav inside modal overlay */}
+            <div
+              className="absolute bottom-6 left-1/2 -translate-x-1/2 w-full max-w-6xl px-4 z-[60]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-black/70 backdrop-blur-md border border-white/10 rounded-full p-2 overflow-x-auto no-scrollbar flex items-center gap-2">
+                {sections.map((section) => (
+                  <Button
+                    key={`modal-bottom-nav-${section.id}`}
+                    onClick={() => {
+                      setSelectedList(section.items);
+                      setSelectedIndex(0);
+                      setSelectedMedia(section.items[0]);
+                      setActiveModalSectionId(section.id);
+                    }}
+                    className={
+                      `group relative flex-shrink-0 px-4 py-2 rounded-full border transition-all duration-300 ${
+                        activeModalSectionId === section.id
+                          ? 'bg-gradient-to-r from-[#f9a51a] to-[#e09416] border-[#f9a51a] text-black'
+                          : 'bg-black/30 border-white/20 text-white hover:border-orange-400/50'
+                      }`
+                    }
+                    variant="outline"
+                  >
+                    <span className="flex items-center gap-2">
+                      <section.icon className="w-4 h-4" />
+                      <span className="font-semibold whitespace-nowrap">{section.title}</span>
+                    </span>
+                  </Button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
+        </>
       )}
       
       <FloatingCallButton />
