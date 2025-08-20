@@ -97,6 +97,9 @@ export const Desktop = (): JSX.Element => {
   const navigate = useNavigate();
   const [isDownloadModalOpen, setIsDownloadModalOpen] = React.useState(false);
   const [pendingDownloadHref, setPendingDownloadHref] = React.useState<string | null>(null);
+  // Mobile gallery carousel centering
+  const mobileCarouselRef = React.useRef<HTMLDivElement | null>(null);
+  const [mobileCarouselOffset, setMobileCarouselOffset] = React.useState(0);
 
   // Desktop base design height for canvas
   const DESIGN_HEIGHT = 6617;
@@ -285,6 +288,20 @@ export const Desktop = (): JSX.Element => {
     // Duplicate icon items for seamless loop
     return [...certifications, ...certifications, ...certifications, ...certifications];
   };
+
+  React.useEffect(() => {
+    const computeOffset = () => {
+      if (!mobileCarouselRef.current) return;
+      const containerWidth = mobileCarouselRef.current.clientWidth;
+      const cardWidth = 288; // w-72
+      const gap = 12; // gap-3
+      const centerOffset = Math.max(0, (containerWidth - cardWidth) / 2 - gap / 2);
+      setMobileCarouselOffset(centerOffset);
+    };
+    computeOffset();
+    window.addEventListener('resize', computeOffset);
+    return () => window.removeEventListener('resize', computeOffset);
+  }, []);
 
   return (
     <div className="bg-white w-full min-h-screen overflow-x-hidden">
@@ -1394,7 +1411,8 @@ export const Desktop = (): JSX.Element => {
             {/* Mobile carousel with snap */}
             <div
               className="relative overflow-hidden"
-              style={tDelay(400)}
+              style={{ ...tDelay(400), paddingLeft: mobileCarouselOffset }}
+              ref={mobileCarouselRef}
               onMouseEnter={() => setIsCarouselPaused(true)}
               onMouseLeave={() => setIsCarouselPaused(false)}
             >
