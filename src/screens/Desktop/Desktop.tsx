@@ -1099,11 +1099,16 @@ export const Desktop = (): JSX.Element => {
                   <span className="font-medium text-white text-sm leading-[60px] whitespace-nowrap">info@vinsubco.co</span>
                 </div>
 
-                <div className="absolute top-[194px] left-[70%] flex items-center gap-3" style={tDelay(1000)}>
+                <div className="absolute top-[194px] left-[70%] flex items-center justify-center md:justify-start gap-3" style={tDelay(1000)}>
                   <img className="w-5 h-5" alt="Location" src="/vector-3.svg" loading="lazy" />
-                  <span className="font-medium text-white text-sm leading-[60px] whitespace-nowrap">
+                  <a 
+                    href="https://maps.app.goo.gl/pufwXHYeLCQd6Ukg7?g_st=iw" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-medium text-white text-sm leading-[60px] whitespace-nowrap hover:text-[#f9a51a] transition-colors cursor-pointer"
+                  >
                     Dammam, Kingdom of Saudi Arabia
-                  </span>
+                  </a>
                 </div>
 
                 <div className="absolute top-[234px] left-[70%] flex items-center gap-3" style={tDelay(1100)}>
@@ -1678,7 +1683,14 @@ export const Desktop = (): JSX.Element => {
                 </div>
                 <div className="flex items-center justify-center md:justify-start gap-3">
                   <img className="w-5 h-5" alt="Location" src="/vector-3.svg" loading="lazy" />
-                  <span className="text-white text-sm font-medium">Dammam, Kingdom of Saudi Arabia</span>
+                  <a 
+                    href="https://maps.app.goo.gl/pufwXHYeLCQd6Ukg7?g_st=iw" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-medium text-white text-sm leading-[60px] whitespace-nowrap hover:text-[#f9a51a] transition-colors cursor-pointer"
+                  >
+                    Dammam, Kingdom of Saudi Arabia
+                  </a>
                 </div>
                 <div className="flex items-center justify-center md:justify-start gap-3">
                   <img className="w-5 h-5" alt="Registration" src="/vector-4.svg" loading="lazy" />
