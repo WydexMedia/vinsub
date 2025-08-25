@@ -20,7 +20,7 @@ const navigationItems = [
   { name: "Services", href: "#services", active: false },
   { name: "Projects", href: "#/gallery", active: false },
   { name: "Certifications", href: "#/certifications", active: false },
-  { name: "Contact Us", href: "tel:0509331315", active: true },
+  { name: "Contact Us", href: "tel:+9660509331315", active: true },
 ];
 
 // Data for services section (fixed typos)
@@ -509,7 +509,7 @@ export const Desktop = (): JSX.Element => {
                   <a
                     href="tel:0509331315"
                     className="rounded-xl font-bold px-4 py-2 bg-neutral-900 text-white hover:opacity-90"
-                    aria-label="Call 0509331315"
+                    aria-label="Call +9660509331315"
                   >
                     Call Now
                   </a>
@@ -550,7 +550,7 @@ export const Desktop = (): JSX.Element => {
                 <h1
                   className="text-white font-extrabold tracking-tight leading-[1.15] pb-1
                    text-5xl md:text-6xl xl:text-7xl drop-shadow-sm"
-                  style={tDelay(600)}
+                  style={{ ...tDelay(600), fontFamily: "'ui-monospace','SFMono-Regular',Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace" }}
                 >
                   Vinsub International
                   <br className="hidden md:block" />
@@ -769,7 +769,7 @@ export const Desktop = (): JSX.Element => {
                 href="tel:0509331315"
                 className="rounded-[10px] bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(217,217,217,1)_100%)] transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center px-4 py-2"
                 style={tDelay(400)}
-                aria-label="Call 0509331315"
+                aria-label="Call +9660509331315"
               >
                 <span className="font-bold text-black text-[16px] md:text-[19px] whitespace-nowrap">Call Now</span>
               </a>
@@ -874,7 +874,7 @@ export const Desktop = (): JSX.Element => {
           >
             <h3
               className="absolute w-[331px] top-0 left-[258px] font-bold text-black text-[19px] leading-[60px] whitespace-nowrap transition-all duration-700"
-              style={tDelay(500)}
+              style={{ ...tDelay(500), fontFamily: "'Work Sans', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
             >
               Vinsub International Contracting Co
             </h3>
@@ -1087,7 +1087,7 @@ export const Desktop = (): JSX.Element => {
                 {/* Contacts */}
                 <div className="absolute top-[114px] left-[70%] flex items-center gap-3" style={tDelay(800)}>
                   <img className="w-5 h-5" alt="Phone" src="/vector-1.svg" loading="lazy" />
-                  <span className="font-medium text-white text-sm leading-[60px] whitespace-nowrap">0509331315</span>
+                  <span className="font-medium text-white text-sm leading-[60px] whitespace-nowrap">+9660509331315</span>
                 </div>
 
                 <div className="absolute top-[154px] left-[70%] flex items-center gap-3" style={tDelay(900)}>
@@ -1223,7 +1223,7 @@ export const Desktop = (): JSX.Element => {
             <div className="absolute inset-x-0 bottom-20 px-4 text-center">
               <h1
                 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight"
-                style={tDelay(600)}
+                style={{ ...tDelay(600), fontFamily: "'ui-monospace','SFMono-Regular',Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace" }}
               >
                 Vinsub International
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-[#f9a51a]">
@@ -1242,7 +1242,7 @@ export const Desktop = (): JSX.Element => {
                 Download Brochure
               </a>
                 <a
-                  href="tel:0509331315"
+                  href="tel:+9660509331315"
                   className="rounded-lg px-4 py-2 bg-[#f9a51a] text-black font-bold"
                 >
                   Call Now
@@ -1303,7 +1303,7 @@ export const Desktop = (): JSX.Element => {
               <span className="font-bold text-black text-base">View Our Projects</span>
             </Button>
             <a
-              href="tel:0509331315"
+              href="tel:+9660509331315"
               className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gradient-to-r from-white to-gray-200 transition-all duration-300 text-center"
               style={tDelay(350)}
               aria-label="Call 0509331315"
@@ -1330,7 +1330,7 @@ export const Desktop = (): JSX.Element => {
             <Separator className="w-32 mx-auto mb-6" />
             <h3
               className="text-xl font-bold text-black mb-4 transition-all duration-700"
-              style={tDelay(400)}
+              style={{ ...tDelay(400), fontFamily: "'Work Sans', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
             >
               Vinsub International Contracting Co
             </h3>
@@ -1666,7 +1666,7 @@ export const Desktop = (): JSX.Element => {
               <div className="space-y-2">
                 <div className="flex items-center justify-center md:justify-start gap-3">
                   <img className="w-5 h-5" alt="Phone" src="/vector-1.svg" loading="lazy" />
-                  <span className="text-white text-sm font-medium">0509331315</span>
+                  <span className="text-white text-sm font-medium">+9660509331315</span>
                 </div>
                 <div className="flex items-center justify-center md:justify-start gap-3">
                   <img className="w-5 h-5" alt="Email" src="/vector.svg" loading="lazy" />
