@@ -350,22 +350,23 @@ export const Gallery = (): JSX.Element => {
       
       {/* Combined full-width top bar (logo + Our Gallery) */}
       <div className="w-full md:fixed md:top-0 md:left-0 md:z-50 bg-black/40 backdrop-blur-2xl border-b border-white/10">
-        <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-2 flex items-center justify-between">
+        <div className="relative w-full px-4 md:px-10 py-2 flex items-center justify-between">
           <button
             onClick={() => navigate("/")}
             className="transform hover:scale-105 transition-all duration-200"
             aria-label="Go to Home"
           >
             <img
-              className="w-28 md:w-32 h-8 md:h-10 object-contain filter brightness-0 invert"
+              className="w-48 md:w-56 h-12 md:h-14 object-contain"
               alt="Vinsub"
               src="VINSUB.webp"
+              style={{ filter: "invert(78%) sepia(84%) saturate(841%) hue-rotate(355deg) brightness(101%) contrast(102%)" }}
             />
           </button>
           <h1 className="hidden md:block absolute left-1/2 -translate-x-1/2 text-4xl font-black bg-gradient-to-r from-[#f9a51a] to-[#e09416] bg-clip-text text-transparent">
             Our Gallery
           </h1>
-          <div className="w-28 md:w-32 h-8 md:h-10" />
+          <div className="w-48 md:w-56 h-12 md:h-14" />
         </div>
         <div className="w-full">
           <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 text-center">

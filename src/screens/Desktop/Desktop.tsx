@@ -454,7 +454,7 @@ export const Desktop = (): JSX.Element => {
             >
               <div className="relative mx-auto h-full flex items-center justify-between px-12">
                 <img
-                  className="w-[220px] h-auto max-h-10 object-contain transition-all duration-700"
+                  className="w-[320px] xl:w-[360px] 2xl:w-[380px] h-auto max-h-12 xl:max-h-14 2xl:max-h-16 object-contain transition-all duration-700"
                   style={tDelay(300)}
                   alt="Vinsub"
                   src="/VINSUB.webp"
@@ -796,56 +796,60 @@ export const Desktop = (): JSX.Element => {
               />
             </div>
 
-            {/* First row */}
+            {/* First row (full-width with padding) */}
             <div
-              className="absolute w-[910px] h-[75px] top-[235px] left-1/2 -translate-x-1/2 transition-all duration-1000"
+              className="absolute inset-x-0 top-[235px] px-12 xl:px-24 2xl:px-32 transition-all duration-1000"
               style={tDelay(400)}
             >
-              {[
-                { href: "https://www.alrashed-fasteners.com/", src: "clients/Fasteners-AlRashed-logo-retina.webp", alt: "Fasteners AlRashed", w: 100, h: 75 },
-                { href: "https://www.nov.com/", src: "clients/nov-white-logo.webp", alt: "NOV (National Oilwell Varco)", w: 100, h: 30, top: 22, left: 162 },
-                { href: "https://www.sgn.com.sa/public/index.php", src: "clients/cropped-OUR-LOGO1-2.webp", alt: "SGN (Saudi German Nonwovens)", w: 100, h: 33, top: 21, left: 324 },
-                { href: "https://www.zamilladders.com/home/", src: "clients/logo_light.webp", alt: "Zamil Ladders", w: 100, h: 72, top: 1, left: 486 },
-                { href: "https://eatonarabia.com/", src: "clients/Eaton-Arabia-JV-mark-rectangle-l.webp", alt: "Eaton Arabia", w: 100, h: 21, top: 27, left: 648 },
-                { href: "https://samcorebars.com/", src: "clients/logo-1.webp", alt: "SAMCO (Saudi Metal Coating Company)", w: 100, h: 54, top: 10, left: 810 },
-              ].map((c, i) => (
-                <a
-                  key={i}
-                  href={c.href}
-                  target="_blank"
-                  rel="nofollow"
-                  className="absolute transition-all duration-500 hover:scale-110"
-                  style={{ ...tDelay(500 + i * 100), width: c.w, height: c.h, top: c.top ?? 0, left: c.left ?? i * 162 }}
-                >
-                  <img className="w-full h-full object-contain" alt={c.alt} src={c.src} loading="lazy" />
-                </a>
-              ))}
+              <div className="flex items-center justify-between flex-wrap gap-y-6">
+                {[
+                  { href: "https://www.alrashed-fasteners.com/", src: "clients/Fasteners-AlRashed-logo-retina.webp", alt: "Fasteners AlRashed", w: 100, h: 75 },
+                  { href: "https://www.nov.com/", src: "clients/nov-white-logo.webp", alt: "NOV (National Oilwell Varco)", w: 100, h: 30 },
+                  { href: "https://www.sgn.com.sa/public/index.php", src: "clients/cropped-OUR-LOGO1-2.webp", alt: "SGN (Saudi German Nonwovens)", w: 100, h: 33 },
+                  { href: "https://www.zamilladders.com/home/", src: "clients/logo_light.webp", alt: "Zamil Ladders", w: 100, h: 72 },
+                  { href: "https://eatonarabia.com/", src: "clients/Eaton-Arabia-JV-mark-rectangle-l.webp", alt: "Eaton Arabia", w: 100, h: 21 },
+                  { href: "https://samcorebars.com/", src: "clients/logo-1.webp", alt: "SAMCO (Saudi Metal Coating Company)", w: 100, h: 54 },
+                ].map((c, i) => (
+                  <a
+                    key={i}
+                    href={c.href}
+                    target="_blank"
+                    rel="nofollow"
+                    className="transition-all duration-500 hover:scale-110"
+                    style={{ ...tDelay(500 + i * 100), width: c.w, height: c.h }}
+                  >
+                    <img className="w-full h-full object-contain" alt={c.alt} src={c.src} loading="lazy" />
+                  </a>
+                ))}
+              </div>
             </div>
 
-            {/* Second row */}
+            {/* Second row (full-width with padding) */}
             <div
-              className="absolute w-[915px] h-[43px] top-[402px] left-1/2 -translate-x-1/2 transition-all duration-1000"
+              className="absolute inset-x-0 top-[402px] px-12 xl:px-24 2xl:px-32 transition-all duration-1000"
               style={tDelay(600)}
             >
-              {[
-                { href: "https://alupco.com/", src: "clients/alupco_logo-50.webp", alt: "ALUPCO (Aluminium Products Company)", w: 100, h: 43 },
-                { href: "https://jazeerasteel.com/", src: "clients/logo2.webp", alt: "Al Jazeera Steel Products Co. (AJSP)", w: 100, h: 21, top: 11, left: 163 },
-                { href: "https://www.eastpipes.com/", src: "clients/logo.webp", alt: "East Pipes Integrated Company", w: 100, h: 22, top: 11, left: 326 },
-                { href: "https://www.alrashed-steel.com/", src: "clients/EAST-PIPES_BILINGUAL_LOGO-01-e16.webp", alt: "Al Rashed Steel", w: 100, h: 55, top: 0, left: 489 },
-                { href: "https://jazeerasteel.com/", src: "clients/Logo-AL-Jazeera-Steel.webp", alt: "Al Jazeera Steel Products Co. (AJSP)", w: 100, h: 41, top: 1, left: 652 },
-                { href: "https://www.almajdouie.com/almajdouie_metal", src: "clients/logo (1).webp", alt: "Almajdouie Metal Industry", w: 100, h: 23, top: 10, left: 815 },
-              ].map((c, i) => (
-                <a
-                  key={i}
-                  href={c.href}
-                  target="_blank"
-                  rel="nofollow"
-                  className="absolute transition-all duration-500 hover:scale-110"
-                  style={{ ...tDelay(700 + i * 100), width: c.w, height: c.h, top: c.top ?? 0, left: c.left ?? i * 163 }}
-                >
-                  <img className="w-full h-full object-contain" alt={c.alt} src={c.src} loading="lazy" />
-                </a>
-              ))}
+              <div className="flex items-center justify-between flex-wrap gap-y-6">
+                {[
+                  { href: "https://alupco.com/", src: "clients/alupco_logo-50.webp", alt: "ALUPCO (Aluminium Products Company)", w: 100, h: 43 },
+                  { href: "https://jazeerasteel.com/", src: "clients/logo2.webp", alt: "Al Jazeera Steel Products Co. (AJSP)", w: 100, h: 21 },
+                  { href: "https://www.eastpipes.com/", src: "clients/logo.webp", alt: "East Pipes Integrated Company", w: 100, h: 22 },
+                  { href: "https://www.alrashed-steel.com/", src: "clients/EAST-PIPES_BILINGUAL_LOGO-01-e16.webp", alt: "Al Rashed Steel", w: 100, h: 55 },
+                  { href: "https://jazeerasteel.com/", src: "clients/Logo-AL-Jazeera-Steel.webp", alt: "Al Jazeera Steel Products Co. (AJSP)", w: 100, h: 41 },
+                  { href: "https://www.almajdouie.com/almajdouie_metal", src: "clients/logo (1).webp", alt: "Almajdouie Metal Industry", w: 100, h: 23 },
+                ].map((c, i) => (
+                  <a
+                    key={i}
+                    href={c.href}
+                    target="_blank"
+                    rel="nofollow"
+                    className="transition-all duration-500 hover:scale-110"
+                    style={{ ...tDelay(700 + i * 100), width: c.w, height: c.h }}
+                  >
+                    <img className="w-full h-full object-contain" alt={c.alt} src={c.src} loading="lazy" />
+                  </a>
+                ))}
+              </div>
             </div>
           </section>
 
@@ -1126,7 +1130,7 @@ export const Desktop = (): JSX.Element => {
           >
             <div className="flex items-center justify-between px-4 h-full w-full">
               <img
-                className="w-28 h-auto max-h-8 object-contain transition-all duration-700"
+                className="w-36 sm:w-40 h-auto max-h-10 sm:max-h-12 object-contain transition-all duration-700"
                 style={tDelay(300)}
                 alt="Vinsub"
                 src="/VINSUB.webp"

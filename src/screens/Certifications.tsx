@@ -16,14 +16,14 @@ export const Certifications = (): JSX.Element => {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full h-16 bg-white/95 backdrop-blur-sm shadow-sm">
-        <div className="flex items-center justify-between px-4 h-full max-w-7xl mx-auto">
+        <div className="flex items-center justify-between px-4 md:px-10 h-full w-full">
           <button
             onClick={() => navigate("/")}
             aria-label="Back to Home"
             className="p-0 bg-transparent border-0"
           >
             <img
-              className="w-28 h-auto max-h-8 object-contain cursor-pointer"
+              className="w-48 md:w-56 h-12 md:h-14 object-contain cursor-pointer"
               alt="Vinsub"
               src="/VINSUB.webp"
             />
