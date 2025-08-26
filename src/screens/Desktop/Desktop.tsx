@@ -30,25 +30,25 @@ const services = [
     id: 1,
     title: "ENGINEERING SERVICES",
     description:
-      "We specialize in a variety of mechanical services, including welding, machining, fabrication, and pipeline erection. As a trusted Engineering Service Provider in Saudi Arabia, we also handle maintenance, contracting, and construction projects, along with the installation of water and sewage lines, as well as electromechanical systems for fire safety and security protection.",
+      "We are a leading Engineering Service Provider in Saudi Arabia and a trusted industrial workshop provider in Saudi Arabia, offering welding, machining, fabrication, pipeline erection, maintenance, contracting, and electromechanical system installations.",
   },
   {
     id: 2,
     title: "CIVIL / ARCHITECTURAL",
     description:
-      "We focus on civil construction and offer a wide range of services, including structural steel works, earthworks, pre-engineered steel buildings, RCC works, internal finishing, furnishing, and decoration. As a leading Engineering Service Provider in Saudi Arabia, and with our workshop services in Dammam, we also take care of installing gates and fences, constructing industrial buildings, asphalting, site preparations, excavation, warehouse renovations, and maintenance.",
+      "As a top Engineering Service Provider in Saudi Arabia and industrial workshop provider in Saudi Arabia, we deliver structural steel works, RCC, finishing, earthworks, fencing, and warehouse renovations.",
   },
   {
     id: 3,
     title: "OPERATION & MAINTENANCE",
     description:
-      "We handle a variety of projects, including power plants, office buildings, warehouses, workshops, and industrial services. As an experienced Engineering Service Provider in Saudi Arabia, we proudly provide workshop services in Dammam, tailored to meet the diverse needs of our clients with a focus on quality and reliability. Our commitment is to complete every project on time and uphold the highest standards.",
+      "An experienced Engineering Service Provider in Saudi Arabia and industrial workshop provider in Saudi Arabia, handling power plants, warehouses, workshops, and industrial maintenance with quality and reliability.",
   },
   {
     id: 4,
     title: "INDUSTRIAL & SAFETY EQUIPMENT TRADING",
     description:
-      "We specialize in providing dependable industrial equipment trading to support projects across various sizes and sectors. As a trusted Engineering Service Provider in Saudi Arabia, we make sure our clients have access to top-notch machinery and tools. With our workshop services based in Dammam, we assist businesses in keeping their operations running smoothly and reaching their goals effectively.",
+      "We are a trusted Engineering Service Provider in Saudi Arabia and a reliable industrial workshop provider in Saudi Arabia, delivering quality equipment trading and workshop services to keep businesses running smoothly.",
   },
 ];
 
@@ -556,7 +556,7 @@ export const Desktop = (): JSX.Element => {
                 <h1
                   className="text-white font-extrabold tracking-tight leading-[1.15] pb-1
                    text-5xl md:text-6xl xl:text-7xl drop-shadow-sm"
-                  style={{ ...tDelay(600), fontFamily: "'ui-monospace','SFMono-Regular',Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace" }}
+                  style={{ ...tDelay(600), fontFamily: "'Poppins', 'Montserrat', 'Inter', 'Roboto', 'Oswald', 'Bebas Neue', 'Anton', 'Barlow', 'Source Sans Pro', 'Nunito', 'Basote', 'ui-monospace','SFMono-Regular',Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace" }}
                 >
                   Vinsub International
                   <br className="hidden md:block" />
@@ -699,7 +699,7 @@ export const Desktop = (): JSX.Element => {
                     left: index % 2 === 0 ? 'calc(50% - 330px)' : 'calc(45% + 220px)',
                   }}
                 >
-                  <CardContent className={`p-0 ${index % 2 === 1 ? 'pr-2' : ''}`}>
+                  <CardContent className={`p-0 flex flex-col justify-center h-full ${index % 2 === 1 ? 'pr-2' : ''}`}>
                     <h3
                       className="font-extrabold text-[27px] leading-[30px] text-white transition-all duration-500"
                       style={tDelay(900 + index * 200)}
@@ -884,7 +884,7 @@ export const Desktop = (): JSX.Element => {
           >
             <h3
               className="absolute w-[331px] top-0 left-[258px] font-bold text-black text-[19px] leading-[60px] whitespace-nowrap transition-all duration-700"
-              style={{ ...tDelay(500), fontFamily: "'Work Sans', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+              style={{ ...tDelay(500), fontFamily: "'Montserrat', 'Poppins', 'Inter', 'Roboto', 'Oswald', 'Bebas Neue', 'Anton', 'Barlow', 'Source Sans Pro', 'Nunito', 'Basote', 'Work Sans', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
             >
               Vinsub International Contracting Co
             </h3>
@@ -1311,7 +1311,7 @@ export const Desktop = (): JSX.Element => {
             <div className="absolute inset-x-0 bottom-20 px-4 text-center">
               <h1
                 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight"
-                style={{ ...tDelay(600), fontFamily: "'ui-monospace','SFMono-Regular',Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace" }}
+                style={{ ...tDelay(600), fontFamily: "'Montserrat', 'Poppins', 'Inter', 'Roboto', 'Oswald', 'Bebas Neue', 'Anton', 'Barlow', 'Source Sans Pro', 'Nunito', 'Basote', 'ui-monospace','SFMono-Regular',Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace" }}
               >
                 Vinsub International
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-[#f9a51a]">
@@ -1418,7 +1418,7 @@ export const Desktop = (): JSX.Element => {
             <Separator className="w-32 mx-auto mb-6" />
             <h3
               className="text-xl font-bold text-black mb-4 transition-all duration-700"
-              style={{ ...tDelay(400), fontFamily: "'Work Sans', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+              style={{ ...tDelay(400), fontFamily: "'Montserrat', 'Poppins', 'Inter', 'Roboto', 'Oswald', 'Bebas Neue', 'Anton', 'Barlow', 'Source Sans Pro', 'Nunito', 'Basote', 'Work Sans', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
             >
               Vinsub International Contracting Co
             </h3>
@@ -1460,7 +1460,7 @@ export const Desktop = (): JSX.Element => {
                   className={`bg-transparent border border-white/10 rounded-2xl`}
                   style={tDelay(400 + index * 150)}
                 >
-                  <CardContent className="p-6 text-center">
+                  <CardContent className="p-6 text-center flex flex-col justify-center min-h-[300px]">
                     <span
                       className="block text-5xl font-extrabold text-[#f9a51a] mb-3"
                       style={tDelay(450 + index * 150)}
