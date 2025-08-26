@@ -1,6 +1,7 @@
 import { Instagram, Facebook, Twitter, Cog, Wrench, Hammer, Factory, Fuel, SprayCan } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm, ValidationError } from '@formspree/react';
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import {
@@ -100,9 +101,13 @@ export const Desktop = (): JSX.Element => {
   // Mobile gallery carousel centering
   const mobileCarouselRef = React.useRef<HTMLDivElement | null>(null);
   const [mobileCarouselOffset, setMobileCarouselOffset] = React.useState(0);
+  
+  // Formspree form state
+  const [desktopFormState, handleDesktopSubmit] = useForm("xvgbordo");
+  const [mobileFormState, handleMobileSubmit] = useForm("xvgbordo");
 
   // Desktop base design height for canvas
-  const DESIGN_HEIGHT = 6617;
+  const DESIGN_HEIGHT = 7100; // Increased to accommodate contact box
   const ORIGINAL_HERO_HEIGHT = 1072;
   const HERO_HEIGHT = 700; // adjust as needed
   const DELTA = ORIGINAL_HERO_HEIGHT - HERO_HEIGHT;
@@ -127,6 +132,7 @@ export const Desktop = (): JSX.Element => {
           'mobile-vision',
           'mobile-clients',
           'mobile-ceo-message',
+          'mobile-contact-box',
           'mobile-footer',
           // desktop sections (safe to reveal; they are hidden on lg:hidden anyway)
           'hero',
@@ -1005,11 +1011,84 @@ export const Desktop = (): JSX.Element => {
             </div>
           </section>
 
+          {/* Contact Box */}
+          <section className="absolute w-full py-16 bg-gray-50" style={{ top: '6200px' }}>
+            <div className="max-w-2xl mx-auto px-6">
+              <div className="bg-white border-2 border-[#f9a51a] rounded-lg p-6 shadow-lg">
+                <h3 className="text-2xl font-bold text-black mb-6 text-center">Contact Us</h3>
+                {desktopFormState.succeeded ? (
+                  <div className="text-center py-8">
+                    <p className="text-green-600 text-lg font-semibold">Thank you for your message!</p>
+                    <p className="text-gray-600 mt-2">We will get back to you soon.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleDesktopSubmit} className="space-y-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f9a51a] focus:border-transparent"
+                        placeholder="Enter your name"
+                      />
+                      <ValidationError 
+                        prefix="Name" 
+                        field="name"
+                        errors={desktopFormState.errors}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="mobile" className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+                      <input
+                        type="tel"
+                        id="mobile"
+                        name="mobile"
+                        required
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f9a51a] focus:border-transparent"
+                        placeholder="Enter your mobile number"
+                      />
+                      <ValidationError 
+                        prefix="Mobile" 
+                        field="mobile"
+                        errors={desktopFormState.errors}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="comment" className="block text-sm font-medium text-gray-700 mb-1">Comment</label>
+                      <textarea
+                        id="comment"
+                        name="comment"
+                        required
+                        rows={3}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f9a51a] focus:border-transparent"
+                        placeholder="Enter your message"
+                      />
+                      <ValidationError 
+                        prefix="Comment" 
+                        field="comment"
+                        errors={desktopFormState.errors}
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={desktopFormState.submitting}
+                      className="w-full bg-gradient-to-r from-[#f9a51a] to-[#e09416] text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity disabled:opacity-50"
+                    >
+                      {desktopFormState.submitting ? 'Submitting...' : 'Submit'}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+          </section>
+
           {/* Footer (single, deduped) */}
           <footer
             id="footer"
             data-animate
-            className={`absolute w-full h-[366px] top-[6238px] left-0 transition-all duration-1000 ${visibleSections.has("footer") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            className={`absolute w-full h-[366px] top-[6760px] left-0 transition-all duration-1000 ${visibleSections.has("footer") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
             <div className="absolute w-full h-[366px] top-0 left-0">
@@ -1634,6 +1713,84 @@ export const Desktop = (): JSX.Element => {
             >
               CEO MESSAGE
             </h3>
+          </div>
+        </section>
+
+        {/* Contact Box - Mobile */}
+        <section
+          id="mobile-contact-box"
+          data-animate
+          className={`w-full py-14 px-4 bg-gray-50 transition-all duration-1000 ${visibleSections.has("mobile-contact-box") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+        >
+          <div className="max-w-md mx-auto">
+            <div className="bg-white border-2 border-[#f9a51a] rounded-lg p-6 shadow-lg">
+              <h3 className="text-2xl font-bold text-black mb-4 text-center">Contact Us</h3>
+              {mobileFormState.succeeded ? (
+                <div className="text-center py-8">
+                  <p className="text-green-600 text-lg font-semibold">Thank you for your message!</p>
+                  <p className="text-gray-600 mt-2">We will get back to you soon.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleMobileSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="mobile-name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                    <input
+                      type="text"
+                      id="mobile-name"
+                      name="name"
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f9a51a] focus:border-transparent"
+                      placeholder="Enter your name"
+                    />
+                    <ValidationError 
+                      prefix="Name" 
+                      field="name"
+                      errors={mobileFormState.errors}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="mobile-mobile" className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+                    <input
+                      type="tel"
+                      id="mobile-mobile"
+                      name="mobile"
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f9a51a] focus:border-transparent"
+                      placeholder="Enter your mobile number"
+                    />
+                    <ValidationError 
+                      prefix="Mobile" 
+                      field="mobile"
+                      errors={mobileFormState.errors}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="mobile-comment" className="block text-sm font-medium text-gray-700 mb-1">Comment</label>
+                    <textarea
+                      id="mobile-comment"
+                      name="comment"
+                      required
+                      rows={3}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f9a51a] focus:border-transparent"
+                      placeholder="Enter your message"
+                    />
+                    <ValidationError 
+                      prefix="Comment" 
+                      field="comment"
+                      errors={mobileFormState.errors}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={mobileFormState.submitting}
+                    className="w-full bg-gradient-to-r from-[#f9a51a] to-[#e09416] text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity disabled:opacity-50"
+                  >
+                    {mobileFormState.submitting ? 'Submitting...' : 'Submit'}
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </section>
 
