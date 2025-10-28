@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Engineering Service Provider in Saudi Arabia  |  industrial workshop provider in Saudi Arabia</title>
+    <title>Engineering Service Provider in Saudi Arabia| Industrial Workshop in Saudi Arabia</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="google-site-verification" content="50-q0zNpT99UIVDuo1IO5KBIC0rOYxSOpXSabyTRbxA" />
     
@@ -11,7 +11,7 @@
     <meta name="keywords" content="engineering, Saudi Arabia, civil engineering, mechanical engineering, industrial engineering, Vinsub">
     <meta name="author" content="Vinsub">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://vinsubco.com/">
+    <link id="canonical-link" rel="canonical" href="">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
@@ -57,6 +57,16 @@
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      // Set canonical URL dynamically to match current page
+      (function() {
+        const canonicalLink = document.getElementById('canonical-link');
+        if (canonicalLink) {
+          const url = window.location.href.split('#')[0].split('?')[0];
+          canonicalLink.href = url;
+        }
+      })();
+    </script>
     <script type="module" src="./src/index.tsx"></script>
   </body>
 </html>
