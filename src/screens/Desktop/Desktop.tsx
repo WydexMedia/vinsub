@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Twitter, Cog, Wrench, Hammer, Factory, Fuel, SprayCan } from "lucide-react";
+import { Cog, Wrench, Hammer, Factory, Fuel, SprayCan } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, ValidationError } from '@formspree/react';
@@ -1099,11 +1099,12 @@ export const Desktop = (): JSX.Element => {
                   aria-hidden="true"
                 />
                 <div className="absolute top-0 left-0 h-full w-2/5 bg-[#d9d9d9]" />
-                 <div className={`absolute top-[203px] left-[153px] z-10 flex items-center gap-2 transition-all duration-700 delay-300 ${visibleSections.has('footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}> 
-                  <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity"> 
-                  <Instagram className="w-4 h-4 text-black" /> </a> <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
-                   <Twitter className="w-4 h-4 text-black" /> </a> <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity"> 
-                   <Facebook className="w-4 h-4 text-black" /> </a> </div>
+                 {/* Social media links removed - add actual profile URLs when available */}
+                 {/* <div className={`absolute top-[203px] left-[153px] z-10 flex items-center gap-2 transition-all duration-700 delay-300 ${visibleSections.has('footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}> 
+                  <a href="https://instagram.com/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity"> 
+                  <Instagram className="w-4 h-4 text-black" /> </a> <a href="https://x.com/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity">
+                   <Twitter className="w-4 h-4 text-black" /> </a> <a href="https://facebook.com/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:opacity-90 transition-opacity"> 
+                   <Facebook className="w-4 h-4 text-black" /> </a> </div> */}
 
                 
 
@@ -1816,7 +1817,8 @@ export const Desktop = (): JSX.Element => {
                   {quickLinks.map((link, index) => (
                     <a
                       key={link}
-                      href=''
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
                       className="block text-white text-sm font-semibold hover:text-[#f9a51a] transition-colors"
                       style={tDelay(350 + index * 50)}
                     >
